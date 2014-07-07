@@ -1,0 +1,49 @@
+{
+  "name": "gulp-frontend-boilerplate",
+  "version": "0.1.0",
+  "description": "A gulp boilerplate with common frontend tasks.",
+  "author": "Damien Seguin <https://twitter.com/damienseguinme>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DamienSeguin/gulp-frontend-boilerplate"
+  },
+  "issues": {
+    "url": "https://github.com/DamienSeguin/gulp-frontend-boilerplate/issues"
+  },
+  "keywords": [
+    "gulp",
+    "boilerplate",
+    "frontend",
+    "tasks",
+    "workflow"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "del": "^0.1.x",
+    "gulp": "^3.8.x",
+    "gulp-autoprefixer": "^0.0.x",
+    "gulp-cache": "^0.2.x",
+    "gulp-combine-media-queries": "^0.1.x",
+    "gulp-concat": "^2.2.x",
+    "gulp-connect": "^2.0.x",
+    "gulp-header": "^1.0.x",
+    "gulp-if": "^1.2.x",
+    "gulp-imagemin": "^0.6.x",
+    "gulp-jshint": "^1.6.x",
+    "gulp-minify-css": "^0.3.x",
+    "gulp-newer": "^0.3.X",
+    "gulp-notify": "^1.4.x",
+    "gulp-order": "^1.1.x",
+    "gulp-preprocess": "^1.1.x",
+    "gulp-rename": "^1.2.x",
+    "gulp-ruby-sass": "^0.5.x",
+    "gulp-size": "^0.4.x",
+    "gulp-uglify": "^0.3.x",
+    "gulp-util": "^2.2.x",
+    "gulp-watch": "^0.6.x",
+    "gulp.spritesmith": "^1.1.x",
+    "imagemin-pngcrush": "^0.1.x",
+    "jshint-stylish": "^0.2.x",
+    "opn": "^0.1.x"
+  }
+}
