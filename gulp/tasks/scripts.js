@@ -1,38 +1,51 @@
 /**
  * Scripts task
  *
- * Concat files in order
- * Provide a styled jshint output.
- * Reload connection.
- * Output file size.
+ * 'scripts:native' jshint.
+ * 'scripts:coffee' coffeelint, compile coffee files.
  *
  */
 
 var config = require('../config');
+var handleErrors = require('../utils/handleErrors');
 var gulp = require('gulp');
-var excludeFiles = require('../utils/excludeFiles');
 
-var order = require('gulp-order');
+var browserSync = require('browser-sync');
+
 var jshint = require('gulp-jshint');
-var concat = require('gulp-concat');
-var connect = require('gulp-connect');
+var coffee = require('gulp-coffee');
+var coffeelint = require('gulp-coffeelint');
 var size = require('gulp-size');
 
-gulp.task('scripts', function() {
-	return gulp.src(excludeFiles([config.src + '/scripts/**/*.js'], config.copyFiles))
-		.pipe(order([
-			'vendor/**/*.js',
-			'plugins/**/*.js',
-			'debug/**/*.js',
-			'*.js',
-			'main.js'
-		]))
+gulp.task('scripts', ['scripts:native', 'scripts:coffee']);
+
+gulp.task('scripts:native', function() {
+	return gulp.src(config.src + '/scripts/**/*.js')
 		.pipe(jshint('.jshintrc'))
 		.pipe(jshint.reporter('jshint-stylish'))
-		.pipe(concat('main.js'))
 		.pipe(gulp.dest(config.dist + '/scripts'))
-		.pipe(connect.reload())
+		.on('end', function() {
+			browserSync.reload();
+		})
 		.pipe(size({
-			title: 'Main script size'
+			title: 'Script size'
+		}));
+});
+
+gulp.task('scripts:coffee', function() {
+	return gulp.src(config.src + '/scripts/**/*.coffee')
+		.pipe(coffeelint())
+		.pipe(coffeelint.reporter())
+		.on('error', handleErrors)
+		.pipe(coffee({
+			bare: true
+		}))
+		.on('error', handleErrors)
+		.pipe(gulp.dest(config.dist + '/scripts'))
+		.on('end', function() {
+			browserSync.reload();
+		})
+		.pipe(size({
+			title: 'Coffee file compiled size'
 		}));
 });

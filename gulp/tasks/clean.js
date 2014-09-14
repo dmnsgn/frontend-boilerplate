@@ -7,8 +7,17 @@
 
 var config = require('../config');
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 var del = require('del');
 
-gulp.task('clean', ['clearCache'], function(cb) {
-	del([config.dist + '/*', '.gitkeep', '.sass-cache'], cb);
+var cache = require('gulp-cache');
+
+gulp.task('clean', ['clean:clearCache', 'clean:deleteFiles']);
+
+gulp.task('clean:deleteFiles', function() {
+	del([config.dist + '/*', '!' + config.dist + '/bower_components' , '.sass-cache']);
+});
+
+gulp.task('clean:clearCache', function() {
+	cache.clearAll();
 });

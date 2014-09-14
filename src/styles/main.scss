@@ -1,9 +1,22 @@
+/*# sourceMappingURL=main.css.map */
+
 @charset "UTF-8";
 
 @import '_sprite';
 
-@import 'vendor/_normalize';
+// bower:scss
+@import "../../dist/bower_components/normalize-scss/_normalize.scss";
+@import "../../dist/bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+@import '_partial';
 
 /**
  * Main style file
  */
+
+body {
+	background-color: #ddd;
+	color: #333;
+	transition: all .3s ease;
+}

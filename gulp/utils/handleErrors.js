@@ -10,6 +10,10 @@ var gutil = require('gulp-util');
 module.exports = function() {
 	gutil.beep();
 
+	// End the task
+	this.emit('end');
+
+	// Notify what's wrong
 	notify.onError({
 		title: 'Compile Error',
 		message: '<%= error.message %>'

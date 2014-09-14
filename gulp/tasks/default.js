@@ -1,24 +1,36 @@
 /**
  *  Default task
  *
- * All the magic begins here:
- * - create a simple server with livereload
- * - serve to localhost
- * - copy non-processed files to dist folder
- * - watch changes in source folder
- *
+ * 'default:dev' immediatly work on sources files.
+ * 'default:prod' Generate a deployable build and serve it to check if it's ok to deploy.
  */
 
 var config = require('../config');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 
-gulp.task('default', ['connect', 'copy'], function() {
-	// Serve
-	gulp.start('serve');
+var runSequence = require('run-sequence');
 
-	// Watch changes
-	gulp.start('watch');
+gulp.task('default', function() {
+	var args = process.argv,
+		prod = args.indexOf('--prod') !== -1;
+	if (prod) {
+		gulp.start('default:prod');
+	} else {
+		gulp.start('default:dev');
+	}
+});
 
-	gutil.log(gutil.colors.bgGreen('Default task started. Watching changes...'));
+gulp.task('default:dev', function() {
+
+	runSequence(['markup:all', 'styles', 'scripts', 'images'], ['serve', 'watch']);
+
+});
+
+gulp.task('default:prod', function() {
+
+	runSequence(['markup:all', 'styles', 'scripts', 'images'], 'build', 'serve', function() {
+		gutil.log(gutil.colors.bgGreen('Build ready and served.'));
+	});
+
 });

@@ -21,12 +21,32 @@ Sass (go check on its superpowers [here](http://sass-lang.com/))
 
 	gem install sass
 
+### Optional
+
+Bower (A package manager for the web, [here](http://bower.io/))
+
+	npm install -g bower
+
+Coffeescript: ["It's just JavaScript"](http://coffeescript.org/)
+
+	sudo npm install -g coffee-script
+
+Imagemagick (used for favicons task)
+
+	brew install imagemagick
+
 ### Clone this repository
 
 	git clone https://github.com/DamienSeguin/gulp-frontend-boilerplate.git
 
 ### Install dependencies
 
+	// It's up to you to install packages with
+	bower install <package> --save
+	// Run at least once
+	bower install
+
+	// Npm
 	npm install
 
 ## Usage
@@ -38,11 +58,14 @@ Open `gulp/config.js` with your favorite text editor.
 |Option|Type|Default
 |:---------|:---------:|:----------:|
 |**verbose**: provide a more verbose output when available (useful for debugging).|Boolean|false|
-|**port**: the connect webserver port.|Number|8080|
-|**src**: the source folder, that's where you write code.|String|src|
-|**dist**: the destination folder, that's where your code is compiled.|String|dist|
-|**autoprefixer**: the browser(s) targeted (see full list of options [here](https://github.com/ai/autoprefixer#browsers))|Array|['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']|
-|**copyFiles**: a list of file copied directly to the dist folder|Array|[]|
+|**port**: the server port.|Number|3000|
+|**src**: the source folder path, that's where you write code.|String|src|
+|**dist**: the destination folder path, that's where your code is compiled.|String|dist|
+|**test**: the `test` folder path.|String|test|
+|**bower**: the `bower_components` folder path (it has to be in the dist folder)|String|dist/bower_components|
+|**browsers**: the browser(s) targeted for autoprefixer and autopolyfiller (see full list of options [here](https://github.com/ai/autoprefixer#browsers))|Array|['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']|
+|**prodUrl**: the absolute url to use in the sitemap|String|''|
+|**analyticsUA**: your google analytics UA|String|''|
 |**banner**: add a text header above your main files.|String|*filled with `package.json` datas*|
 
 
@@ -55,32 +78,88 @@ This is the default task.
 
 All the magic begins here:
 
-* create a simple server with livereload
-* serve to localhost
-* copy non-processed files to dist folder
+* process `.html` files (adding bower dependencies and including templates)
+* process `.scss` files (adding bower dependencies, autoprefixing for dev)
+* process `.js` and `.coffee` files with lint reports
+* create a server with BrowserSync and serve `dist` folder
 * watch changes in source folder
-* reload on changes
+* reload on changes in source folder
 
 ---
-Note: Each task is self documented if you want to use them individually (e.g. `gulp spritesheet`, `gulp images`)
+Note: if you just want to build the project and serve a 'production ready' version, run `gulp --prod`.
+
 
 #### Make changes
- * Write your markup in `src` folder
- * Add some styles and some scripts
+
+ * Write your markup in `src` folder and in `src/templates`. Include your partials with `<!-- @include templates/_filename.html -->`
+ * Add some `scss` styles.
+ * Add some `scripts`: `.js` or `.coffee`.
+ * Run your `bower install <package> --save`. This will automatically include the main files of each package. If there is a warning in your CLI, just include them manually (for instance, `<script src="bower_components/history.js/scripts/bundled-uncompressed/html5/native.history.js"></script>`) inside the build tag (`<!-- build:js scripts/main.min.js -->`)
  * Add images in the - wait for it - `images` folder.
  * Generate a spritesheet with corresponding mixins (located in `styles/_sprite.scss`) by adding `.png` files into `images/sprite` folder .
 
+#### Build for deploy
+
+When you are happy with your changes, run:
+
+	gulp build
+
+* Replace build tags with `.min` files, generates these minified files in `dist` folder (with optimization tasks)
+* Add copyright headers and generate a `sitemap.xml`file
+
+#### Tests tasks
+
+Quick tests and stats with:
+
+	// w3c validation
+	gulp test:markup
+
+	// mocha tests (written in test folder)
+	gulp test:scripts
+
+	// PageSpeed Insights reporter for mobile and desktop
+	gulp test:psi
+
 
 #### Clean it
-Clean dist dir and clear all caches (sass cache, gulp-cache)
+
+Clean dist dir and clear all caches (sass cache, gulp cache)
 
 	gulp clean
 
+#### Help
+
+This command will give you a list of all tasks available.
+
+	gulp help
+
+---
+Note: Each task is self documented. You can use them individually (e.g. `gulp images:spritesheet`, `gulp images:optimization`) but you should use the tasks above (`default` then `build`. Then `default` if neeeded and `build` again. `serve` to check if all is ok before deploying).
+
 
 ## External issues
-* Gaze break watchers when renaming folder : https://github.com/shama/gaze/issues/56
-* connect deprecated connect(middleware) warning : https://github.com/AveVlad/gulp-connect/issues/67
+* Gaze break watchers when renaming folder: https://github.com/shama/gaze/issues/56. Waiting for gaze 0.6 https://github.com/gulpjs/gulp/issues/600
+* watch doesn't work when adding files: https://github.com/floatdrop/gulp-watch/issues/50
 * images task is slow
+* Sass sourcemap: too much randomness for now (https://github.com/Compass/compass/issues/1654, http://fettblog.eu/blog/2014/04/10/gulp-sass-autoprefixer-sourcemaps/ ...)
+* favicons: will be refactored soon (https://github.com/haydenbleasel/favicons/pull/11#issuecomment-51773236)
+* Run sequence is intended to be a temporary solution until orchestrator is updated to support non-dependent ordered tasks: https://github.com/gulpjs/gulp/issues/347
+* Gulp 4 will change. A lot: https://github.com/gulpjs/gulp/issues/355 & https://github.com/gulpjs/gulp/issues/347
+
+### Change log
+
+0.2.0
+
+* Switch from livereload to browsersync
+* Add Bower
+* Add coffeescript
+* Add gulp-favicon
+* Add test task
+* Add mocha tests
+* Add google analytics snippet and config UA option
+* Add browserhappy snippet
+* Code style: less task files, rename to `task:subtask`
 
 ##Licence
+
 MIT

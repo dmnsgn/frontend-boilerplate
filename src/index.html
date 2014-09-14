@@ -5,27 +5,37 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Gulp Frontend Boilerplate</title>
 
-	<!-- @if NODE_ENV!='build' -->
+	<!-- build:css styles/main.min.css -->
 	<link rel="stylesheet" href="styles/main.css">
-	<!-- @endif -->
-	<!-- @if NODE_ENV='build' -->
-	<link rel="stylesheet" href="styles/main.min.css">
-	<!-- @endif -->
+	<!-- endbuild -->
 
-	<script src="scripts/vendor/modernizr.custom.29734.js"></script>
+	<!-- build:js scripts/vendor/modernizr.js -->
+	<script src="bower_components/modernizr/modernizr.js"></script>
+	<!-- endbuild -->
 </head>
 <body>
 
-	<!-- @include inc/_header.html -->
+	<!-- @include templates/_browserhappy.html -->
+
+	<!-- @include templates/_header.html -->
 
 	<div id="main">
-		Hello world !
+		Hello world
 	</div>
-	<!-- @if NODE_ENV!='build' -->
+
+	<script id="template" type="text/x-handlebars-template">
+		<!-- @include templates/_template.hbs -->
+	</script>
+
+	<!-- build:js scripts/main.min.js -->
+	<!-- bower:js -->
+	<!-- endbower -->
+	<script src="scripts/vendor/vendor.js"></script>
+	<script src="scripts/plugins/plugins.js"></script>
 	<script src="scripts/main.js"></script>
-	<!-- @endif -->
-	<!-- @if NODE_ENV='build' -->
-	<script src="scripts/main.min.js"></script>
-	<!-- @endif -->
+	<!-- endbuild -->
+
+	<!-- @include templates/_analytics.html -->
+
 </body>
 </html>

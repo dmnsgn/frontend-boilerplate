@@ -7,51 +7,64 @@
  */
 
 var config = require('../config');
+var handleErrors = require('../utils/handleErrors');
 var gulp = require('gulp');
-var gutil = require('gulp-util');
+var gulpif = require('gulp-if');
+
+var del = require('del');
+var runSequence = require('run-sequence');
 
 var header = require('gulp-header');
 var rename = require('gulp-rename');
-var connect = require('gulp-connect');
+var filter = require('gulp-filter');
 var size = require('gulp-size');
 
-var preprocess = require('gulp-preprocess');
+var useref = require('gulp-useref');
+var uglify = require('gulp-uglify');
+var sitemap = require('gulp-sitemap');
 
 var autoprefixer = require('gulp-autoprefixer');
 var minifyCss = require('gulp-minify-css');
 var cmq = require('gulp-combine-media-queries');
 
-var uglify = require('gulp-uglify');
+gulp.task('build', function() {
 
-gulp.task('build', ['buildTemplates', 'buildAssets', 'buildStyles', 'buildScripts'], function() {
-	connect.reload();
-	gutil.log(gutil.colors.bgGreen('Build task completed.'));
+	runSequence('build:markup', 'build:styles');
+
 });
 
 /**
- * Build templates
+ * Build markup
  *
  * Markup tasks, change building blocks
+ *
  */
 
-gulp.task('buildTemplates', function() {
-	return gulp.src(config.src + '/*.html')
-		.pipe(preprocess({
-			context: {
-				NODE_ENV: 'build'
-			}
-		}))
+gulp.task('build:markup', function() {
+	gulp.start('build:markup:sitemap');
+
+	var assets = useref.assets();
+	return gulp.src(config.dist + '/*.html')
+		.pipe(assets)
+		.on('error', handleErrors)
+		.pipe(gulpif('*.js', uglify()))
+		.pipe(header(config.banner))
+		.pipe(assets.restore())
+		.pipe(useref())
 		.pipe(gulp.dest(config.dist));
 });
 
-/**
- * Build assets
- *
- * Images & spritesheet tasks
- *
- */
+gulp.task('build:markup:sitemap', function() {
+	var isUrlDefinned = (typeof config.prodUrl === 'string' && config.prodUrl !== '') ? true : false;
 
-gulp.task('buildAssets', ['images', 'spritesheet']);
+	if (isUrlDefinned) {
+		return gulp.src(config.dist + '/*.html').pipe(sitemap({
+				fileName: 'sitemap.xml',
+				siteUrl: config.prodUrl
+			}))
+			.pipe(gulp.dest(config.dist));
+	}
+});
 
 /**
  * Build styles
@@ -61,15 +74,17 @@ gulp.task('buildAssets', ['images', 'spritesheet']);
  *
  */
 
-gulp.task('buildStyles', ['styles'], function() {
+gulp.task('build:styles', function() {
 	return gulp.src(config.dist + '/styles/main.css')
-		.pipe(autoprefixer(config.autoprefixer, {
+		.pipe(autoprefixer(config.browsers, {
 			cascade: false
 		}))
 		.pipe(cmq({
 			log: config.verbose
 		}))
-		.pipe(minifyCss())
+		.pipe(minifyCss({
+			keepSpecialComments: 1
+		}))
 		.pipe(header(config.banner))
 		.pipe(rename({
 			suffix: '.min'
@@ -77,26 +92,5 @@ gulp.task('buildStyles', ['styles'], function() {
 		.pipe(gulp.dest(config.dist + '/styles'))
 		.pipe(size({
 			title: 'Main styles minified size'
-		}));
-});
-
-/**
- * Build scripts
- *
- * Script task, uglify, prepend header, output .min
- * Output file size.
- *
- */
-
-gulp.task('buildScripts', ['scripts'], function() {
-	return gulp.src(config.dist + '/scripts/main.js')
-		.pipe(uglify())
-		.pipe(header(config.banner))
-		.pipe(rename({
-			suffix: '.min'
-		}))
-		.pipe(gulp.dest(config.dist + '/scripts'))
-		.pipe(size({
-			title: 'Main scripts minified size'
 		}));
 });

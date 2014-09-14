@@ -1,23 +1,51 @@
 /**
- * Markup task
+ * Markup tasks
  *
- * Copy html files to dist folder.
+ * 'markup:all' when all html files need to be processed.
+ * 'markup:changed' when only the main files changed.
+ *
+ * Process html files.
+ * Copy them to dist folder.
  * Reload connection.
  *
  */
 
 var config = require('../config');
 var gulp = require('gulp');
-var preprocess = require('gulp-preprocess');
-var connect = require('gulp-connect');
+var gulpif = require('gulp-if');
 
-gulp.task('markup', function() {
-	return gulp.src(config.src + '/*.html')
+var browserSync = require('browser-sync');
+
+var newer = require('gulp-newer');
+var preprocess = require('gulp-preprocess');
+var wiredep = require('wiredep').stream;
+
+function process(changed) {
+	return gulp.src(config.src + '/*.html', {
+			base: config.src
+		})
+		.pipe(gulpif(changed, newer(config.dist)))
 		.pipe(preprocess({
 			context: {
-				NODE_ENV: 'dev'
+				NODE_ENV: 'dev',
+				UA: config.analyticsUA
 			}
 		}))
+		.pipe(wiredep({
+			directory: config.bower,
+			ignorePath: '../' + config.dist + '/',
+			exclude: ['bower_components/modernizr/modernizr.js']
+		}))
 		.pipe(gulp.dest(config.dist))
-		.pipe(connect.reload());
+		.on('end', function() {
+			browserSync.reload()
+		});
+};
+
+gulp.task('markup:changed', function() {
+	return process(true);
+});
+
+gulp.task('markup:all', function() {
+	return process();
 });
