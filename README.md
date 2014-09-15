@@ -142,11 +142,14 @@ Note: Each task is self documented. You can use them individually (e.g. `gulp im
 * watch doesn't work when adding files: https://github.com/floatdrop/gulp-watch/issues/50
 * images task is slow
 * Sass sourcemap: too much randomness for now (https://github.com/Compass/compass/issues/1654, http://fettblog.eu/blog/2014/04/10/gulp-sass-autoprefixer-sourcemaps/ ...)
-* favicons: will be refactored soon (https://github.com/haydenbleasel/favicons/pull/11#issuecomment-51773236)
 * Run sequence is intended to be a temporary solution until orchestrator is updated to support non-dependent ordered tasks: https://github.com/gulpjs/gulp/issues/347
 * Gulp 4 will change. A lot: https://github.com/gulpjs/gulp/issues/355 & https://github.com/gulpjs/gulp/issues/347
 
 ### Change log
+
+0.2.1
+
+* Update images:favicons tasks
 
 0.2.0
 

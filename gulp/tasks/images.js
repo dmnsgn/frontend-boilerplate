@@ -7,6 +7,8 @@
  *
  */
 
+var fs = require('fs');
+
 var config = require('../config');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
@@ -20,7 +22,7 @@ var spritesmith = require('gulp.spritesmith');
 
 var favicons = require('favicons');
 
-gulp.task('images', ['images:optimization', 'images:spritesheet']);
+gulp.task('images', ['images:optimization', 'images:spritesheet', 'images:favicons']);
 
 gulp.task('images:optimization', function() {
 	return gulp.src([config.src + '/images/**/*', '!' + config.src + '/images/{sprite,sprite/**}'])
@@ -66,14 +68,21 @@ gulp.task('images:favicons', function() {
 		windows: true,
 
 		// Miscellaneous
-		html: config.src + '/index.html',
-		background: '#1d1d1d',
-		tileBlackWhite: true,
+		html: null,
+		background: 'transparent',
+		tileBlackWhite: false,
 		manifest: null,
 		trueColor: false,
 		logging: config.verbose,
-		callback: function() {
-			gutil.log(gutil.colors.bgGreen('Favicons created.'));
+		callback: function(status, html) {
+			var metas = html.replace(/href="/g, 'href"=/images/favicon/').replace(/content="/g, 'content"=/images/favicon/');
+			fs.writeFile(config.src + '/templates/_favicons.html', metas, function(err) {
+				if (err) {
+					console.log(err);
+				} else {
+					gutil.log(gutil.colors.bgGreen(status));
+				}
+			});
 		}
 	});
 });
