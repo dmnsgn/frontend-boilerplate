@@ -147,6 +147,11 @@ Note: Each task is self documented. You can use them individually (e.g. `gulp im
 
 ### Change log
 
+0.2.2
+
+* Clean/Upgrade dependencies
+* Update images:favicons tasks
+
 0.2.1
 
 * Update images:favicons tasks

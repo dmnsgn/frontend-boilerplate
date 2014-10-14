@@ -65,22 +65,41 @@ gulp.task('images:favicons', function() {
 		coast: true,
 		favicons: true,
 		firefox: true,
+		opengraph: true,
 		windows: true,
 
 		// Miscellaneous
 		html: null,
 		background: 'transparent',
 		tileBlackWhite: false,
-		manifest: null,
+		manifest: config.dist + '/manifest.webapp',
 		trueColor: false,
+		url: config.prodUrl,
 		logging: config.verbose,
 		callback: function(status, html) {
-			var metas = html.replace(/href="/g, 'href"=/images/favicon/').replace(/content="/g, 'content"=/images/favicon/');
+			var that = this;
+			// Correct path in html
+			var hrefRe = new RegExp(config.dist + '/', 'g');
+			var metas = html.replace(hrefRe, '').replace(/content="dist\//g, 'content="images/favicon/');
 			fs.writeFile(config.src + '/templates/_favicons.html', metas, function(err) {
 				if (err) {
 					console.log(err);
 				} else {
-					gutil.log(gutil.colors.bgGreen(status));
+					// Correct path in manifest
+					fs.readFile(that.manifest, 'utf8', function(err, data) {
+						if (err) {
+							return console.log(err);
+						}
+						var result = data.replace(/firefox-icon/g, 'images/favicon/firefox-icon');
+
+						fs.writeFile(that.manifest, result, 'utf8', function(err) {
+							if (err) {
+								return console.log(err);
+							} else {
+								gutil.log(gutil.colors.bgGreen(status));
+							}
+						});
+					});
 				}
 			});
 		}

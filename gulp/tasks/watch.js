@@ -88,7 +88,7 @@ gulp.task('watch', function() {
 	});
 
 	// Watch images files
-	watch(config.src + '/images/**/*', {
+	watch([config.src + '/images/**/*', '!' + config.src + '/images/sprite/**/*'], {
 		emitOnGlob: false,
 		read: false,
 		name: 'Images watcher',
