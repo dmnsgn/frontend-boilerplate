@@ -1,4 +1,4 @@
-'use strict';
+View = require './views/view'
 
 # Main script file
 

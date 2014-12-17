@@ -9,6 +9,7 @@
 
 var fs = require('fs');
 
+var pkg = require('../../package.json');
 var config = require('../config');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
@@ -43,65 +44,37 @@ gulp.task('images:spritesheet', function() {
 		algorithm: 'binary-tree'
 	}));
 	spriteData.on('finish', function() {
-		gutil.log(gutil.colors.bgYellow('Spritesmith ready to process....'));
+		gutil.log(gutil.colors.yellow('Spritesmith ready to process....'));
 	});
 	spriteData.css.pipe(gulp.dest(config.src + '/styles/')).on('end', function() {
-		gutil.log(gutil.colors.bgYellow('_sprite.scss file written...'));
+		gutil.log(gutil.colors.yellow('_sprite.scss file written...'));
 	});
 	return spriteData.img.pipe(gulp.dest(config.dist + '/images/')).on('end', function() {
-		gutil.log(gutil.colors.bgGreen('Spritesheet generated.'));
+		gutil.log(gutil.colors.green('Spritesheet generated.'));
 	});
 });
 
 gulp.task('images:favicons', function() {
+
 	return favicons({
-		// I/O
-		source: config.src + '/favicon.png',
-		dest: config.dist + '/images/favicon',
-
-		// Icon Types
-		android: true,
-		apple: true,
-		coast: true,
-		favicons: true,
-		firefox: true,
-		opengraph: true,
-		windows: true,
-
-		// Miscellaneous
-		html: null,
-		background: 'transparent',
-		tileBlackWhite: false,
-		manifest: config.dist + '/manifest.webapp',
-		trueColor: false,
-		url: config.prodUrl,
-		logging: config.verbose,
-		callback: function(status, html) {
-			var that = this;
-			// Correct path in html
-			var hrefRe = new RegExp(config.dist + '/', 'g');
-			var metas = html.replace(hrefRe, '').replace(/content="dist\//g, 'content="images/favicon/');
-			fs.writeFile(config.src + '/templates/_favicons.html', metas, function(err) {
-				if (err) {
-					console.log(err);
-				} else {
-					// Correct path in manifest
-					fs.readFile(that.manifest, 'utf8', function(err, data) {
-						if (err) {
-							return console.log(err);
-						}
-						var result = data.replace(/firefox-icon/g, 'images/favicon/firefox-icon');
-
-						fs.writeFile(that.manifest, result, 'utf8', function(err) {
-							if (err) {
-								return console.log(err);
-							} else {
-								gutil.log(gutil.colors.bgGreen(status));
-							}
-						});
-					});
-				}
-			});
+		files: {
+			src: config.src + '/favicon.png',
+			dest: config.dist + '/images/favicon',
+			html: config.src + '/inc/_favicons.html',
+			iconsPath: 'images/favicon'
+		},
+		settings: {
+			appName: pkg.name,
+			appDescription: pkg.description,
+			developer: pkg.author,
+			developerURL: config.developerURL,
+			background: 'transparent',
+			index: 'index.html',
+			url: config.prodUrl,
+			logging: true
 		}
+	}, function(err) {
+		if (err) throw err;
 	});
+
 });

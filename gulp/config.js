@@ -27,5 +27,6 @@ module.exports = {
 		' * @copyright ' + pkg.license,
 		' */',
 		''
-	].join('\n')
+	].join('\n'),
+	developerURL: 'http://damienseguin.me'
 };

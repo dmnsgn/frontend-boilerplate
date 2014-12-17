@@ -15,7 +15,11 @@ var watch = require('gulp-watch');
 // 	gutil.log(gutil.colors.gray('File ' + event.path + ' was ' + event.type + ', running tasks...'));
 // }
 
-gulp.task('watch', function() {
+gulp.task('setWatch', function() {
+	global.isWatching = true;
+});
+
+gulp.task('watch', ['setWatch'], function() {
 
 	// Watch html files
 	watch(config.src + '/*.html', {
@@ -27,10 +31,10 @@ gulp.task('watch', function() {
 		gulp.start('markup:changed');
 	});
 
-	watch(config.src + '/templates/**/*', {
+	watch(config.src + '/inc/**/*', {
 		emitOnGlob: false,
 		read: false,
-		name: 'Templates watcher',
+		name: 'Includes watcher',
 		verbose: config.verbose
 	}, function() {
 		gulp.start('markup:all');
@@ -57,25 +61,8 @@ gulp.task('watch', function() {
 		gulp.start('styles:sass');
 	});
 
-	// Watch .js files
-	watch(config.src + '/scripts/**/*.js', {
-		emitOnGlob: false,
-		read: false,
-		name: 'Js watcher',
-		verbose: config.verbose
-	}, function() {
-		gulp.start('scripts:native');
-	});
-
-	// Watch .coffee files
-	watch(config.src + '/scripts/**/*.coffee', {
-		emitOnGlob: false,
-		read: false,
-		name: 'Coffee watcher',
-		verbose: config.verbose
-	}, function() {
-		gulp.start('scripts:coffee');
-	});
+	// Watch .js, .json, .coffee, .hbs files
+	gulp.start('scripts');
 
 	// Watch test files
 	watch(config.test + '/**/*.js', {
