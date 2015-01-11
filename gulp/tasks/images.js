@@ -23,7 +23,7 @@ var spritesmith = require('gulp.spritesmith');
 
 var favicons = require('favicons');
 
-gulp.task('images', ['images:optimization', 'images:spritesheet', 'images:favicons']);
+gulp.task('images', ['images:optimization', 'images:spritesheet'/*, 'images:favicons'*/]);
 
 gulp.task('images:optimization', function() {
 	return gulp.src([config.src + '/images/**/*', '!' + config.src + '/images/{sprite,sprite/**}'])
@@ -54,7 +54,7 @@ gulp.task('images:spritesheet', function() {
 	});
 });
 
-gulp.task('images:favicons', function() {
+/*gulp.task('images:favicons', function() {
 
 	return favicons({
 		files: {
@@ -77,4 +77,4 @@ gulp.task('images:favicons', function() {
 		if (err) throw err;
 	});
 
-});
+});*/

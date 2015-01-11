@@ -1,11 +1,14 @@
 /**
  * Scripts task
  *
+ * Bundle scripts/templates with browserify
+ *
  */
 
 var config = require('../config');
 var gulp = require('gulp');
 
+var browserSync = require('browser-sync');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var source = require('vinyl-source-stream');
@@ -35,7 +38,12 @@ gulp.task('scripts', function(callback) {
 			.on('error', handleErrors)
 			.pipe(source('main.js'))
 			.pipe(gulp.dest('./' + config.dist + '/scripts'))
-			.on('end', bundleLogger.end);
+			.on('end', function() {
+				if (global.isWatching) {
+					browserSync.reload();
+				}
+				bundleLogger.end();
+			})
 	};
 
 	if (global.isWatching) {

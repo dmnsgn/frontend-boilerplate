@@ -37,7 +37,7 @@ gulp.task('styles:sass', function() {
 	return sass(config.src + '/styles/main.scss', {
 			sourcemap: true
 		})
-		// .on('error', handleErrors)
+		.on('error', handleErrors)
 		.pipe(autoprefixer('last 2 version'))
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest(config.dist + '/styles'))

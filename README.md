@@ -144,11 +144,12 @@ Note: Each task is self documented. You can use them individually (e.g. `gulp im
 
 ### Change log
 
-// TODO: favicon paths
-// CHECK doc in each file
-// GM ?
-// --prod
-// jshint
+0.3.0
+
+* Add browserify (coffee, hbs, sourcemaps)
+* Add sass sourcemaps
+* Remove jshint
+* Muted images:favicons task
 
 0.2.2
 

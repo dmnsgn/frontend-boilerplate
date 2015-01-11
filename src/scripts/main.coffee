@@ -1,5 +1,6 @@
 View = require './views/view'
+template = require './templates/view.hbs'
 
 # Main script file
 
-console.log 'Hello world'
+console.log template({ name: 'World' })
