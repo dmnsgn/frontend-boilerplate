@@ -21,8 +21,6 @@ Sass (go check on its superpowers [here](http://sass-lang.com/))
 
 	gem install sass
 
-### Optional
-
 Bower (A package manager for the web, [here](http://bower.io/))
 
 	npm install -g bower
@@ -31,9 +29,9 @@ Coffeescript: ["It's just JavaScript"](http://coffeescript.org/)
 
 	sudo npm install -g coffee-script
 
-Imagemagick (used for favicons task)
+Graphicsmagick (used for favicons task)
 
-	brew install imagemagick
+	brew install graphicsmagick
 
 ### Clone this repository
 
@@ -141,11 +139,17 @@ Note: Each task is self documented. You can use them individually (e.g. `gulp im
 * Gaze break watchers when renaming folder: https://github.com/shama/gaze/issues/56. Waiting for gaze 0.6 https://github.com/gulpjs/gulp/issues/600
 * watch doesn't work when adding files: https://github.com/floatdrop/gulp-watch/issues/50
 * images task is slow
-* Sass sourcemap: too much randomness for now (https://github.com/Compass/compass/issues/1654, http://fettblog.eu/blog/2014/04/10/gulp-sass-autoprefixer-sourcemaps/ ...)
 * Run sequence is intended to be a temporary solution until orchestrator is updated to support non-dependent ordered tasks: https://github.com/gulpjs/gulp/issues/347
 * Gulp 4 will change. A lot: https://github.com/gulpjs/gulp/issues/355 & https://github.com/gulpjs/gulp/issues/347
 
 ### Change log
+
+0.3.0
+
+* Add browserify (coffee, hbs, sourcemaps)
+* Add sass sourcemaps
+* Remove jshint
+* Muted images:favicons task
 
 0.2.2
 
