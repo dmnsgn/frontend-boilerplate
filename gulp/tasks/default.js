@@ -2,7 +2,7 @@
  *  Default task
  *
  * 'default:dev' immediatly work on sources files.
- * 'default:prod' Generate a deployable build and serve it to check if it's ok to deploy.
+ * 'default:prod' generate a deployable build and serve it to check if it's ok to deploy.
  */
 
 var config = require('../config');

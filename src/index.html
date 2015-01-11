@@ -4,39 +4,23 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Gulp Frontend Boilerplate</title>
-
 	<!-- build:css styles/main.min.css -->
 	<link rel="stylesheet" href="styles/main.css">
 	<!-- endbuild -->
-
 	<!-- build:js scripts/vendor/modernizr.js -->
 	<script src="bower_components/modernizr/modernizr.js"></script>
 	<!-- endbuild -->
-	<!-- @include templates/_favicons.html -->
+	<!-- @include inc/_favicons.html -->
 </head>
 <body>
-
-	<!-- @include templates/_browserhappy.html -->
-
-	<!-- @include templates/_header.html -->
-
-	<div id="main">
-
-	</div>
-
-	<script id="template" type="text/x-handlebars-template">
-		<!-- @include templates/_template.hbs -->
-	</script>
-
+	<!-- @include inc/_browserhappy.html -->
+	<!-- @include inc/_header.html -->
+	<div id="main"></div>
 	<!-- build:js scripts/main.min.js -->
 	<!-- bower:js -->
 	<!-- endbower -->
-	<script src="scripts/vendor/vendor.js"></script>
-	<script src="scripts/plugins/plugins.js"></script>
 	<script src="scripts/main.js"></script>
 	<!-- endbuild -->
-
-	<!-- @include templates/_analytics.html -->
-
+	<!-- @include inc/_analytics.html -->
 </body>
 </html>
