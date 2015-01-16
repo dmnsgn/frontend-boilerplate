@@ -25,10 +25,6 @@ Bower (A package manager for the web, [here](http://bower.io/))
 
 	npm install -g bower
 
-Coffeescript: ["It's just JavaScript"](http://coffeescript.org/)
-
-	sudo npm install -g coffee-script
-
 Graphicsmagick (used for favicons task)
 
 	brew install graphicsmagick
@@ -143,6 +139,10 @@ Note: Each task is self documented. You can use them individually (e.g. `gulp im
 * Gulp 4 will change. A lot: https://github.com/gulpjs/gulp/issues/355 & https://github.com/gulpjs/gulp/issues/347
 
 ### Change log
+
+0.3.1
+
+* Enable images:favicons task
 
 0.3.0
 
