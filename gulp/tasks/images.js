@@ -7,8 +7,6 @@
  *
  */
 
-var fs = require('fs');
-
 var pkg = require('../../package.json');
 var config = require('../config');
 var gulp = require('gulp');
@@ -21,9 +19,9 @@ var pngcrush = require('imagemin-pngcrush');
 
 var spritesmith = require('gulp.spritesmith');
 
-var favicons = require('favicons');
+var favicons = require('gulp-favicons');
 
-gulp.task('images', ['images:optimization', 'images:spritesheet'/*, 'images:favicons'*/]);
+gulp.task('images', ['images:optimization', 'images:spritesheet' , 'images:favicons' ]);
 
 gulp.task('images:optimization', function() {
 	return gulp.src([config.src + '/images/**/*', '!' + config.src + '/images/{sprite,sprite/**}'])
@@ -54,27 +52,27 @@ gulp.task('images:spritesheet', function() {
 	});
 });
 
-/*gulp.task('images:favicons', function() {
+gulp.task('images:favicons', function() {
 
-	return favicons({
-		files: {
-			src: config.src + '/favicon.png',
-			dest: config.dist + '/images/favicon',
-			html: config.src + '/inc/_favicons.html',
-			iconsPath: 'images/favicon'
-		},
-		settings: {
-			appName: pkg.name,
-			appDescription: pkg.description,
-			developer: pkg.author,
-			developerURL: config.developerURL,
-			background: 'transparent',
-			index: 'index.html',
-			url: config.prodUrl,
-			logging: true
-		}
-	}, function(err) {
-		if (err) throw err;
-	});
+	return gulp.src(config.src + '/inc/_favicons.html')
+		.pipe(favicons({
+			files: {
+				src: config.src + '/favicon.png',
+				dest: '../../' + config.dist + '/images/favicon',
+				iconsPath: 'images/favicon'
+			},
+			settings: {
+				appName: pkg.name,
+				appDescription: pkg.description,
+				developer: pkg.author,
+				developerURL: config.developerURL,
+				background: 'transparent',
+				index: 'index.html',
+				url: config.prodUrl,
+				logging: config.verbose
+			}
+		}, function(err) {
+			console.log(err)
+		}));
 
-});*/
+});

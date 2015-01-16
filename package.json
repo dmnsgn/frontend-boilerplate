@@ -1,6 +1,6 @@
 {
   "name": "gulp-frontend-boilerplate",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A gulp boilerplate with common frontend tasks.",
   "author": "Damien Seguin <https://twitter.com/damienseguinme>",
   "homepage": "https://github.com/DamienSeguin/gulp-frontend-boilerplate",
@@ -16,7 +16,8 @@
     "boilerplate",
     "frontend",
     "tasks",
-    "workflow"
+    "workflow",
+    "coffee-script"
   ],
   "license": "MIT",
   "browserify": {
@@ -28,15 +29,16 @@
   "dependencies": {},
   "devDependencies": {
     "browser-sync": "^1.8.x",
-    "browserify": "^7.0.1",
+    "browserify": "^7.0.x",
+    "coffee-script": "^1.8.x",
     "coffeeify": "^1.0.x",
     "del": "^1.1.x",
-    "favicons": "^2.0.3",
     "gulp": "^3.8.x",
     "gulp-autoprefixer": "^2.0.x",
     "gulp-cache": "^0.2.x",
     "gulp-changed": "^1.1.x",
     "gulp-combine-media-queries": "^0.2.x",
+    "gulp-favicons": "^1.0.x",
     "gulp-filter": "^2.0.x",
     "gulp-flatten": "0.0.x",
     "gulp-header": "^1.2.x",
