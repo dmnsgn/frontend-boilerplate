@@ -2,14 +2,14 @@
   "name": "gulp-frontend-boilerplate",
   "version": "0.3.1",
   "description": "A gulp boilerplate with common frontend tasks.",
-  "author": "Damien Seguin <https://twitter.com/damienseguinme>",
-  "homepage": "https://github.com/DamienSeguin/gulp-frontend-boilerplate",
+  "author": "Damien Seguin <https://twitter.com/dmnsgn>",
+  "homepage": "https://github.com/dmnsgn/gulp-frontend-boilerplate",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DamienSeguin/gulp-frontend-boilerplate"
+    "url": "https://github.com/dmnsgn/gulp-frontend-boilerplate"
   },
   "issues": {
-    "url": "https://github.com/DamienSeguin/gulp-frontend-boilerplate/issues"
+    "url": "https://github.com/dmnsgn/gulp-frontend-boilerplate/issues"
   },
   "keywords": [
     "gulp",
