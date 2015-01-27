@@ -25,10 +25,6 @@ Bower (A package manager for the web, [here](http://bower.io/))
 
 	npm install -g bower
 
-Graphicsmagick (used for favicons task)
-
-	brew install graphicsmagick
-
 ### Clone this repository
 
 	git clone https://github.com/DamienSeguin/gulp-frontend-boilerplate.git
@@ -85,7 +81,7 @@ Note: if you just want to build the project and serve a 'production ready' versi
 
 #### Make changes
 
- * Write your markup in `src` folder and in `src/templates`. Include your partials with `<!-- @include templates/_filename.html -->`
+ * Write your markup in `src` folder and in `src/inc`. Include your partials with `<!-- @include templates/_filename.html -->`
  * Add some `scss` styles.
  * Add some `scripts`: `.js` or `.coffee`.
  * Run your `bower install <package> --save`. This will automatically include the main files of each package. If there is a warning in your CLI, just include them manually (for instance, `<script src="bower_components/history.js/scripts/bundled-uncompressed/html5/native.history.js"></script>`) inside the build tag (`<!-- build:js scripts/main.min.js -->`)
@@ -134,43 +130,10 @@ Note: Each task is self documented. You can use them individually (e.g. `gulp im
 ## External issues
 * Gaze break watchers when renaming folder: https://github.com/shama/gaze/issues/56. Waiting for gaze 0.6 https://github.com/gulpjs/gulp/issues/600
 * watch doesn't work when adding files: https://github.com/floatdrop/gulp-watch/issues/50
-* images task is slow
 * Run sequence is intended to be a temporary solution until orchestrator is updated to support non-dependent ordered tasks: https://github.com/gulpjs/gulp/issues/347
 * Gulp 4 will change. A lot: https://github.com/gulpjs/gulp/issues/355 & https://github.com/gulpjs/gulp/issues/347
 
-### Change log
-
-0.3.1
-
-* Enable images:favicons task
-
-0.3.0
-
-* Add browserify (coffee, hbs, sourcemaps)
-* Add sass sourcemaps
-* Remove jshint
-* Muted images:favicons task
-
-0.2.2
-
-* Clean/Upgrade dependencies
-* Update images:favicons tasks
-
-0.2.1
-
-* Update images:favicons tasks
-
-0.2.0
-
-* Switch from livereload to browsersync
-* Add Bower
-* Add coffeescript
-* Add gulp-favicon
-* Add test task
-* Add mocha tests
-* Add google analytics snippet and config UA option
-* Add browserhappy snippet
-* Code style: less task files, rename to `task:subtask`
+TODO: remove bower
 
 ##Licence
 

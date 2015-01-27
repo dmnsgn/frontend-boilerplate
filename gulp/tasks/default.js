@@ -29,7 +29,7 @@ gulp.task('default:dev', function() {
 
 gulp.task('default:prod', function() {
 
-	runSequence(['markup:all', 'styles', 'scripts', 'images'], 'build', 'serve', function() {
+	runSequence(['markup:all', 'styles', 'images'], 'build', 'serve', function() {
 		gutil.log(gutil.colors.bgGreen('Build ready and served.'));
 	});
 

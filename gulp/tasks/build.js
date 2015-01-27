@@ -29,7 +29,7 @@ var cmq = require('gulp-combine-media-queries');
 
 gulp.task('build', function() {
 
-	runSequence('build:markup', 'build:styles');
+	return runSequence('scripts', ['build:markup', 'build:styles']);
 
 });
 
@@ -47,8 +47,6 @@ gulp.task('build:markup', function() {
 	return gulp.src(config.dist + '/*.html')
 		.pipe(assets)
 		.on('error', handleErrors)
-		.pipe(gulpif('*.js', uglify()))
-		.pipe(header(config.banner))
 		.pipe(assets.restore())
 		.pipe(useref())
 		.pipe(gulp.dest(config.dist));

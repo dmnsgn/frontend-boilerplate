@@ -15,7 +15,7 @@ var gutil = require('gulp-util');
 var newer = require('gulp-newer');
 var cache = require('gulp-cache');
 var imagemin = require('gulp-imagemin');
-var pngcrush = require('imagemin-pngcrush');
+var pngquant = require('imagemin-pngquant');
 
 var spritesmith = require('gulp.spritesmith');
 
@@ -29,7 +29,7 @@ gulp.task('images:optimization', function() {
 		.pipe(cache(imagemin({
 			progressive: true,
 			interlaced: true,
-			use: [pngcrush()]
+			use: [pngquant()]
 		})))
 		.pipe(gulp.dest(config.dist + '/images'));
 });

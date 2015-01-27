@@ -7,11 +7,16 @@
 
 var config = require('../config');
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
 var browserSync = require('browser-sync');
 var browserify = require('browserify');
 var watchify = require('watchify');
-var source = require('vinyl-source-stream');
+
+var header = require('gulp-header');
+var uglify = require('gulp-uglify');
 
 var bundleLogger = require('../utils/bundleLogger');
 var handleErrors = require('../utils/handleErrors');
@@ -37,6 +42,9 @@ gulp.task('scripts', function(callback) {
 			.bundle()
 			.on('error', handleErrors)
 			.pipe(source('main.js'))
+			.pipe(buffer())
+			.pipe(global.isWatching ? gutil.noop() : uglify())
+			.pipe(global.isWatching ? gutil.noop() : header(config.banner))
 			.pipe(gulp.dest('./' + config.dist + '/scripts'))
 			.on('end', function() {
 				if (global.isWatching) {

@@ -1,75 +1,86 @@
 {
-  "name": "gulp-frontend-boilerplate",
-  "version": "0.3.1",
-  "description": "A gulp boilerplate with common frontend tasks.",
-  "author": "Damien Seguin <https://twitter.com/dmnsgn>",
-  "homepage": "https://github.com/dmnsgn/gulp-frontend-boilerplate",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/dmnsgn/gulp-frontend-boilerplate"
-  },
-  "issues": {
-    "url": "https://github.com/dmnsgn/gulp-frontend-boilerplate/issues"
-  },
-  "keywords": [
-    "gulp",
-    "boilerplate",
-    "frontend",
-    "tasks",
-    "workflow",
-    "coffee-script"
-  ],
-  "license": "MIT",
-  "browserify": {
-    "transform": [
-      "coffeeify",
-      "hbsfy"
-    ]
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "browser-sync": "^1.8.x",
-    "browserify": "^7.0.x",
-    "coffee-script": "^1.8.x",
-    "coffeeify": "^1.0.x",
-    "del": "^1.1.x",
-    "gulp": "^3.8.x",
-    "gulp-autoprefixer": "^2.0.x",
-    "gulp-cache": "^0.2.x",
-    "gulp-changed": "^1.1.x",
-    "gulp-combine-media-queries": "^0.2.x",
-    "gulp-favicons": "^1.0.x",
-    "gulp-filter": "^2.0.x",
-    "gulp-flatten": "0.0.x",
-    "gulp-header": "^1.2.x",
-    "gulp-if": "^1.2.x",
-    "gulp-imagemin": "^2.1.x",
-    "gulp-minify-css": "^0.3.x",
-    "gulp-mocha": "^2.0.x",
-    "gulp-newer": "^0.5.x",
-    "gulp-notify": "^2.1.x",
-    "gulp-preprocess": "^1.2.x",
-    "gulp-rename": "^1.2.x",
-    "gulp-ruby-sass": "^1.0.0-alpha",
-    "gulp-sitemap": "^2.0.x",
-    "gulp-size": "^1.1.x",
-    "gulp-sourcemaps": "^1.3.x",
-    "gulp-task-listing": "^1.0.x",
-    "gulp-uglify": "^1.0.x",
-    "gulp-useref": "^1.1.x",
-    "gulp-util": "^3.0.x",
-    "gulp-w3cjs": "^0.2.x",
-    "gulp-watch": "^3.0.x",
-    "gulp.spritesmith": "^2.4.x",
-    "handlebars": "^2.0.x",
-    "hbsfy": "^2.2.x",
-    "imagemin-pngcrush": "^4.0.x",
-    "main-bower-files": "^2.4.x",
-    "pretty-hrtime": "^1.0.x",
-    "psi": "^0.1.x",
-    "run-sequence": "^1.0.x",
-    "vinyl-source-stream": "^1.0.x",
-    "watchify": "^2.2.x",
-    "wiredep": "^2.2.x"
-  }
+	"name": "gulp-frontend-boilerplate",
+	"version": "0.3.2",
+	"description": "A gulp boilerplate with common frontend tasks.",
+	"author": "Damien Seguin <https://twitter.com/dmnsgn>",
+	"homepage": "https://github.com/dmnsgn/gulp-frontend-boilerplate",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dmnsgn/gulp-frontend-boilerplate"
+	},
+	"issues": {
+		"url": "https://github.com/dmnsgn/gulp-frontend-boilerplate/issues"
+	},
+	"keywords": [
+		"gulp",
+		"boilerplate",
+		"frontend",
+		"tasks",
+		"workflow",
+		"coffee-script"
+	],
+	"license": "MIT",
+	"browserify-shim": {
+		"jquery": "$"
+	},
+	"browser": {
+		"jquery": "./node_modules/jquery/dist/jquery.js"
+	},
+	"browserify": {
+		"transform": [
+			"browserify-shim",
+			"coffeeify",
+			"hbsfy"
+		]
+	},
+	"dependencies": {
+		"jquery": "^2.1.3"
+	},
+	"devDependencies": {
+		"browser-sync": "^1.9.x",
+		"browserify": "^8.1.x",
+		"browserify-shim": "^3.8.x",
+		"coffee-script": "^1.8.x",
+		"coffeeify": "^1.0.x",
+		"del": "^1.1.x",
+		"gulp": "^3.8.x",
+		"gulp-autoprefixer": "^2.1.x",
+		"gulp-cache": "^0.2.x",
+		"gulp-changed": "^1.1.x",
+		"gulp-combine-media-queries": "^0.2.x",
+		"gulp-favicons": "^1.0.x",
+		"gulp-filter": "^2.0.x",
+		"gulp-flatten": "0.0.x",
+		"gulp-header": "^1.2.x",
+		"gulp-if": "^1.2.x",
+		"gulp-imagemin": "^2.1.x",
+		"gulp-minify-css": "^0.4.x",
+		"gulp-mocha": "^2.0.x",
+		"gulp-newer": "^0.5.x",
+		"gulp-notify": "^2.2.x",
+		"gulp-preprocess": "^1.2.x",
+		"gulp-rename": "^1.2.x",
+		"gulp-ruby-sass": "^1.0.0-alpha",
+		"gulp-sitemap": "^2.0.x",
+		"gulp-size": "^1.2.x",
+		"gulp-sourcemaps": "^1.3.x",
+		"gulp-task-listing": "^1.0.x",
+		"gulp-uglify": "^1.1.x",
+		"gulp-useref": "^1.1.x",
+		"gulp-util": "^3.0.x",
+		"gulp-w3cjs": "^0.2.x",
+		"gulp-watch": "^4.1.x",
+		"gulp.spritesmith": "^2.4.x",
+		"handlebars": "^2.0.x",
+		"hbsfy": "^2.2.x",
+		"imagemin-pngquant": "^4.0.x",
+		"main-bower-files": "^2.5.x",
+		"pretty-hrtime": "^1.0.x",
+		"psi": "^1.0.x",
+		"run-sequence": "^1.0.x",
+		"vinyl-buffer": "^1.0.0",
+		"vinyl-source-stream": "^1.0.x",
+		"watchify": "^2.2.x",
+		"wiredep": "^2.2.x"
+	}
 }
