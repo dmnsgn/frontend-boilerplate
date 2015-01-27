@@ -117,6 +117,6 @@ gulp.task('watch', ['setWatch'], function() {
 	// gulp.watch(config.src + '/images/**/*', ['images']).on('change', onWatchChange);
 	// gulp.watch(config.src + '/images/sprite/**/*', ['images:spritesheet']).on('change', onWatchChange);
 
-	gutil.log(gutil.colors.bgGreen('Watching changes...'));
+	gutil.log(gutil.colors.green('Watching changes...'));
 
 });
