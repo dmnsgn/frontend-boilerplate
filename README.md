@@ -21,20 +21,11 @@ Sass (go check on its superpowers [here](http://sass-lang.com/))
 
 	gem install sass
 
-Bower (A package manager for the web, [here](http://bower.io/))
-
-	npm install -g bower
-
 ### Clone this repository
 
 	git clone https://github.com/DamienSeguin/gulp-frontend-boilerplate.git
 
 ### Install dependencies
-
-	// It's up to you to install packages with
-	bower install <package> --save
-	// Run at least once
-	bower install
 
 	// Npm
 	npm install
@@ -52,7 +43,6 @@ Open `gulp/config.js` with your favorite text editor.
 |**src**: the source folder path, that's where you write code.|String|src|
 |**dist**: the destination folder path, that's where your code is compiled.|String|dist|
 |**test**: the `test` folder path.|String|test|
-|**bower**: the `bower_components` folder path (it has to be in the dist folder)|String|dist/bower_components|
 |**browsers**: the browser(s) targeted for autoprefixer and autopolyfiller (see full list of options [here](https://github.com/ai/autoprefixer#browsers))|Array|['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']|
 |**prodUrl**: the absolute url to use in the sitemap|String|''|
 |**analyticsUA**: your google analytics UA|String|''|
@@ -68,8 +58,8 @@ This is the default task.
 
 All the magic begins here:
 
-* process `.html` files (adding bower dependencies and including templates)
-* process `.scss` files (adding bower dependencies, autoprefixing for dev)
+* process `.html` files
+* process `.scss` files
 * process `.js` and `.coffee` files with lint reports
 * create a server with BrowserSync and serve `dist` folder
 * watch changes in source folder
@@ -84,7 +74,6 @@ Note: if you just want to build the project and serve a 'production ready' versi
  * Write your markup in `src` folder and in `src/inc`. Include your partials with `<!-- @include templates/_filename.html -->`
  * Add some `scss` styles.
  * Add some `scripts`: `.js` or `.coffee`.
- * Run your `bower install <package> --save`. This will automatically include the main files of each package. If there is a warning in your CLI, just include them manually (for instance, `<script src="bower_components/history.js/scripts/bundled-uncompressed/html5/native.history.js"></script>`) inside the build tag (`<!-- build:js scripts/main.min.js -->`)
  * Add images in the - wait for it - `images` folder.
  * Generate a spritesheet with corresponding mixins (located in `styles/_sprite.scss`) by adding `.png` files into `images/sprite` folder .
 
@@ -132,8 +121,6 @@ Note: Each task is self documented. You can use them individually (e.g. `gulp im
 * watch doesn't work when adding files: https://github.com/floatdrop/gulp-watch/issues/50
 * Run sequence is intended to be a temporary solution until orchestrator is updated to support non-dependent ordered tasks: https://github.com/gulpjs/gulp/issues/347
 * Gulp 4 will change. A lot: https://github.com/gulpjs/gulp/issues/355 & https://github.com/gulpjs/gulp/issues/347
-
-TODO: remove bower
 
 ##Licence
 

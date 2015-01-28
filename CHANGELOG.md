@@ -1,5 +1,10 @@
 ### Change log
 
+0.3.3
+
+* Add napa
+* Remove bower
+
 0.3.2
 
 * Add browserify-shim
