@@ -40,15 +40,15 @@ gulp.task('watch', ['setWatch'], function() {
 		gulp.start('markup:all');
 	});
 
-	// Watch bower dependencies
-	watch('bower.json', {
+	// Watch dependencies
+	watch('package.json', {
 		emitOnGlob: false,
 		read: false,
-		name: 'Bower dependencies watcher',
+		name: 'Package watcher',
 		verbose: config.verbose
 	}, function() {
 		gulp.start('markup:all');
-		gulp.start('styles:wiredep');
+		gulp.start('scripts');
 	});
 
 	// Watch .scss files
@@ -58,7 +58,7 @@ gulp.task('watch', ['setWatch'], function() {
 		name: 'Scss watcher',
 		verbose: config.verbose
 	}, function() {
-		gulp.start('styles:sass');
+		gulp.start('styles');
 	});
 
 	// Watch .js, .json, .coffee, .hbs files

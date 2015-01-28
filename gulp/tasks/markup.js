@@ -18,7 +18,6 @@ var browserSync = require('browser-sync');
 
 var newer = require('gulp-newer');
 var preprocess = require('gulp-preprocess');
-var wiredep = require('wiredep').stream;
 
 function process(changed) {
 	return gulp.src(config.src + '/*.html', {
@@ -30,11 +29,6 @@ function process(changed) {
 				NODE_ENV: 'dev',
 				UA: config.analyticsUA
 			}
-		}))
-		.pipe(wiredep({
-			directory: config.bower,
-			ignorePath: '../' + config.dist + '/',
-			exclude: ['bower_components/modernizr/modernizr.js']
 		}))
 		.pipe(gulp.dest(config.dist))
 		.on('end', function() {

@@ -1,14 +1,9 @@
-/*# sourceMappingURL=main.css.map */
-
 @charset "UTF-8";
 
+@import 'node_modules/normalize.scss/normalize';
+@import 'node_modules/gridle/sass/gridle/_gridle';
+
 @import '_sprite';
-
-// bower:scss
-@import "../../dist/bower_components/normalize-scss/_normalize.scss";
-// endbower
-
-@import '_partial';
 
 /**
  * Main style file
@@ -16,6 +11,5 @@
 
 body {
 	background-color: #ddd;
-	color: #333;
 	transition: all .3s ease;
 }

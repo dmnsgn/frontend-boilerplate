@@ -1,4 +1,4 @@
-$ = require('jquery')
+$ = require 'jquery'
 View = require './views/view'
 template = require './templates/view.hbs'
 

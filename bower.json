@@ -1,9 +1,0 @@
-{
-  "name": "gulp-frontend-boilerplate",
-  "private": true,
-  "dependencies": {
-    "normalize-scss": "~3.0.1",
-    "modernizr": "~2.8.3"
-  },
-  "devDependencies": {}
-}

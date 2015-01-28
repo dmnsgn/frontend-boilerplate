@@ -15,7 +15,7 @@ var cache = require('gulp-cache');
 gulp.task('clean', ['clean:clearCache', 'clean:deleteFiles']);
 
 gulp.task('clean:deleteFiles', function() {
-	del([config.dist + '/*', '!' + config.dist + '/bower_components' , '.sass-cache']);
+	del([config.dist + '/*', '.sass-cache']);
 });
 
 gulp.task('clean:clearCache', function() {
