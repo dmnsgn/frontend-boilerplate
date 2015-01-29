@@ -15,8 +15,9 @@ var browserSync = require('browser-sync');
 var browserify = require('browserify');
 var watchify = require('watchify');
 
-var header = require('gulp-header');
 var uglify = require('gulp-uglify');
+var header = require('gulp-header');
+var rename = require('gulp-rename');
 
 var bundleLogger = require('../utils/bundleLogger');
 var handleErrors = require('../utils/handleErrors');
@@ -45,6 +46,9 @@ gulp.task('scripts', function(callback) {
 			.pipe(buffer())
 			.pipe(global.isWatching ? gutil.noop() : uglify())
 			.pipe(global.isWatching ? gutil.noop() : header(config.banner))
+			.pipe(global.isWatching ? gutil.noop() : rename({
+				suffix: '.min'
+			}))
 			.pipe(gulp.dest('./' + config.dist + '/scripts'))
 			.on('end', function() {
 				if (global.isWatching) {

@@ -18,7 +18,7 @@ module.exports = {
 	prodUrl: 'http://test.tld',
 	analyticsUA: 'UA-XXXXX-X',
 	banner: ['/**',
-		' * ' + pkg.name,
+		' * ' + pkg.title,
 		' * ' + pkg.description,
 		' * Compiled: ' + Date(),
 		' * @version v' + pkg.version,

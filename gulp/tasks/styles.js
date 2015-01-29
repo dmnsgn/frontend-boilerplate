@@ -7,6 +7,7 @@
 
 var config = require('../config');
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 var handleErrors = require('../utils/handleErrors');
 
 var browserSync = require('browser-sync');
@@ -22,8 +23,8 @@ gulp.task('styles', function() {
 			sourcemap: true
 		})
 		.on('error', handleErrors)
-		.pipe(autoprefixer('last 2 version'))
-		.pipe(sourcemaps.write())
+		.pipe(autoprefixer(config.browsers))
+		.pipe(!global.isWatching ? gutil.noop() : sourcemaps.write())
 		.pipe(gulp.dest(config.dist + '/styles'))
 		.pipe(filter('**/*.css'))
 		.pipe(browserSync.reload({

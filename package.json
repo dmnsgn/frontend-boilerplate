@@ -1,6 +1,7 @@
 {
   "name": "gulp-frontend-boilerplate",
-  "version": "0.3.3",
+  "title": "Gulp Frontend Boilerplate",
+  "version": "0.3.4",
   "description": "A gulp boilerplate with common frontend tasks.",
   "author": "Damien Seguin <https://twitter.com/dmnsgn>",
   "homepage": "https://github.com/dmnsgn/gulp-frontend-boilerplate",
@@ -21,10 +22,10 @@
   ],
   "license": "MIT",
   "browserify-shim": {
-    "jquery": "$"
+    "TweenMax": "TweenMax"
   },
   "browser": {
-    "jquery": "./node_modules/jquery/dist/jquery.js"
+    "TweenMax": "./node_modules/greensock/src/minified/TweenMax.min.js"
   },
   "browserify": {
     "transform": [
@@ -33,8 +34,10 @@
       "hbsfy"
     ]
   },
+  "napa": {
+    "greensock": "greensock/GreenSock-JS"
+  },
   "dependencies": {
-    "jquery": "^2.1.3",
     "normalize.scss": "^0.1.0"
   },
   "devDependencies": {
@@ -85,8 +88,5 @@
   },
   "scripts": {
     "install": "napa"
-  },
-  "napa": {
-    "gridle": "olivierbossel/gridle"
   }
 }

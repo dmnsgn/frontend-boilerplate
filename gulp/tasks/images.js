@@ -62,7 +62,7 @@ gulp.task('images:favicons', function() {
 				iconsPath: 'images/favicon'
 			},
 			settings: {
-				appName: pkg.name,
+				appName: pkg.title,
 				appDescription: pkg.description,
 				developer: pkg.author,
 				developerURL: config.developerURL,
