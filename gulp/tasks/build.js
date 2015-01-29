@@ -29,7 +29,7 @@ var cmq = require('gulp-combine-media-queries');
 
 gulp.task('build', function() {
 
-	return runSequence('scripts', ['build:markup', 'build:styles']);
+	runSequence('scripts', 'build:markup', 'build:styles');
 
 });
 
@@ -74,15 +74,10 @@ gulp.task('build:markup:sitemap', function() {
 
 gulp.task('build:styles', function() {
 	return gulp.src(config.dist + '/styles/main.css')
-		.pipe(autoprefixer(config.browsers, {
-			cascade: false
-		}))
 		.pipe(cmq({
 			log: config.verbose
 		}))
-		.pipe(minifyCss({
-			keepSpecialComments: 1
-		}))
+		.pipe(minifyCss())
 		.pipe(header(config.banner))
 		.pipe(rename({
 			suffix: '.min'

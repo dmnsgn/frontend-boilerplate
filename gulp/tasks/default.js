@@ -23,14 +23,14 @@ gulp.task('default', function() {
 
 gulp.task('default:dev', function() {
 
-	runSequence(['markup:all', 'styles', 'scripts', 'images'], ['serve', 'watch']);
+	runSequence('setWatch', ['markup:all', 'styles', 'scripts', 'images'], ['serve', 'watch']);
 
 });
 
 gulp.task('default:prod', function() {
 
 	runSequence(['markup:all', 'styles', 'images'], 'build', 'serve', function() {
-		gutil.log(gutil.colors.bgGreen('Build ready and served.'));
+		gutil.log(gutil.colors.green('Build ready and served.'));
 	});
 
 });

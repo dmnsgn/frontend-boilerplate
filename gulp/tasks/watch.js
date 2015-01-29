@@ -19,7 +19,7 @@ gulp.task('setWatch', function() {
 	global.isWatching = true;
 });
 
-gulp.task('watch', ['setWatch'], function() {
+gulp.task('watch', function() {
 
 	// Watch html files
 	watch(config.src + '/*.html', {

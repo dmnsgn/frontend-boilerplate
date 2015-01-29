@@ -1,5 +1,9 @@
 ### Change log
 
+0.3.4
+
+* Clean build task
+
 0.3.3
 
 * Add napa
