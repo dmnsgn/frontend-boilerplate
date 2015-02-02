@@ -23,7 +23,7 @@ Sass (go check on its superpowers [here](http://sass-lang.com/))
 
 ### Clone this repository
 
-	git clone https://github.com/DamienSeguin/gulp-frontend-boilerplate.git
+	git clone https://github.com/dmnsgn/gulp-frontend-boilerplate.git
 
 ### Install dependencies
 
