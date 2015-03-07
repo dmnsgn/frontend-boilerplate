@@ -20,7 +20,9 @@ var size = require('gulp-size');
 
 gulp.task('styles', function() {
 	return sass(config.src + '/styles/main.scss', {
-			sourcemap: true
+			sourcemap: true,
+			compass: true,
+			require: ['sass-globbing', 'sass-css-importer']
 		})
 		.on('error', handleErrors)
 		.pipe(autoprefixer(config.browsers))

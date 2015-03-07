@@ -1,7 +1,7 @@
 {
   "name": "gulp-frontend-boilerplate",
   "title": "Gulp Frontend Boilerplate",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "A gulp boilerplate with common frontend tasks.",
   "author": "Damien Seguin <https://twitter.com/dmnsgn>",
   "homepage": "https://github.com/dmnsgn/gulp-frontend-boilerplate",
@@ -38,7 +38,7 @@
     "greensock": "greensock/GreenSock-JS"
   },
   "dependencies": {
-    "normalize.scss": "^0.1.0"
+    "normalizecss": "^3.0.0"
   },
   "devDependencies": {
     "browser-sync": "^1.9.x",

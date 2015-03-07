@@ -19,7 +19,7 @@ Gulp (are you new with the streaming build system ? Take a sip [here](https://gi
 
 Sass (go check on its superpowers [here](http://sass-lang.com/))
 
-	gem install sass
+	gem install sass compass sass-css-importer sass-globbing
 
 ### Clone this repository
 
