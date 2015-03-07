@@ -1,14 +1,6 @@
 @charset "UTF-8";
 
-@import 'node_modules/normalize.scss/normalize';
-
 @import '_sprite';
+@import 'CSS:node_modules/normalizecss/normalize';
 
-/**
- * Main style file
- */
-
-body {
-	background-color: #ddd;
-	transition: all .3s ease;
-}
+@import 'modules/**/*';
