@@ -1,5 +1,9 @@
 ### Change log
 
+0.3.6
+
+* Add sass-easing
+
 0.3.5
 
 * Add compass, sass-css-importer and sass-globbing
