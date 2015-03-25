@@ -10,26 +10,26 @@ This is a work in progress. Feel free to contribute.
 ### Requirements
 
 Node (use brew or install it from [here](http://nodejs.org/download/))
-
-	brew install node
-
+```bash
+brew install node
+```
 Gulp (are you new with the streaming build system ? Take a sip [here](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started))
-
-	npm install -g gulp
-
+```bash
+npm install -g gulp
+```
 Sass (go check on its superpowers [here](http://sass-lang.com/))
-
-	gem install sass compass sass-css-importer sass-globbing
-
+```bash
+gem install sass compass sass-css-importer sass-globbing
+```
 ### Clone this repository
-
-	git clone https://github.com/dmnsgn/gulp-frontend-boilerplate.git
-
+```bash
+git clone https://github.com/dmnsgn/gulp-frontend-boilerplate.git
+```
 ### Install dependencies
-
-	// Npm
-	npm install
-
+```bash
+// Npm
+npm install
+```
 ## Usage
 
 ### Configuration
@@ -53,9 +53,9 @@ Open `gulp/config.js` with your favorite text editor.
 
 #### Launch it
 This is the default task.
-
-	gulp
-
+```bash
+gulp
+```
 All the magic begins here:
 
 * process `.html` files
@@ -80,38 +80,38 @@ Note: if you just want to build the project and serve a 'production ready' versi
 #### Build for deploy
 
 When you are happy with your changes, run:
-
-	gulp build
-
+```bash
+gulp build
+```
 * Replace build tags with `.min` files, generates these minified files in `dist` folder (with optimization tasks)
 * Add copyright headers and generate a `sitemap.xml`file
 
 #### Tests tasks
 
 Quick tests and stats with:
+```bash
+// w3c validation
+gulp test:markup
 
-	// w3c validation
-	gulp test:markup
+// mocha tests (written in test folder)
+gulp test:scripts
 
-	// mocha tests (written in test folder)
-	gulp test:scripts
-
-	// PageSpeed Insights reporter for mobile and desktop
-	gulp test:psi
-
+// PageSpeed Insights reporter for mobile and desktop
+gulp test:psi
+```
 
 #### Clean it
 
 Clean dist dir and clear all caches (sass cache, gulp cache)
-
-	gulp clean
-
+```bash
+gulp clean
+```
 #### Help
 
 This command will give you a list of all tasks available.
-
-	gulp help
-
+```bash
+gulp help
+```
 ---
 Note: Each task is self documented. You can use them individually (e.g. `gulp images:spritesheet`, `gulp images:optimization`) but you should use the tasks above (`default` then `build`. Then `default` if neeeded and `build` again. `serve` to check if all is ok before deploying).
 
