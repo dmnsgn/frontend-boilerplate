@@ -1,5 +1,9 @@
 ### Change log
 
+0.3.7
+
+* Add sass-font-face
+
 0.3.6
 
 * Add sass-easing

@@ -1,0 +1,3 @@
+$font-regular: 'Open Sans Regular';
+
+@include font-face($font-regular, 'fonts/', 'OpenSans-Regular-webfont', 'open_sansregular');
