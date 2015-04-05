@@ -11,24 +11,24 @@ This is a work in progress. Feel free to contribute.
 
 Node (use brew or install it from [here](http://nodejs.org/download/))
 ```bash
-brew install node
+$ brew install node
 ```
 Gulp (are you new with the streaming build system ? Take a sip [here](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started))
 ```bash
-npm install -g gulp
+$ npm install -g gulp
 ```
 Sass (go check on its superpowers [here](http://sass-lang.com/))
 ```bash
-gem install sass compass sass-css-importer sass-globbing
+$ gem install sass compass sass-css-importer sass-globbing
 ```
 ### Clone this repository
 ```bash
-git clone https://github.com/dmnsgn/gulp-frontend-boilerplate.git
+$ git clone https://github.com/dmnsgn/gulp-frontend-boilerplate.git
 ```
 ### Install dependencies
 ```bash
 // Npm
-npm install
+$ npm install
 ```
 ## Usage
 
