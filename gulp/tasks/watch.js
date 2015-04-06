@@ -98,9 +98,6 @@ gulp.task('watch', function() {
 	// gulp.watch(config.src + '/*.html', ['markup:changed']).on('change', onWatchChange);
 	// gulp.watch(config.src + '/inc/**/*', ['markup:all']).on('change', onWatchChange);
 
-	// // Watch bower dependencies
-	// gulp.watch('bower.json', ['markup:all', 'styles:wiredep']).on('change', onWatchChange);
-
 	// // Watch .scss files
 	// gulp.watch(config.src + '/styles/**/*.scss', ['styles']).on('change', onWatchChange);
 
