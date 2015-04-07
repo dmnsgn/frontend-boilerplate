@@ -21,9 +21,11 @@ Sass (go check on its superpowers [here](http://sass-lang.com/))
 ```bash
 $ gem install sass compass sass-css-importer sass-globbing
 ```
-### Clone this repository
+### Clone this repository or grab it from npm
 ```bash
 $ git clone https://github.com/dmnsgn/gulp-frontend-boilerplate.git
+
+$ npm i gulp-frontend-boilerplate
 ```
 ### Install dependencies
 ```bash
