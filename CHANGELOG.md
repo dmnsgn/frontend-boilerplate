@@ -1,5 +1,14 @@
 ### Change log
 
+0.3.9
+
+* Clean fonts folder
+
+0.3.8
+
+* Update dependencies
+* Clean README
+
 0.3.7
 
 * Add sass-font-face
