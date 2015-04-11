@@ -1,6 +1,6 @@
 {
   "name": "gulp-frontend-boilerplate",
-  "title": "Gulp Frontend Boilerplate",
+  "title": "",
   "version": "0.3.9",
   "description": "A gulp boilerplate with common frontend tasks.",
   "author": "Damien Seguin <https://twitter.com/dmnsgn>",
@@ -18,36 +18,34 @@
     "frontend",
     "tasks",
     "workflow",
-    "coffee-script"
+    "browserify",
+    "coffee-script",
+    "es6",
+    "backbonejs",
+    "marionettejs",
+    "react",
+    "jsx",
+    "sass",
+    "less"
   ],
   "license": "MIT",
   "browserify-shim": {
     "TweenMax": "TweenMax"
   },
   "browser": {
-    "TweenMax": "./node_modules/greensock/src/minified/TweenMax.min.js"
+    "TweenMax": "./node_modules/greensock/src/uncompressed/TweenMax.js"
   },
-  "browserify": {
-    "transform": [
-      "browserify-shim",
-      "coffeeify",
-      "hbsfy"
-    ]
-  },
+  "browserify": {},
   "napa": {
     "greensock": "greensock/GreenSock-JS"
   },
   "dependencies": {
-    "normalizecss": "^3.0.0",
-    "sass-easing": "^1.0.2",
-    "sass-font-face": "^1.0.0"
+    "normalizecss": "^3.0.0"
   },
   "devDependencies": {
     "browser-sync": "^2.5.x",
     "browserify": "^9.0.x",
     "browserify-shim": "^3.8.x",
-    "coffee-script": "^1.9.x",
-    "coffeeify": "^1.0.x",
     "del": "^1.1.x",
     "gulp": "^3.8.x",
     "gulp-autoprefixer": "^2.1.x",
@@ -76,9 +74,8 @@
     "gulp-w3cjs": "^0.3.x",
     "gulp-watch": "^4.2.x",
     "gulp.spritesmith": "^3.5.x",
-    "handlebars": "^3.0.x",
-    "hbsfy": "^2.2.x",
     "imagemin-pngquant": "^4.0.x",
+    "inquirer": "^0.8.2",
     "napa": "^1.2.x",
     "pretty-hrtime": "^1.0.x",
     "psi": "^1.0.x",
@@ -88,6 +85,7 @@
     "watchify": "^3.1.x"
   },
   "scripts": {
+    "start": "npm i inquirer chalk && node start.js;",
     "install": "napa"
   }
 }
