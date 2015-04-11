@@ -25,7 +25,7 @@
     "TweenMax": "TweenMax"
   },
   "browser": {
-    "TweenMax": "./node_modules/greensock/src/minified/TweenMax.min.js"
+    "TweenMax": "./node_modules/greensock/src/uncompressed/TweenMax.js"
   },
   "browserify": {
     "transform": [
