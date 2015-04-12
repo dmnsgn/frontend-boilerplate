@@ -84,13 +84,13 @@ var questions = [
           dependencies: ["sass-easing", "sass-font-face"]
         }
       },
-      {
+      /*{
         name: "Less",
         value: {
           extension: 'less',
           dependencies: ["less-easing", "less-font-face"]
         }
-      },
+      },*/
       {
         name: "Nothing, I am fine",
         value: {
