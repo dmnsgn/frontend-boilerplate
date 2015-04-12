@@ -1,5 +1,11 @@
 ### Change log
 
+0.4.0
+* New install system
+* Update tasks according to new install system
+* Update package.json according to new install system
+* Update .editorconfig for js, json
+
 0.3.9
 
 * Clean fonts folder

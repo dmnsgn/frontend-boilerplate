@@ -27,11 +27,21 @@ $ git clone https://github.com/dmnsgn/gulp-frontend-boilerplate.git
 
 $ npm i gulp-frontend-boilerplate
 ```
-### Install dependencies
+
+### Init
+
+This step sets up the boilerplate to fit your needs (App Name, JS compiler/transpiler, JS framework, CSS preprocessor).
+
 ```bash
-// Npm
+$ npm start
+```
+
+Then each time you clone the repo, use:
+
+```bash
 $ npm install
 ```
+
 ## Usage
 
 ### Configuration

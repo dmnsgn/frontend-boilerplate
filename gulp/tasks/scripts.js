@@ -6,6 +6,7 @@
  */
 
 var config = require('../config');
+var pkg = require('../../package.json');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 
@@ -28,8 +29,8 @@ gulp.task('scripts', function(callback) {
 		cache: {},
 		packageCache: {},
 		fullPaths: true,
-		entries: ['./' + config.src + '/scripts/main.coffee'],
-		extensions: ['.coffee', '.hbs'],
+		entries: ['./' + config.src + '/scripts/main.' + pkg.extensions.scripts],
+		extensions: [pkg.extensions.scripts],
 		debug: global.isWatching
 	});
 
