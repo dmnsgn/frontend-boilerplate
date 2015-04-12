@@ -28,13 +28,16 @@ var questions = [
       {
         name: "Coffeescript",
         value: {
+          extension: 'coffee',
           devDependencies: ["coffeeify"],
           transform: ["coffeeify"]
         }
       },
       {
         name: "Good ol' JS",
-        value: {}
+        value: {
+          extension: 'js',
+        }
       }
     ]
   },
@@ -77,51 +80,39 @@ var questions = [
       {
         name: "Sass",
         value: {
+          extension: 'scss',
           dependencies: ["sass-easing", "sass-font-face"]
         }
       },
       {
         name: "Less",
         value: {
+          extension: 'less',
           dependencies: ["less-easing", "less-font-face"]
         }
       },
       {
         name: "Nothing, I am fine",
-        value: {}
+        value: {
+          extension: 'css',
+        }
       }
     ]
   }
 ];
 
 inquirer.prompt(questions, function(datas) {
-  console.log( JSON.stringify(datas, null, "  ") );
 
-  var command = '';
+  var transform = ['browserify-shim'].concat(datas.scripts_language.transform, datas.scripts_framework.transform);
+  var extensions = {
+    scripts: datas.scripts_language.extension || 'js',
+    styles: datas.styles.extension || 'css'
+  }
+  updatePackageFile(datas.app_name, transform.filter(function(t) { return t; }), extensions);
+
   var dependencies = [].concat(datas.scripts_language.dependencies, datas.scripts_framework.dependencies, datas.styles.dependencies);
   var devDependencies = [].concat(datas.scripts_language.devDependencies, datas.scripts_framework.devDependencies, datas.styles.devDependencies);
-  var transform = ['browserify-shim'].concat(datas.scripts_language.transform, datas.scripts_framework.transform);
-
-  updatePackageFile(datas.app_name, transform.filter(function(t) { return t; }));
-
-  // Dependencies
-  if (dependencies.join('') !== '') {
-    command += 'npm install --save' + dependencies.join(' ');
-  }
-  if (devDependencies.join('') !== '') {
-    command += '; npm install --save-dev ' + devDependencies.join(' ');
-  }
-  command += '; npm install';
-
-  if (dependencies || devDependencies) {
-    console.log(chalk.green('Installing dependencies and adding them to package.json...', dependencies.join(' '), devDependencies.join(' ')));
-    exec(command, function (error, stdout, stderr) {
-      console.log(stdout);
-      if (error !== null) {
-        console.log(error);
-      }
-    });
-  }
+  // updateDependencies(dependencies, devDependencies);
 
 });
 
@@ -138,12 +129,13 @@ function hasTransform(transforms, key) {
   return false;
 }
 
-function updatePackageFile(appName, transform) {
+function updatePackageFile(appName, transform, extensions) {
   var path = './package.json';
   var file = fs.readFileSync(path);
   var pkg = JSON.parse(file);
 
   pkg.title = appName;
+  pkg.extensions = extensions;
 
   if (!pkg.browserify) {
     pkg.browserify = {
@@ -186,4 +178,28 @@ function updatePackageFile(appName, transform) {
 
   fs.writeFile(path, JSON.stringify(pkg, undefined, 2));
 
+}
+
+
+function updateDependencies(dependencies, devDependencies) {
+
+  var command = '';
+
+  if (dependencies.join('') !== '') {
+    command += 'npm install --save' + dependencies.join(' ');
+  }
+  if (devDependencies.join('') !== '') {
+    command += '; npm install --save-dev ' + devDependencies.join(' ');
+  }
+  command += '; npm install';
+
+  if (dependencies || devDependencies) {
+    console.log(chalk.green('Installing dependencies and adding them to package.json...', dependencies.join(' '), devDependencies.join(' ')));
+    exec(command, function (error, stdout, stderr) {
+      console.log(stdout);
+      if (error !== null) {
+        console.log(error);
+      }
+    });
+  }
 }
