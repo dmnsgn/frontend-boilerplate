@@ -112,7 +112,7 @@ inquirer.prompt(questions, function(datas) {
 
   var dependencies = [].concat(datas.scripts_language.dependencies, datas.scripts_framework.dependencies, datas.styles.dependencies);
   var devDependencies = [].concat(datas.scripts_language.devDependencies, datas.scripts_framework.devDependencies, datas.styles.devDependencies);
-  // updateDependencies(dependencies, devDependencies);
+  updateDependencies(dependencies, devDependencies);
 
 });
 
