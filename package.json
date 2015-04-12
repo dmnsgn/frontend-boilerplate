@@ -1,7 +1,7 @@
 {
   "name": "gulp-frontend-boilerplate",
   "title": "",
-  "version": "0.3.9",
+  "version": "0.4.0",
   "description": "A gulp boilerplate with common frontend tasks.",
   "author": "Damien Seguin <https://twitter.com/dmnsgn>",
   "homepage": "https://github.com/dmnsgn/gulp-frontend-boilerplate",
