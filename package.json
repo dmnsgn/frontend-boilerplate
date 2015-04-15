@@ -39,6 +39,7 @@
     "browserify": "^9.0.x",
     "browserify-shim": "^3.8.x",
     "del": "^1.1.x",
+    "fontmin": "^0.6.x",
     "gulp": "^3.8.x",
     "gulp-autoprefixer": "^2.1.x",
     "gulp-cache": "^0.2.x",
