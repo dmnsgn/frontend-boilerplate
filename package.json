@@ -1,7 +1,7 @@
 {
   "name": "gulp-frontend-boilerplate",
   "title": "Gulp Frontend Boilerplate",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "A gulp boilerplate with common frontend tasks.",
   "author": "Damien Seguin <https://twitter.com/dmnsgn>",
   "homepage": "https://github.com/dmnsgn/gulp-frontend-boilerplate",
@@ -39,6 +39,7 @@
     "browserify": "^9.0.x",
     "browserify-shim": "^3.8.x",
     "del": "^1.1.x",
+    "fontmin": "^0.6.x",
     "gulp": "^3.8.x",
     "gulp-autoprefixer": "^2.1.x",
     "gulp-cache": "^0.2.x",
