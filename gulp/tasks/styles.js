@@ -1,38 +1,81 @@
 /**
  * Styles tasks
  *
- * 'styles' compile sass files with sourcemaps.
+ * 'styles' compile sass/less files with sourcemaps and autoprefixer.
  *
  */
 
-var config       = require('../config');
-var gulp         = require('gulp');
-var gutil        = require('gulp-util');
-var handleErrors = require('../utils/handleErrors');
+var config         = require('../config');
+var pkg            = require('../../package.json');
+var gulp           = require('gulp');
+var gutil          = require('gulp-util');
+var handleErrors   = require('../utils/handleErrors');
 
-var browserSync  = require('browser-sync');
-var Fontmin      = require('fontmin');
+var browserSync    = require('browser-sync');
+var Fontmin        = require('fontmin');
 
-var sass         = require('gulp-ruby-sass');
-var sourcemaps   = require('gulp-sourcemaps');
-var autoprefixer = require('gulp-autoprefixer');
-var filter       = require('gulp-filter');
-var size         = require('gulp-size');
+switch (pkg.extensions.styles) {
+  case 'scss':
+    var sass = require('gulp-ruby-sass');
+  break;
+
+  case 'less':
+    var less     = require('gulp-less');
+    var lessGlob = require('less-plugin-glob');
+  break;
+}
+
+var sourcemaps     = require('gulp-sourcemaps');
+var autoprefixer   = require('gulp-autoprefixer');
+var filter         = require('gulp-filter');
+var size           = require('gulp-size');
 
 gulp.task('styles', function() {
-  return sass(config.src + '/styles/main.scss', {
-      sourcemap: true,
-      compass: true,
-      require: ['sass-globbing', 'sass-css-importer']
-    })
-    .on('error', handleErrors)
-    .pipe(autoprefixer(config.browsers))
-    .pipe(!global.isWatching ? gutil.noop() : sourcemaps.write())
-    .pipe(gulp.dest(config.dist + '/styles'))
-    .pipe(filter('**/*.css'))
-    .pipe(browserSync.reload({
-      stream: true
-    }));
+
+  switch (pkg.extensions.styles) {
+
+    case 'scss':
+      return sass(config.src + '/styles/main.scss', {
+          sourcemap: true,
+          compass: true,
+          require: ['sass-globbing', 'sass-css-importer']
+        })
+        .on('error', handleErrors)
+        .pipe(autoprefixer(config.browsers))
+        .pipe(!global.isWatching ? gutil.noop() : sourcemaps.write())
+        .pipe(gulp.dest(config.dist + '/styles'))
+        .pipe(filter('**/*.css'))
+        .pipe(browserSync.reload({
+          stream: true
+        }));
+      break;
+
+    case 'less':
+      return gulp.src(config.src + '/styles/main.less')
+        .pipe(sourcemaps.init())
+        .pipe(less({
+          plugins: [require('less-plugin-glob')]
+        }))
+        .on('error', handleErrors)
+        .pipe(autoprefixer(config.browsers))
+        .pipe(!global.isWatching ? gutil.noop() : sourcemaps.write())
+        .pipe(gulp.dest(config.dist + '/styles'))
+        .pipe(filter('**/*.css'))
+        .pipe(browserSync.reload({
+          stream: true
+        }));
+      break;
+
+    default:
+      return gulp.src(config.src + '/styles/**/*.css')
+        .pipe(autoprefixer(config.browsers))
+        .pipe(gulp.dest(config.dist + '/styles'))
+        .pipe(browserSync.reload({
+          stream: true
+        }));
+      break;
+  }
+
 });
 
 

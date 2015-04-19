@@ -24,55 +24,56 @@ var favicons = require('gulp-favicons');
 gulp.task('images', ['images:optimization', 'images:spritesheet' , 'images:favicons' ]);
 
 gulp.task('images:optimization', function() {
-	return gulp.src([config.src + '/images/**/*', '!' + config.src + '/images/{sprite,sprite/**}'])
-		.pipe(newer(config.dist + '/images'))
-		.pipe(cache(imagemin({
-			progressive: true,
-			interlaced: true,
-			use: [pngquant()]
-		})))
-		.pipe(gulp.dest(config.dist + '/images'));
+  return gulp.src([config.src + '/images/**/*', '!' + config.src + '/images/{sprite,sprite/**}'])
+    .pipe(newer(config.dist + '/images'))
+    .pipe(cache(imagemin({
+      progressive: true,
+      interlaced: true,
+      use: [pngquant()]
+    })))
+    .pipe(gulp.dest(config.dist + '/images'));
 });
 
 gulp.task('images:spritesheet', function() {
-	var spriteData = gulp.src(config.src + '/images/sprite/*.png').pipe(spritesmith({
-		cssFormat: 'scss',
-		imgName: '../images/sprite.png',
-		cssName: '_sprite.scss',
-		algorithm: 'binary-tree'
-	}));
-	spriteData.on('finish', function() {
-		gutil.log(gutil.colors.yellow('Spritesmith ready to process....'));
-	});
-	spriteData.css.pipe(gulp.dest(config.src + '/styles/')).on('end', function() {
-		gutil.log(gutil.colors.yellow('_sprite.scss file written...'));
-	});
-	return spriteData.img.pipe(gulp.dest(config.dist + '/images/')).on('end', function() {
-		gutil.log(gutil.colors.green('Spritesheet generated.'));
-	});
+  var spriteData = gulp.src(config.src + '/images/sprite/*.png').pipe(spritesmith({
+    retinaSrcFilter: [config.src + '/images/sprite/*@2x.png'],
+    retinaImgName: 'sprite@2x.png',
+    imgName: '../images/sprite.png',
+    cssName: '_sprite.' + pkg.extensions.styles,
+    algorithm: 'binary-tree'
+  }));
+  spriteData.on('finish', function() {
+    gutil.log(gutil.colors.yellow('Spritesmith ready to process....'));
+  });
+  spriteData.css.pipe(gulp.dest(config.src + '/styles/')).on('end', function() {
+    gutil.log(gutil.colors.yellow('_sprite file written...'));
+  });
+  return spriteData.img.pipe(gulp.dest(config.dist + '/images/')).on('end', function() {
+    gutil.log(gutil.colors.green('Spritesheet generated.'));
+  });
 });
 
 gulp.task('images:favicons', function() {
 
-	return gulp.src(config.src + '/inc/_favicons.html')
-		.pipe(favicons({
-			files: {
-				src: config.src + '/favicon.png',
-				dest: '../../' + config.dist + '/images/favicon',
-				iconsPath: 'images/favicon'
-			},
-			settings: {
-				appName: pkg.title,
-				appDescription: pkg.description,
-				developer: pkg.author,
-				developerURL: config.developerURL,
-				background: 'transparent',
-				index: 'index.html',
-				url: config.prodUrl,
-				logging: config.verbose
-			}
-		}, function(err) {
-			console.log(err)
-		}));
+  return gulp.src(config.src + '/inc/_favicons.html')
+    .pipe(favicons({
+      files: {
+        src: config.src + '/favicon.png',
+        dest: '../../' + config.dist + '/images/favicon',
+        iconsPath: 'images/favicon'
+      },
+      settings: {
+        appName: pkg.title,
+        appDescription: pkg.description,
+        developer: pkg.author,
+        developerURL: config.developerURL,
+        background: 'transparent',
+        index: 'index.html',
+        url: config.prodUrl,
+        logging: config.verbose
+      }
+    }, function(err) {
+      console.log(err)
+    }));
 
 });
