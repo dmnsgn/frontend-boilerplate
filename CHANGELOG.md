@@ -1,5 +1,9 @@
 ### Change log
 
+0.4.3
+* Add support for less preprocessor
+* Add retina spritesheet
+
 0.4.2
 * Add styles:fonts task
 
