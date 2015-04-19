@@ -18,7 +18,13 @@
     "frontend",
     "tasks",
     "workflow",
-    "coffee-script"
+    "sass",
+    "scss",
+    "less",
+    "es6",
+    "coffee-script",
+    "react",
+    "backbone"
   ],
   "license": "MIT",
   "browserify-shim": {
@@ -56,7 +62,6 @@
     "gulp-notify": "^2.2.x",
     "gulp-preprocess": "^1.2.x",
     "gulp-rename": "^1.2.x",
-    "gulp-ruby-sass": "^1.0.x",
     "gulp-sitemap": "^2.0.x",
     "gulp-size": "^1.2.x",
     "gulp-sourcemaps": "^1.5.x",
