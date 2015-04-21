@@ -134,6 +134,6 @@ Note: Each task is self documented. You can use them individually (e.g. `gulp im
 * Run sequence is intended to be a temporary solution until orchestrator is updated to support non-dependent ordered tasks: https://github.com/gulpjs/gulp/issues/347
 * Gulp 4 will change. A lot: https://github.com/gulpjs/gulp/issues/355 & https://github.com/gulpjs/gulp/issues/347
 
-##Licence
+## Licence
 
 MIT
