@@ -21,6 +21,11 @@ Sass (go check on its superpowers [here](http://sass-lang.com/))
 ```bash
 $ gem install sass compass sass-css-importer sass-globbing
 ```
+or [Less](http://lesscss.org/)
+```bash
+$ npm install -g less
+```
+
 ### Clone this repository or grab it from npm
 ```bash
 $ git clone https://github.com/dmnsgn/gulp-frontend-boilerplate.git
@@ -71,7 +76,7 @@ gulp
 All the magic begins here:
 
 * process `.html` files
-* process `.scss` files
+* process `.scss` or `.less` files
 * process `.js` and `.coffee` files with lint reports
 * create a server with BrowserSync and serve `dist` folder
 * watch changes in source folder
@@ -84,7 +89,7 @@ Note: if you just want to build the project and serve a 'production ready' versi
 #### Make changes
 
  * Write your markup in `src` folder and in `src/inc`. Include your partials with `<!-- @include templates/_filename.html -->`
- * Add some `scss` styles.
+ * Add some `scss` or `less` styles.
  * Add some `scripts`: `.js` or `.coffee`.
  * Add images in the - wait for it - `images` folder.
  * Generate a spritesheet with corresponding mixins (located in `styles/_sprite.scss`) by adding `.png` files into `images/sprite` folder .
