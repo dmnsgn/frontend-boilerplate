@@ -92,7 +92,7 @@ Note: if you just want to build the project and serve a 'production ready' versi
  * Add some `scss` or `less` styles.
  * Add some `scripts`: `.js` or `.coffee`.
  * Add images in the - wait for it - `images` folder.
- * Generate a spritesheet with corresponding mixins (located in `styles/_sprite.scss`) by adding `.png` files into `images/sprite` folder .
+ * Generate a spritesheet with corresponding mixins (located in `styles/_sprite.scss`) by adding `.png` files into `images/sprite` folder and retina version with `@2x` suffix.
 
 #### Build for deploy
 
