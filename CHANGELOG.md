@@ -1,5 +1,8 @@
 ### Change log
 
+0.4.4
+* Add support for stylus preprocessor
+
 0.4.3
 * Add support for less preprocessor
 * Add retina spritesheet
