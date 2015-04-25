@@ -94,6 +94,14 @@ var questions = [
         }
       },
       {
+        name: "Stylus",
+        value: {
+          extension: 'styl',
+          dependencies: ["styl-easing", "styl-font-face"],
+          devDependencies: ["gulp-styl"]
+        }
+      },
+      {
         name: "Nothing, I am fine",
         value: {
           extension: 'css',
