@@ -23,6 +23,10 @@ switch (pkg.extensions.styles) {
     var less     = require('gulp-less');
     var lessGlob = require('less-plugin-glob');
   break;
+
+  case 'styl':
+    var stylus = require('gulp-stylus');
+  break;
 }
 
 var sourcemaps     = require('gulp-sourcemaps');
@@ -55,6 +59,22 @@ gulp.task('styles', function() {
         .pipe(sourcemaps.init())
         .pipe(less({
           plugins: [require('less-plugin-glob')]
+        }))
+        .on('error', handleErrors)
+        .pipe(autoprefixer(config.browsers))
+        .pipe(!global.isWatching ? gutil.noop() : sourcemaps.write())
+        .pipe(gulp.dest(config.dist + '/styles'))
+        .pipe(filter('**/*.css'))
+        .pipe(browserSync.reload({
+          stream: true
+        }));
+      break;
+
+    case 'styl':
+      return gulp.src(config.src + '/styles/main.styl')
+        .pipe(sourcemaps.init())
+        .pipe(stylus({
+          'include css': true
         }))
         .on('error', handleErrors)
         .pipe(autoprefixer(config.browsers))
