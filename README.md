@@ -10,23 +10,37 @@ This is a work in progress. Feel free to contribute.
 ### Requirements
 
 Node (use brew or install it from [here](http://nodejs.org/download/))
+
 ```bash
 $ brew install node
 ```
+
 Gulp (are you new with the streaming build system ? Take a sip [here](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started))
+
 ```bash
 $ npm install -g gulp
 ```
-Sass (go check on its superpowers [here](http://sass-lang.com/))
+
+[Sass](http://sass-lang.com/)
+
 ```bash
 $ gem install sass compass sass-css-importer sass-globbing
 ```
+
 or [Less](http://lesscss.org/)
+
 ```bash
 $ npm install -g less
 ```
 
+or [Stylus](https://learnboost.github.io/stylus/)
+
+```bash
+$ npm install -g stylus
+```
+
 ### Clone this repository or grab it from npm
+
 ```bash
 $ git clone https://github.com/dmnsgn/gulp-frontend-boilerplate.git
 
@@ -97,6 +111,7 @@ Note: if you just want to build the project and serve a 'production ready' versi
 #### Build for deploy
 
 When you are happy with your changes, run:
+
 ```bash
 gulp build
 ```
@@ -106,6 +121,7 @@ gulp build
 #### Tests tasks
 
 Quick tests and stats with:
+
 ```bash
 // w3c validation
 gulp test:markup
@@ -120,12 +136,14 @@ gulp test:psi
 #### Clean it
 
 Clean dist dir and clear all caches (sass cache, gulp cache)
+
 ```bash
 gulp clean
 ```
 #### Help
 
 This command will give you a list of all tasks available.
+
 ```bash
 gulp help
 ```
