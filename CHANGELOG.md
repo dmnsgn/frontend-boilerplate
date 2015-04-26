@@ -1,5 +1,8 @@
 ### Change log
 
+0.4.5
+* Update font-face mixin path
+
 0.4.4
 * Add support for stylus preprocessor
 
