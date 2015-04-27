@@ -34,24 +34,15 @@ var autoprefixer   = require('gulp-autoprefixer');
 var filter         = require('gulp-filter');
 var size           = require('gulp-size');
 
-gulp.task('styles', function() {
-
-  switch (pkg.extensions.styles) {
+function getStylesStream(extension) {
+  switch (extension) {
 
     case 'scss':
       return sass(config.src + '/styles/main.scss', {
           sourcemap: true,
           compass: true,
           require: ['sass-globbing', 'sass-css-importer']
-        })
-        .on('error', handleErrors)
-        .pipe(autoprefixer(config.browsers))
-        .pipe(!global.isWatching ? gutil.noop() : sourcemaps.write())
-        .pipe(gulp.dest(config.dist + '/styles'))
-        .pipe(filter('**/*.css'))
-        .pipe(browserSync.reload({
-          stream: true
-        }));
+        });
       break;
 
     case 'less':
@@ -59,14 +50,6 @@ gulp.task('styles', function() {
         .pipe(sourcemaps.init())
         .pipe(less({
           plugins: [require('less-plugin-glob')]
-        }))
-        .on('error', handleErrors)
-        .pipe(autoprefixer(config.browsers))
-        .pipe(!global.isWatching ? gutil.noop() : sourcemaps.write())
-        .pipe(gulp.dest(config.dist + '/styles'))
-        .pipe(filter('**/*.css'))
-        .pipe(browserSync.reload({
-          stream: true
         }));
       break;
 
@@ -75,26 +58,26 @@ gulp.task('styles', function() {
         .pipe(sourcemaps.init())
         .pipe(stylus({
           'include css': true
-        }))
-        .on('error', handleErrors)
-        .pipe(autoprefixer(config.browsers))
-        .pipe(!global.isWatching ? gutil.noop() : sourcemaps.write())
-        .pipe(gulp.dest(config.dist + '/styles'))
-        .pipe(filter('**/*.css'))
-        .pipe(browserSync.reload({
-          stream: true
         }));
       break;
 
     default:
-      return gulp.src(config.src + '/styles/**/*.css')
-        .pipe(autoprefixer(config.browsers))
-        .pipe(gulp.dest(config.dist + '/styles'))
-        .pipe(browserSync.reload({
-          stream: true
-        }));
+      return gulp.src(config.src + '/styles/**/*.css');
       break;
   }
+}
+
+gulp.task('styles', function() {
+
+  return getStylesStream(pkg.extensions.styles)
+    .on('error', handleErrors)
+    .pipe(autoprefixer(config.browsers))
+    .pipe(!global.isWatching ? gutil.noop() : sourcemaps.write())
+    .pipe(gulp.dest(config.dist + '/styles'))
+    .pipe(filter('**/*.css'))
+    .pipe(browserSync.reload({
+      stream: true
+    }));
 
 });
 
