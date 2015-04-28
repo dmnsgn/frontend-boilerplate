@@ -1,5 +1,8 @@
 ### Change log
 
+0.4.7
+* Better compatibility for Windows users
+
 0.4.6
 * Clean styles task
 
