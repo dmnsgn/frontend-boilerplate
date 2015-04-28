@@ -82,7 +82,7 @@
     "watchify": "^3.1.x"
   },
   "scripts": {
-    "start": "npm i inquirer chalk && node start.js;",
+    "start": "npm i inquirer chalk && node start.js",
     "install": "napa"
   },
   "extensions": {
