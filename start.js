@@ -199,9 +199,9 @@ function updateDependencies(dependencies, devDependencies) {
     command += 'npm install --save' + dependencies.join(' ');
   }
   if (devDependencies.join('') !== '') {
-    command += '; npm install --save-dev ' + devDependencies.join(' ');
+    command += ' && npm install --save-dev ' + devDependencies.join(' ');
   }
-  command += '; npm install';
+  command += ' && npm install';
 
   if (dependencies || devDependencies) {
     console.log(chalk.green('Installing dependencies and adding them to package.json...', dependencies.join(' '), devDependencies.join(' ')));
