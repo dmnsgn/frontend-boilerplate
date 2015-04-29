@@ -152,6 +152,7 @@ Note: Each task is self documented. You can use them individually (e.g. `gulp im
 
 
 ## External issues
+* On some OS, napa needs to be installed globally first `npm install -g napa`
 * Gaze break watchers when renaming folder: https://github.com/shama/gaze/issues/56. Waiting for gaze 0.6 https://github.com/gulpjs/gulp/issues/600
 * watch doesn't work when adding files: https://github.com/floatdrop/gulp-watch/issues/50
 * Run sequence is intended to be a temporary solution until orchestrator is updated to support non-dependent ordered tasks: https://github.com/gulpjs/gulp/issues/347
