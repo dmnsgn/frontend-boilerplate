@@ -27,5 +27,5 @@ module.exports = {
 		' */',
 		''
 	].join('\n'),
-	developerURL: 'http://damienseguin.me'
+	developerURL: ''
 };
