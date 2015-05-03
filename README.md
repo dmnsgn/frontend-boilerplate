@@ -78,7 +78,7 @@ Open `gulp/config.js` with your favorite text editor.
 |**prodUrl**: the absolute url to use in the sitemap|String|''|
 |**analyticsUA**: your google analytics UA|String|''|
 |**banner**: add a text header above your main files.|String|*filled with `package.json` datas*|
-
+|**developerURL**: your URL.|String|''|
 
 ### Gulp tasks
 
