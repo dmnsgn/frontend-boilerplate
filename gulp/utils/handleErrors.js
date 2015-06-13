@@ -4,10 +4,10 @@
  * Emit sound and notification
  */
 
-var notify = require('gulp-notify');
-var gutil = require('gulp-util');
+import notify from 'gulp-notify';
+import gutil from 'gulp-util';
 
-module.exports = function() {
+export default function() {
 	gutil.beep();
 
 	// End the task

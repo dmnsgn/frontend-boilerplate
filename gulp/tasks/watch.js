@@ -5,12 +5,8 @@
  *
  */
 
-var config = require('../config');
-var pkg    = require('../../package.json');
-var gulp   = require('gulp');
-var gutil  = require('gulp-util');
-
-var watch  = require('gulp-watch');
+import gutil from 'gulp-util';
+import watch from 'gulp-watch';
 
 // function onWatchChange(event) {
 //  gutil.log(gutil.colors.gray('File ' + event.path + ' was ' + event.type + ', running tasks...'));
@@ -23,7 +19,7 @@ gulp.task('setWatch', function() {
 gulp.task('watch', function() {
 
   // Watch html files
-  watch(config.src + '/*.html', {
+  watch(`${config.src}/*.html`, {
     emitOnGlob: false,
     read: false,
     name: 'Html watcher',
@@ -32,7 +28,7 @@ gulp.task('watch', function() {
     gulp.start('markup:changed');
   });
 
-  watch(config.src + '/inc/**/*', {
+  watch(`${config.src}/inc/**/*`, {
     emitOnGlob: false,
     read: false,
     name: 'Includes watcher',
@@ -53,7 +49,7 @@ gulp.task('watch', function() {
   });
 
   // Watch styles files
-  watch(config.src + '/styles/**/*.' + pkg.extensions.styles, {
+  watch(`${config.src}/styles/**/*.${pkg.extensions.styles}`, {
     emitOnGlob: false,
     read: false,
     name: 'Styles watcher',
@@ -61,7 +57,7 @@ gulp.task('watch', function() {
   }, function() {
     gulp.start('styles');
   });
-  watch(config.src + '/styles/fonts/**/*', {
+  watch(`${config.src} + '/styles/fonts/**/*`, {
     emitOnGlob: false,
     read: false,
     name: 'Fonts watcher',
@@ -74,7 +70,7 @@ gulp.task('watch', function() {
   gulp.start('scripts');
 
   // Watch test files
-  watch(config.test + '/**/*.js', {
+  watch(`${config.test}/**/*.js`, {
     emitOnGlob: false,
     read: false,
     name: 'Test watcher',
@@ -84,7 +80,7 @@ gulp.task('watch', function() {
   });
 
   // Watch images files
-  watch([config.src + '/images/**/*', '!' + config.src + '/images/sprite/**/*'], {
+  watch([`${config.src} + '/images/**/*`, `!${config.src}/images/sprite/**/*`], {
     emitOnGlob: false,
     read: false,
     name: 'Images watcher',
@@ -92,7 +88,7 @@ gulp.task('watch', function() {
   }, function() {
     gulp.start('images:optimization');
   });
-  watch(config.src + '/images/sprite/**/*', {
+  watch(`${config.src}/images/sprite/**/*`, {
     emitOnGlob: false,
     read: false,
     name: 'Spritesheet watcher',

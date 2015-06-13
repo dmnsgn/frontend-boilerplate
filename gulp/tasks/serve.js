@@ -3,25 +3,23 @@
  *
  * Serve dist directory
  * Log url to access from external devices (such as smartphone on the same network)
- * Log when device connect
+ * Log on device connection
  *
  */
 
-var config = require('../config');
-var gulp = require('gulp');
-var browserSync = require('browser-sync');
+import browserSync from 'browser-sync';
 
 gulp.task('serve', function() {
 
-	var logLevel = config.verbose ? 'debug' : 'info';
+  let logLevel = config.verbose ? 'debug' : 'info';
 
-	browserSync({
-		server: {
-			baseDir: config.dist,
-			directory: true
-		},
-		port: config.port,
-		logConnections: true,
-		logLevel: logLevel
-	});
+  browserSync({
+    server: {
+      baseDir: config.dist,
+      directory: true
+    },
+    port: config.port,
+    logConnections: true,
+    logLevel: logLevel
+  });
 });

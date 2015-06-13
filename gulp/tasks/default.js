@@ -5,14 +5,12 @@
  * 'default:prod' generate a deployable build and serve it to check if it's ok to deploy.
  */
 
-var config = require('../config');
-var gulp = require('gulp');
-var gutil = require('gulp-util');
+import gutil from 'gulp-util';
 
-var runSequence = require('run-sequence');
+import runSequence from 'run-sequence';
 
 gulp.task('default', function() {
-  var args = process.argv,
+  let args = process.argv,
     prod = args.indexOf('--prod') !== -1;
   if (prod) {
     gulp.start('default:prod');

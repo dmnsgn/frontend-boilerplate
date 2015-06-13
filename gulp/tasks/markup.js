@@ -10,17 +10,15 @@
  *
  */
 
-var config = require('../config');
-var gulp = require('gulp');
-var gulpif = require('gulp-if');
+import gulpif from 'gulp-if';
 
-var browserSync = require('browser-sync');
+import browserSync from 'browser-sync';
 
-var newer = require('gulp-newer');
-var preprocess = require('gulp-preprocess');
+import newer from 'gulp-newer';
+import preprocess from 'gulp-preprocess';
 
 function process(changed) {
-	return gulp.src(config.src + '/*.html', {
+	return gulp.src(`${config.src}/*.html`, {
 			base: config.src
 		})
 		.pipe(gulpif(changed, newer(config.dist)))
