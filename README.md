@@ -1,7 +1,7 @@
 gulp-frontend-boilerplate
 =========================
 
-> A gulp boilerplate with common frontend tasks.
+> An ES6 boilerplate with common frontend tasks using gulp as build system.
 
 This is a work in progress. Feel free to contribute.
 
@@ -15,10 +15,16 @@ Node (use brew or install it from [here](http://nodejs.org/download/))
 $ brew install node
 ```
 
-Gulp (are you new with the streaming build system ? Take a sip [here](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started))
+Gulp ([Getting started](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started))
 
 ```bash
 $ npm install -g gulp
+```
+
+Babel ([https://babeljs.io/](https://babeljs.io/))
+
+```bash
+$ npm install -g babel
 ```
 
 [Sass](http://sass-lang.com/)
@@ -42,7 +48,9 @@ $ npm install -g stylus
 ### Clone this repository or grab it from npm
 
 ```bash
-$ git clone https://github.com/dmnsgn/gulp-frontend-boilerplate.git
+$ git clone https://github.com/dmnsgn/gulp-frontend-boilerplate.git && rm -rf .git
+
+or
 
 $ npm i gulp-frontend-boilerplate
 ```
@@ -91,7 +99,7 @@ All the magic begins here:
 
 * process `.html` files
 * process `.scss` or `.less` files
-* process `.js` and `.coffee` files with lint reports
+* process `.js` or `.coffee` files
 * create a server with BrowserSync and serve `dist` folder
 * watch changes in source folder
 * reload on changes in source folder
@@ -103,7 +111,7 @@ Note: if you just want to build the project and serve a 'production ready' versi
 #### Make changes
 
  * Write your markup in `src` folder and in `src/inc`. Include your partials with `<!-- @include templates/_filename.html -->`
- * Add some `scss` or `less` styles.
+ * Add some `scss`, `less` or `styl` styles.
  * Add some `scripts`: `.js` or `.coffee`.
  * Add images in the - wait for it - `images` folder.
  * Generate a spritesheet with corresponding mixins (located in `styles/_sprite.scss`) by adding `.png` files into `images/sprite` folder and retina version with `@2x` suffix.

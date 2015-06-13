@@ -2,18 +2,18 @@
  * Export project config
  */
 
-var pkg = require('../package.json');
+import pkg from '../package.json';
 
-var sourceFolder = 'src';
-var distFolder = 'dist';
-var testFolder = 'test';
+const SOURCE = 'src';
+const DIST = 'dist';
+const TEST = 'test';
 
-module.exports = {
+export default {
 	verbose: false,
 	port: 3000,
-	src: sourceFolder,
-	dist: distFolder,
-	test: testFolder,
+	src: SOURCE,
+	dist: DIST,
+	test: TEST,
 	browsers: ['last 2 version', 'safari 5', 'ie 7', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'],
 	prodUrl: 'http://test.tld',
 	analyticsUA: 'UA-XXXXX-X',

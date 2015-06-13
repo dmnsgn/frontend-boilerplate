@@ -5,7 +5,6 @@
  *
  */
 
-var gulp = require('gulp');
-var taskListing = require('gulp-task-listing');
+import taskListing from 'gulp-task-listing';
 
 gulp.task('help', taskListing.withFilters(/:/));

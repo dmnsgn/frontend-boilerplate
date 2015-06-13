@@ -1,44 +1,43 @@
 /**
  * Styles tasks
  *
- * 'styles' compile sass/less files with sourcemaps and autoprefixer.
+ * 'styles' compile sass/less/stylus files with sourcemaps and autoprefixer.
  *
  */
 
-var config         = require('../config');
-var pkg            = require('../../package.json');
-var gulp           = require('gulp');
-var gutil          = require('gulp-util');
-var handleErrors   = require('../utils/handleErrors');
+import gutil from 'gulp-util';
+import handleErrors from '../utils/handleErrors';
 
-var browserSync    = require('browser-sync');
-var Fontmin        = require('fontmin');
+import browserSync from 'browser-sync';
+import Fontmin from 'fontmin';
+
+var preprocessor;
 
 switch (pkg.extensions.styles) {
   case 'scss':
-    var sass = require('gulp-ruby-sass');
+    var preprocessor = require('gulp-ruby-sass');
   break;
 
   case 'less':
-    var less     = require('gulp-less');
+    var preprocessor     = require('gulp-less');
     var lessGlob = require('less-plugin-glob');
   break;
 
   case 'styl':
-    var stylus = require('gulp-stylus');
+    var preprocessor = require('gulp-stylus');
   break;
 }
 
-var sourcemaps     = require('gulp-sourcemaps');
-var autoprefixer   = require('gulp-autoprefixer');
-var filter         = require('gulp-filter');
-var size           = require('gulp-size');
+import sourcemaps from 'gulp-sourcemaps';
+import autoprefixer from 'gulp-autoprefixer';
+import filter from 'gulp-filter';
+import size from 'gulp-size';
 
 function getStylesStream(extension) {
   switch (extension) {
 
     case 'scss':
-      return sass(config.src + '/styles/main.scss', {
+      return preprocessor(`${config.src}/styles/main.scss`, {
           sourcemap: true,
           compass: true,
           require: ['sass-globbing', 'sass-css-importer']
@@ -46,23 +45,23 @@ function getStylesStream(extension) {
       break;
 
     case 'less':
-      return gulp.src(config.src + '/styles/main.less')
+      return gulp.src(`${config.src}/styles/main.less`)
         .pipe(sourcemaps.init())
-        .pipe(less({
+        .pipe(preprocessor({
           plugins: [require('less-plugin-glob')]
         }));
       break;
 
     case 'styl':
-      return gulp.src(config.src + '/styles/main.styl')
+      return gulp.src(`${config.src}/styles/main.styl`)
         .pipe(sourcemaps.init())
-        .pipe(stylus({
+        .pipe(preprocessor({
           'include css': true
         }));
       break;
 
     default:
-      return gulp.src(config.src + '/styles/**/*.css');
+      return gulp.src(`${config.src}/styles/**/*.css`);
       break;
   }
 }
@@ -73,7 +72,7 @@ gulp.task('styles', function() {
     .on('error', handleErrors)
     .pipe(autoprefixer(config.browsers))
     .pipe(!global.isWatching ? gutil.noop() : sourcemaps.write())
-    .pipe(gulp.dest(config.dist + '/styles'))
+    .pipe(gulp.dest(`${config.dist}/styles`))
     .pipe(filter('**/*.css'))
     .pipe(browserSync.reload({
       stream: true
@@ -83,8 +82,8 @@ gulp.task('styles', function() {
 
 
 gulp.task('styles:fonts', function() {
-  var fontmin = new Fontmin()
-    .src(config.src + '/styles/fonts/*.ttf')
+  let fontmin = new Fontmin()
+    .src(`${config.src}/styles/fonts/*.ttf`)
     .use(Fontmin.ttf2eot({
       clone: true
     }))
@@ -94,7 +93,7 @@ gulp.task('styles:fonts', function() {
     .use(Fontmin.ttf2svg({
       clone: true
     }))
-    .dest(config.dist + '/styles/fonts');
+    .dest(`${config.dist}/styles/fonts`);
 
   return fontmin.run(
     function (err, files, stream) {

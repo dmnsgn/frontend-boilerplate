@@ -5,38 +5,35 @@
  *
  */
 
-var config = require('../config');
-var pkg = require('../../package.json');
-var gulp = require('gulp');
-var gutil = require('gulp-util');
+import gutil from 'gulp-util';
 
-var source = require('vinyl-source-stream');
-var buffer = require('vinyl-buffer');
-var browserSync = require('browser-sync');
-var browserify = require('browserify');
-var watchify = require('watchify');
+import source from 'vinyl-source-stream';
+import buffer from 'vinyl-buffer';
+import browserSync from 'browser-sync';
+import browserify from 'browserify';
+import watchify from 'watchify';
 
-var uglify = require('gulp-uglify');
-var header = require('gulp-header');
-var rename = require('gulp-rename');
+import uglify from 'gulp-uglify';
+import header from 'gulp-header';
+import rename from 'gulp-rename';
 
-var bundleLogger = require('../utils/bundleLogger');
-var handleErrors = require('../utils/handleErrors');
+import bundleLogger from '../utils/bundleLogger';
+import handleErrors from '../utils/handleErrors';
 
 gulp.task('scripts', function(callback) {
 
-  var b = browserify({
+  let b = browserify({
     cache: {},
     packageCache: {},
-    fullPaths: true,
-    entries: ['./' + config.src + '/scripts/main.' + pkg.extensions.scripts],
+    fullPaths: false,
+    entries: [`./${config.src}/scripts/main.${pkg.extensions.scripts}`],
     extensions: [pkg.extensions.scripts],
     debug: global.isWatching
   });
 
-  var bundler = global.isWatching ? watchify(b) : b;
+  let bundler = global.isWatching ? watchify(b) : b;
 
-  var bundle = function() {
+  let bundle = function() {
 
     bundleLogger.start();
 
@@ -51,7 +48,7 @@ gulp.task('scripts', function(callback) {
       .pipe(global.isWatching ? gutil.noop() : rename({
         suffix: '.min'
       }))
-      .pipe(gulp.dest('./' + config.dist + '/scripts'))
+      .pipe(gulp.dest(`./${config.dist}/scripts`))
       .on('end', function() {
         if (global.isWatching) {
           browserSync.reload();
