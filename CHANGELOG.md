@@ -1,5 +1,8 @@
 ### Change log
 
+0.5.0
+* Use ES6
+
 0.4.7
 * Better compatibility for Windows users
 
