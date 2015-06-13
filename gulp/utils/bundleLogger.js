@@ -4,11 +4,12 @@
  * Provides gulp style logs to the bundle method in browserify.js
  */
 
-var gutil = require('gulp-util');
-var prettyHrtime = require('pretty-hrtime');
+import gutil from 'gulp-util';
+import prettyHrtime from 'pretty-hrtime';
+
 var startTime;
 
-module.exports = {
+export default {
 	start: function() {
 		startTime = process.hrtime();
 		gutil.log('Bundling...');
@@ -19,8 +20,8 @@ module.exports = {
 	},
 
 	end: function() {
-		var taskTime = process.hrtime(startTime);
-		var prettyTime = prettyHrtime(taskTime);
+		let taskTime = process.hrtime(startTime);
+		let prettyTime = prettyHrtime(taskTime);
 		gutil.log('Bundled in', gutil.colors.magenta(prettyTime));
 	}
 };

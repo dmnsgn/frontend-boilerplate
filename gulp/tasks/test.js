@@ -7,28 +7,26 @@
  *
  */
 
-var config = require('../config');
-var handleErrors = require('../utils/handleErrors');
-var gulp = require('gulp');
-var gutil = require('gulp-util');
+import handleErrors from '../utils/handleErrors';
 
-var w3cjs = require('gulp-w3cjs');
+import gutil from 'gulp-util';
 
-var mocha = require('gulp-mocha');
+import w3cjs from 'gulp-w3cjs';
+import mocha from 'gulp-mocha';
 
-var psi = require('psi');
+import psi from 'psi';
 
 gulp.task('test', ['test:markup', 'test:scripts'], function() {
 	gutil.log(gutil.colors.bgGreen('Test task completed.'));
 });
 
 gulp.task('test:markup', function() {
-	return gulp.src(config.dist + '/*.html')
+	return gulp.src(`${config.dist}/*.html`)
 		.pipe(w3cjs());
 });
 
 gulp.task('test:scripts', function() {
-	return gulp.src(config.test + '/*.js', {
+	return gulp.src(`${config.test}/*.js`, {
 			read: false
 		})
 		.pipe(mocha({
