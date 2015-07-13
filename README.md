@@ -105,7 +105,7 @@ All the magic begins here:
 * reload on changes in source folder
 
 ---
-Note: if you just want to build the project and serve a 'production ready' version, run `gulp --prod`.
+Note: if you just want to build the project and serve a 'production ready' version, run `gulp --env prod`.
 
 
 #### Make changes

@@ -113,7 +113,7 @@ var questions = [
 
 inquirer.prompt(questions, function(datas) {
 
-  var transform = ['browserify-shim'].concat(datas.scripts_language.transform, datas.scripts_framework.transform);
+  var transform = [].concat(datas.scripts_language.transform, datas.scripts_framework.transform);
   var extensions = {
     scripts: datas.scripts_language.extension || 'js',
     styles: datas.styles.extension || 'css'
