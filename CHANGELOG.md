@@ -1,31 +1,45 @@
 ### Change log
 
+0.5.1
+
+* Separate vendor and app scripts
+* Better CLI arguments
+
 0.5.0
+
 * Use ES6
 
 0.4.7
+
 * Better compatibility for Windows users
 
 0.4.6
+
 * Clean styles task
 
 0.4.5
+
 * Update font-face mixin path
 
 0.4.4
+
 * Add support for stylus preprocessor
 
 0.4.3
+
 * Add support for less preprocessor
 * Add retina spritesheet
 
 0.4.2
+
 * Add styles:fonts task
 
 0.4.1
+
 * Fix scripts task
 
 0.4.0
+
 * New install system
 * Update tasks according to new install system
 * Update package.json according to new install system
