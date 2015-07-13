@@ -10,24 +10,22 @@ import gutil from 'gulp-util';
 import runSequence from 'run-sequence';
 
 gulp.task('default', function() {
-  let args = process.argv,
-    prod = args.indexOf('--prod') !== -1;
-  if (prod) {
+  if (config.args.env === 'prod') {
     gulp.start('default:prod');
-  } else {
+  } else if (config.args.env === 'dev') {
     gulp.start('default:dev');
   }
 });
 
 gulp.task('default:dev', function() {
 
-  runSequence('setWatch', ['markup:all', 'styles:fonts', 'styles', 'scripts', 'images'], ['serve', 'watch']);
+  runSequence(['markup:all', 'styles:fonts', 'styles', 'scripts', 'images'], ['serve', 'watch']);
 
 });
 
 gulp.task('default:prod', function() {
 
-  runSequence(['markup:all', 'styles:fonts', 'styles', 'images'], 'build', 'serve', function() {
+  runSequence(['markup:all', 'styles:fonts', 'styles', 'scripts', 'images'], 'build', 'serve', function() {
     gutil.log(gutil.colors.green('Build ready and served.'));
   });
 

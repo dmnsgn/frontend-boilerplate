@@ -12,10 +12,6 @@ import watch from 'gulp-watch';
 //  gutil.log(gutil.colors.gray('File ' + event.path + ' was ' + event.type + ', running tasks...'));
 // }
 
-gulp.task('setWatch', function() {
-  global.isWatching = true;
-});
-
 gulp.task('watch', function() {
 
   // Watch html files
@@ -40,12 +36,13 @@ gulp.task('watch', function() {
   // Watch dependencies
   watch('package.json', {
     emitOnGlob: false,
-    read: false,
+    read: true,
     name: 'Package watcher',
     verbose: config.verbose
-  }, function() {
+  }, function(file) {
+    global.pkg = JSON.parse(file.contents.toString());
     gulp.start('markup:all');
-    gulp.start('scripts');
+    gulp.start('scripts:vendor');
   });
 
   // Watch styles files
@@ -66,7 +63,7 @@ gulp.task('watch', function() {
     gulp.start('styles:fonts');
   });
 
-  // Watch scripts files
+  // Watch scripts files (using watchify)
   gulp.start('scripts');
 
   // Watch test files

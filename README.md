@@ -77,6 +77,7 @@ Open `gulp/config.js` with your favorite text editor.
 
 |Option|Type|Default
 |:---------|:---------:|:----------:|
+|**args**: CLI arguments.|Object|minimist(process.argv.slice(2), options)|
 |**verbose**: provide a more verbose output when available (useful for debugging).|Boolean|false|
 |**port**: the server port.|Number|3000|
 |**src**: the source folder path, that's where you write code.|String|src|
@@ -98,14 +99,14 @@ gulp
 All the magic begins here:
 
 * process `.html` files
-* process `.scss` or `.less` files
+* process `.scss`, `.less` or `.styl` files
 * process `.js` or `.coffee` files
 * create a server with BrowserSync and serve `dist` folder
 * watch changes in source folder
 * reload on changes in source folder
 
 ---
-Note: if you just want to build the project and serve a 'production ready' version, run `gulp --prod`.
+Note: if you just want to build the project and serve a 'production ready' version, run `gulp --env prod`.
 
 
 #### Make changes

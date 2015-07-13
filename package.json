@@ -1,7 +1,7 @@
 {
   "name": "gulp-frontend-boilerplate",
   "title": "Gulp Frontend Boilerplate",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "A gulp boilerplate with common frontend tasks.",
   "author": "Damien Seguin <https://twitter.com/dmnsgn>",
   "homepage": "https://github.com/dmnsgn/gulp-frontend-boilerplate",
@@ -15,6 +15,7 @@
   "keywords": [
     "gulp",
     "es6",
+    "es2015",
     "boilerplate",
     "frontend",
     "tasks",
@@ -27,26 +28,20 @@
     "backbone"
   ],
   "license": "MIT",
-  "browserify-shim": {
-    "TweenMax": "TweenMax"
-  },
-  "browser": {
-    "TweenMax": "./node_modules/greensock/src/uncompressed/TweenMax.js"
-  },
-  "browserify": {},
+  "vendors": [
+    "./node_modules/greensock/src/uncompressed/TweenMax.js"
+  ],
   "napa": {
     "greensock": "greensock/GreenSock-JS"
   },
   "dependencies": {
-    "normalizecss": "^3.0.0"
+    "normalize.css": "git://github.com/necolas/normalize.css.git#3.0.3"
   },
   "devDependencies": {
-    "babel": "^5.5.7",
+    "babel": "^5.6.x",
     "browser-sync": "^2.7.x",
     "browserify": "^10.2.x",
-    "browserify-shim": "^3.8.x",
     "del": "^1.2.x",
-    "es6-module-loader": "^0.17.0",
     "fontmin": "^0.8.x",
     "gulp": "^3.9.x",
     "gulp-autoprefixer": "^2.3.x",
@@ -57,8 +52,8 @@
     "gulp-filter": "^2.0.x",
     "gulp-header": "^1.2.x",
     "gulp-if": "^1.2.x",
-    "gulp-imagemin": "^2.2.x",
-    "gulp-minify-css": "^1.1.x",
+    "gulp-imagemin": "^2.3.x",
+    "gulp-minify-css": "^1.2.x",
     "gulp-mocha": "^2.1.x",
     "gulp-newer": "^0.5.x",
     "gulp-notify": "^2.2.x",
@@ -71,10 +66,11 @@
     "gulp-uglify": "^1.2.x",
     "gulp-useref": "^1.2.x",
     "gulp-util": "^3.0.x",
-    "gulp-w3cjs": "^0.3.x",
+    "gulp-w3cjs": "^1.0.x",
     "gulp-watch": "^4.2.x",
     "gulp.spritesmith": "^3.8.x",
     "imagemin-pngquant": "^4.1.x",
+    "minimist": "^1.1.1",
     "napa": "^1.2.x",
     "pretty-hrtime": "^1.0.x",
     "psi": "^1.0.x",

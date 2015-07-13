@@ -71,7 +71,7 @@ gulp.task('styles', function() {
   return getStylesStream(pkg.extensions.styles)
     .on('error', handleErrors)
     .pipe(autoprefixer(config.browsers))
-    .pipe(!global.isWatching ? gutil.noop() : sourcemaps.write())
+    .pipe(config.args.env !== 'dev' ? gutil.noop() : sourcemaps.write())
     .pipe(gulp.dest(`${config.dist}/styles`))
     .pipe(filter('**/*.css'))
     .pipe(browserSync.reload({
