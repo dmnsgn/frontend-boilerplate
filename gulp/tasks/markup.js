@@ -10,7 +10,7 @@
  *
  */
 
-import gulpif from 'gulp-if';
+import gutil from 'gulp-util';
 
 import browserSync from 'browser-sync';
 
@@ -21,7 +21,7 @@ function process(changed) {
 	return gulp.src(`${config.src}/*.html`, {
 			base: config.src
 		})
-		.pipe(gulpif(changed, newer(config.dist)))
+		.pipe(changed ? newer(config.dist) : gutil.noop())
 		.pipe(preprocess({
 			context: {
 				NODE_ENV: 'dev',
