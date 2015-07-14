@@ -1,5 +1,10 @@
 ### Change log
 
+0.5.2
+
+* Use PostCSS
+* Update build tasks
+
 0.5.1
 
 * Separate vendor and app scripts

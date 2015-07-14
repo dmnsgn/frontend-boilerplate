@@ -105,8 +105,10 @@ All the magic begins here:
 * watch changes in source folder
 * reload on changes in source folder
 
+Same as running `gulp --env dev`.
+
 ---
-Note: if you just want to build the project and serve a 'production ready' version, run `gulp --env prod`.
+Note: if you just want to build the project and serve it, run `gulp --env prod --serve`.
 
 
 #### Make changes
@@ -115,14 +117,14 @@ Note: if you just want to build the project and serve a 'production ready' versi
  * Add some `scss`, `less` or `styl` styles.
  * Add some `scripts`: `.js` or `.coffee`.
  * Add images in the - wait for it - `images` folder.
- * Generate a spritesheet with corresponding mixins (located in `styles/_sprite.scss`) by adding `.png` files into `images/sprite` folder and retina version with `@2x` suffix.
+ * Generate a spritesheet with corresponding mixins (located in `styles/_sprite{.scss,.less,.styl}`) by adding `.png` files into `images/sprite` folder and retina version with `@2x` suffix.
 
-#### Build for deploy
+#### Build
 
 When you are happy with your changes, run:
 
 ```bash
-gulp build
+gulp --env prod
 ```
 * Replace build tags with `.min` files, generates these minified files in `dist` folder (with optimization tasks)
 * Add copyright headers and generate a `sitemap.xml`file

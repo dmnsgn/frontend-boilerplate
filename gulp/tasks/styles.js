@@ -2,6 +2,7 @@
  * Styles tasks
  *
  * 'styles' compile sass/less/stylus files with sourcemaps and autoprefixer.
+ * 'styles:fonts' convert fonts.
  *
  */
 
@@ -11,37 +12,64 @@ import handleErrors from '../utils/handleErrors';
 import browserSync from 'browser-sync';
 import Fontmin from 'fontmin';
 
-var preprocessor;
+import sourcemaps from 'gulp-sourcemaps';
 
-switch (pkg.extensions.styles) {
-  case 'scss':
-    var preprocessor = require('gulp-ruby-sass');
-  break;
+import postcss from 'gulp-postcss';
+import autoprefixer from 'autoprefixer-core';
+import mqpacker from 'css-mqpacker';
+import csswring from 'csswring';
 
-  case 'less':
-    var preprocessor     = require('gulp-less');
-    var lessGlob = require('less-plugin-glob');
-  break;
+import filter from 'gulp-filter';
+import header from 'gulp-header';
+import rename from 'gulp-rename';
 
-  case 'styl':
-    var preprocessor = require('gulp-stylus');
-  break;
+let preprocessor, processors, envDev = config.args.env === 'dev';
+
+// Processors
+if (config.args.env === 'dev') {
+  processors = [
+    autoprefixer({
+      browsers: config.browsers
+    })
+  ];
+} else {
+  processors = [
+    autoprefixer({
+      browsers: config.browsers
+    }),
+    mqpacker,
+    csswring({
+      preserveHacks: true,
+      removeAllComments: true
+    })
+  ];
 }
 
-import sourcemaps from 'gulp-sourcemaps';
-import autoprefixer from 'gulp-autoprefixer';
-import filter from 'gulp-filter';
-import size from 'gulp-size';
+// Preprocessor
+switch (pkg.extensions.styles) {
+  case 'scss':
+  preprocessor = require('gulp-ruby-sass');
+    break;
+
+  case 'less':
+    preprocessor = require('gulp-less');
+    var lessGlob = require('less-plugin-glob');
+    break;
+
+  case 'styl':
+    preprocessor = require('gulp-stylus');
+    break;
+}
 
 function getStylesStream(extension) {
   switch (extension) {
 
     case 'scss':
       return preprocessor(`${config.src}/styles/main.scss`, {
-          sourcemap: true,
-          compass: true,
-          require: ['sass-globbing', 'sass-css-importer']
-        });
+        sourcemap: true,
+        compass: true,
+        require: ['sass-globbing', 'sass-css-importer']
+      });
       break;
 
     case 'less':
@@ -70,8 +98,12 @@ gulp.task('styles', function() {
 
   return getStylesStream(pkg.extensions.styles)
     .on('error', handleErrors)
-    .pipe(autoprefixer(config.browsers))
-    .pipe(config.args.env !== 'dev' ? gutil.noop() : sourcemaps.write())
+    .pipe(postcss(processors))
+    .pipe(envDev ? sourcemaps.write() : gutil.noop())
+    .pipe(envDev ? gutil.noop() : header(config.banner))
+    .pipe(envDev ? gutil.noop() : rename({
+      suffix: '.min'
+    }))
     .pipe(gulp.dest(`${config.dist}/styles`))
     .pipe(filter('**/*.css'))
     .pipe(browserSync.reload({
@@ -96,11 +128,10 @@ gulp.task('styles:fonts', function() {
     .dest(`${config.dist}/styles/fonts`);
 
   return fontmin.run(
-    function (err, files, stream) {
+    function(err, files, stream) {
       if (err) {
         console.log(err);
       }
     }
   );
 });
-

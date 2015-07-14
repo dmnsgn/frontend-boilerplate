@@ -25,8 +25,13 @@ gulp.task('default:dev', function() {
 
 gulp.task('default:prod', function() {
 
-  runSequence(['markup:all', 'styles:fonts', 'styles', 'scripts', 'images'], 'build', 'serve', function() {
-    gutil.log(gutil.colors.green('Build ready and served.'));
+  runSequence(['markup:all', 'styles:fonts', 'images'], 'build', function() {
+    if (config.args.serve) {
+      gulp.start('serve');
+    } else {
+      process.exit();
+    }
+    gutil.log(gutil.colors.yellow('Build ready, preparing to serve...'));
   });
 
 });
