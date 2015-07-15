@@ -111,17 +111,17 @@ var questions = [
   }
 ];
 
-inquirer.prompt(questions, function(datas) {
+inquirer.prompt(questions, function(data) {
 
-  var transform = [].concat(datas.scripts_language.transform, datas.scripts_framework.transform);
+  var transform = [].concat(data.scripts_language.transform, data.scripts_framework.transform);
   var extensions = {
-    scripts: datas.scripts_language.extension || 'js',
-    styles: datas.styles.extension || 'css'
+    scripts: data.scripts_language.extension || 'js',
+    styles: data.styles.extension || 'css'
   }
-  updatePackageFile(datas.app_name, transform.filter(function(t) { return t; }), extensions);
+  updatePackageFile(data.app_name, transform.filter(function(t) { return t; }), extensions);
 
-  var dependencies = [].concat(datas.scripts_language.dependencies, datas.scripts_framework.dependencies, datas.styles.dependencies);
-  var devDependencies = [].concat(datas.scripts_language.devDependencies, datas.scripts_framework.devDependencies, datas.styles.devDependencies);
+  var dependencies = [].concat(data.scripts_language.dependencies, data.scripts_framework.dependencies, data.styles.dependencies);
+  var devDependencies = [].concat(data.scripts_language.devDependencies, data.scripts_framework.devDependencies, data.styles.devDependencies);
   updateDependencies(dependencies, devDependencies);
 
 });
