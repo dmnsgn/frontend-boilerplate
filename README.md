@@ -60,7 +60,7 @@ $ npm i gulp-frontend-boilerplate
 This step sets up the boilerplate to fit your needs (App Name, JS compiler/transpiler, JS framework, CSS preprocessor).
 
 ```bash
-$ npm start
+$ npm run init
 ```
 
 Then each time you clone the repo, use:
