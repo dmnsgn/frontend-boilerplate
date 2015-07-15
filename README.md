@@ -48,7 +48,7 @@ $ npm install -g stylus
 ### Clone this repository or grab it from npm
 
 ```bash
-$ git clone https://github.com/dmnsgn/gulp-frontend-boilerplate.git && rm -rf .git
+$ git clone --depth 1 https://github.com/dmnsgn/gulp-frontend-boilerplate.git && cd gulp-frontend-boilerplate && rm -rf .git
 
 or
 
