@@ -79,7 +79,7 @@
     "watchify": "^3.2.x"
   },
   "scripts": {
-    "init": "npm i inquirer chalk && babel-node gulp/init/index.js",
+    "init": "npm i inquirer chalk && babel-node ./gulp/init/index.js",
     "install": "napa"
   },
   "extensions": {

@@ -6,32 +6,27 @@ import inquirer from 'inquirer'
 
 import choices from './choices.js'
 
-let questions = [
-  {
-    type: "input",
-    name: "app_name",
-    message: "What's your app name?",
-    default: 'App'
-  },
-  {
-    type: "list",
-    name: "language",
-    message: "What script compiler/transpiler do you want to use?",
-    choices: choices(__dirname + '/language/')
-  },
-  {
-    type: "list",
-    name: "framework",
-    message: "What js framework do you want to use?",
-    choices: choices(__dirname + '/framework/')
-  },
-  {
-    type: "list",
-    name: "preprocessor",
-    message: "What css preprocessor do you want to use?",
-    choices: choices(__dirname + '/preprocessor/')
-  }
-];
+let questions = [{
+  type: "input",
+  name: "app_name",
+  message: "What's your app name?",
+  default: 'App'
+}, {
+  type: "list",
+  name: "language",
+  message: "What script compiler/transpiler do you want to use?",
+  choices: choices(__dirname + '/language/')
+}, {
+  type: "list",
+  name: "framework",
+  message: "What js framework do you want to use?",
+  choices: choices(__dirname + '/framework/')
+}, {
+  type: "list",
+  name: "preprocessor",
+  message: "What css preprocessor do you want to use?",
+  choices: choices(__dirname + '/preprocessor/')
+}];
 
 inquirer.prompt(questions, function(data) {
 
@@ -40,7 +35,9 @@ inquirer.prompt(questions, function(data) {
     scripts: data.language.extension || 'js',
     styles: data.preprocessor.extension || 'css'
   }
-  updatePackageFile(data.app_name, transform.filter(function(t) { return t; }), extensions);
+  updatePackageFile(data.app_name, transform.filter(function(t) {
+    return t;
+  }), extensions);
 
   let dependencies = [].concat(data.language.dependencies, data.framework.dependencies, data.preprocessor.dependencies);
   let devDependencies = [].concat(data.language.devDependencies, data.framework.devDependencies, data.preprocessor.devDependencies);
@@ -50,9 +47,9 @@ inquirer.prompt(questions, function(data) {
 
 // Inspired by https://github.com/mattdesl/shimbro/
 function hasTransform(transforms, key) {
-  for (let i=0; i<transforms.length; i++) {
+  for (let i = 0; i < transforms.length; i++) {
     let t = transforms[i];
-    if (typeof t === "string" && t == key){
+    if (typeof t === "string" && t == key) {
       return true;
     } else if (t[0] == key) {
       return true;
@@ -82,7 +79,7 @@ function updatePackageFile(appName, transform, extensions) {
     let transforms = pkg.browserify.transform;
 
     if (typeof transforms === 'string') {
-      transforms = [ transforms ];
+      transforms = [transforms];
     }
 
     if (!Array.isArray(transforms)) {
@@ -109,7 +106,6 @@ function updatePackageFile(appName, transform, extensions) {
   }
 
   fs.writeFile(path, JSON.stringify(pkg, undefined, 2));
-
 }
 
 
@@ -127,11 +123,11 @@ function updateDependencies(dependencies, devDependencies) {
 
   if (dependencies || devDependencies) {
     console.log(chalk.green('Installing dependencies and adding them to package.json...', dependencies.join(' '), devDependencies.join(' ')));
-    // exec(command, function (error, stdout, stderr) {
-    //   console.log(stdout);
-    //   if (error !== null) {
-    //     console.log(error);
-    //   }
-    // });
+    exec(command, function (error, stdout, stderr) {
+      console.log(stdout);
+      if (error !== null) {
+        console.log(error);
+      }
+    });
   }
 }
