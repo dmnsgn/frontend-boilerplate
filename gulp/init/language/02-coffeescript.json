@@ -1,0 +1,8 @@
+{
+  "name": "Coffeescript",
+  "value": {
+    "extension": "coffee",
+    "devDependencies": ["coffeeify"],
+    "transform": ["coffeeify"]
+  }
+}

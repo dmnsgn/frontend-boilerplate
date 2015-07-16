@@ -1,7 +1,7 @@
 {
   "name": "gulp-frontend-boilerplate",
   "title": "Gulp Frontend Boilerplate",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "A gulp boilerplate with common frontend tasks.",
   "author": "Damien Seguin <https://twitter.com/dmnsgn>",
   "homepage": "https://github.com/dmnsgn/gulp-frontend-boilerplate",
@@ -79,7 +79,7 @@
     "watchify": "^3.2.x"
   },
   "scripts": {
-    "start": "npm i inquirer chalk && node start.js",
+    "init": "npm i inquirer chalk && babel-node ./gulp/init/index.js",
     "install": "napa"
   },
   "extensions": {

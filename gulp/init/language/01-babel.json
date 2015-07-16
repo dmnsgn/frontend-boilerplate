@@ -1,0 +1,7 @@
+{
+  "name": "ECMAScript 6 (ES6 using Babel transpiler)",
+  "value": {
+    "devDependencies": ["babelify"],
+    "transform": ["babelify"]
+  }
+}

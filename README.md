@@ -60,7 +60,7 @@ $ npm i gulp-frontend-boilerplate
 This step sets up the boilerplate to fit your needs (App Name, JS compiler/transpiler, JS framework, CSS preprocessor).
 
 ```bash
-$ npm start
+$ npm run init
 ```
 
 Then each time you clone the repo, use:
@@ -86,7 +86,7 @@ Open `gulp/config.js` with your favorite text editor.
 |**browsers**: the browser(s) targeted for autoprefixer and autopolyfiller (see full list of options [here](https://github.com/ai/autoprefixer#browsers))|Array|['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']|
 |**prodUrl**: the absolute url to use in the sitemap|String|''|
 |**analyticsUA**: your google analytics UA|String|''|
-|**banner**: add a text header above your main files.|String|*filled with `package.json` datas*|
+|**banner**: add a text header above your main files.|String|*filled with `package.json` data*|
 |**developerURL**: your URL.|String|''|
 
 ### Gulp tasks

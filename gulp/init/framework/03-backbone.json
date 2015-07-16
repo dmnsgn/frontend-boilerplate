@@ -1,0 +1,6 @@
+{
+  "name": "Backbone.js",
+  "value": {
+    "dependencies": ["backbone"]
+  }
+}

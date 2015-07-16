@@ -1,0 +1,6 @@
+{
+  "name": "Backbone.js + Marionette.js",
+  "value": {
+    "dependencies": ["backbone", "backbone.marionette"]
+  }
+}

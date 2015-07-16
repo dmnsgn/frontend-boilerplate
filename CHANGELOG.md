@@ -1,5 +1,9 @@
 ### Change log
 
+0.5.3
+
+* Refactor init
+
 0.5.2
 
 * Use PostCSS

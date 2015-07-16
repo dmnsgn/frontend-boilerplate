@@ -1,0 +1,8 @@
+{
+  "name": "Stylus",
+  "value": {
+    "extension": "styl",
+    "dependencies": ["styl-easing", "styl-font-face"],
+    "devDependencies": ["gulp-styl"]
+  }
+}

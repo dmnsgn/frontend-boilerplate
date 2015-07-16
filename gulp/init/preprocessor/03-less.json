@@ -1,0 +1,8 @@
+{
+  "name": "Less",
+  "value": {
+    "extension": "less",
+    "dependencies": ["less-easing", "less-font-face"],
+    "devDependencies": ["gulp-less", "less-plugin-glob"]
+  }
+}
