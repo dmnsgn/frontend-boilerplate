@@ -1,0 +1,8 @@
+{
+  "name": "Sass",
+  "value": {
+    "extension": "scss",
+    "dependencies": ["sass-easing", "sass-font-face"],
+    "devDependencies": ["gulp-ruby-sass"]
+  }
+}

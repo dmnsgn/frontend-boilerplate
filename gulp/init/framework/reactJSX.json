@@ -1,0 +1,8 @@
+{
+  "name": "React + JSX",
+  "value": {
+    "devDependencies": ["reactify"],
+    "dependencies": ["react"],
+    "transform": ["reactify"]
+  }
+}
