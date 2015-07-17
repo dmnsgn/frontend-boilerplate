@@ -1,7 +1,4 @@
-import {
-  exec
-}
-from 'child_process'
+import { exec } from 'child_process'
 import fs from 'fs'
 
 import chalk from 'chalk'
@@ -17,23 +14,21 @@ let questions = [{
 }, {
   type: "list",
   name: "language",
-  message: "Script compiler/transpiler",
+  message: "Script compiler/transpiler:",
   choices: choices(__dirname + '/language/')
 }, {
   type: "list",
   name: "framework",
-  message: "JS framework",
+  message: "JS framework:",
   choices: choices(__dirname + '/framework/')
 }, {
   type: "list",
   name: "preprocessor",
-  message: "CSS preprocessor",
+  message: "CSS preprocessor:",
   choices: choices(__dirname + '/preprocessor/')
 }];
 
 inquirer.prompt(questions, function(data) {
-
-  console.log(data);
 
   let transform = [].concat(data.language.transform, data.framework.transform);
   let extensions = {
