@@ -159,7 +159,7 @@ This command will give you a list of all tasks available.
 gulp help
 ```
 ---
-Note: Each task is self documented. You can use them individually (e.g. `gulp images:spritesheet`, `gulp images:optimization`) but you should use the tasks above (`default` then `build`. Then `default` if neeeded and `build` again. `serve` to check if all is ok before deploying).
+Note: Each task is self documented. You can use them individually (e.g. `gulp images:spritesheet`, `gulp images:optimization`) but you should use the tasks above.
 
 
 ## External issues
