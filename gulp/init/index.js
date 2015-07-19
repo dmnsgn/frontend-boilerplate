@@ -74,10 +74,10 @@ function updatePackageFile(appName, transform, extensions) {
     pkg.browserify = {
       'transform': transform
     };
-    console.log(chalk.green('Adding ' + transform.join(' ') + ' transforms to package.json.'));
+    console.log(chalk.green(`Adding ${transform.join(' ')} transform(s) to package.json.`));
   } else if (!pkg.browserify.transform) {
     pkg.browserify.transform = transform;
-    console.log(chalk.green('Adding ' + transform.join(' ') + ' transforms to package.json.'));
+    console.log(chalk.green(`Adding ${transform.join(' ')} transform(s) to package.json.`));
   } else {
 
     let transforms = pkg.browserify.transform;
@@ -105,11 +105,11 @@ function updatePackageFile(appName, transform, extensions) {
 
       pkg.browserify.transform = transforms;
 
-      console.log(chalk.green('Adding ' + newTransforms.join(' ') + ' transforms to package.json.'));
+      console.log(chalk.green(`Adding ${newTransforms.join(' ')} transform(s) to package.json.`));
     }
   }
 
-  fs.writeFile('../../package.json', JSON.stringify(pkg, undefined, 2));
+  fs.writeFile(`${process.cwd()}/package.json`, JSON.stringify(pkg, undefined, 2));
 }
 
 
@@ -136,6 +136,6 @@ function updateDependencies(dependencies, devDependencies) {
 }
 
 function updateSourceFiles(extensions) {
-  del([pkg.directories.source + '/styles/**/*.!(' + extensions.styles + ')']);
-  del([pkg.directories.source + '/scripts/**/*.!(' + extensions.scripts + ')']);
+  del([`${pkg.directories.source}/styles/**/*.!(${extensions.styles})`]);
+  del([`${pkg.directories.source}/scripts/**/*.!(${extensions.scripts})`]);
 }
