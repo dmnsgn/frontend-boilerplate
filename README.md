@@ -73,20 +73,18 @@ $ npm install
 
 ### Configuration
 
-Open `gulp/config.js` with your favorite text editor.
+Open `package.json`:
 
 |Option|Type|Default
 |:---------|:---------:|:----------:|
-|**args**: CLI arguments.|Object|minimist(process.argv.slice(2), options)|
-|**verbose**: provide a more verbose output when available (useful for debugging).|Boolean|false|
-|**port**: the server port.|Number|3000|
 |**src**: the source folder path, that's where you write code.|String|src|
 |**dist**: the destination folder path, that's where your code is compiled.|String|dist|
 |**test**: the `test` folder path.|String|test|
+|**verbose**: provide a more verbose output when available (useful for debugging).|Boolean|false|
+|**port**: the server port.|Number|3000|
 |**browsers**: the browser(s) targeted for autoprefixer and autopolyfiller (see full list of options [here](https://github.com/ai/autoprefixer#browsers))|Array|['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']|
 |**prodUrl**: the absolute url to use in the sitemap|String|''|
 |**analyticsUA**: your google analytics UA|String|''|
-|**banner**: add a text header above your main files.|String|*filled with `package.json` data*|
 |**developerURL**: your URL.|String|''|
 
 ### Gulp tasks

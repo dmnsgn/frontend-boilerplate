@@ -24,6 +24,5 @@ export default {
     ' * @copyright ' + pkg.license,
     ' */',
     ''
-  ].join('\n'),
-  developerURL: ''
+  ].join('\n')
 };
