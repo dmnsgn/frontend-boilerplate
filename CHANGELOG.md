@@ -1,5 +1,10 @@
 ### Change log
 
+0.5.4
+
+* Clean on init
+* Refactor config
+
 0.5.3
 
 * Refactor init

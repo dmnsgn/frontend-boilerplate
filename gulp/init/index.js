@@ -3,8 +3,10 @@ import fs from 'fs'
 
 import chalk from 'chalk'
 import inquirer from 'inquirer'
+import del from 'del';
 
 import choices from './choices.js'
+import pkg from '../../package.json';
 
 let questions = [{
   type: "input",
@@ -38,6 +40,7 @@ inquirer.prompt(questions, function(data) {
   updatePackageFile(data.app_name, transform.filter(function(t) {
     return t;
   }), extensions);
+  updateSourceFiles(extensions);
 
   let dependencies = [].concat(data.language.dependencies, data.framework.dependencies, data.preprocessor.dependencies).filter(function(n) {
     return n != undefined;
@@ -63,9 +66,6 @@ function hasTransform(transforms, key) {
 }
 
 function updatePackageFile(appName, transform, extensions) {
-  let path = './package.json';
-  let file = fs.readFileSync(path);
-  let pkg = JSON.parse(file);
 
   pkg.title = appName;
   pkg.extensions = extensions;
@@ -74,10 +74,10 @@ function updatePackageFile(appName, transform, extensions) {
     pkg.browserify = {
       'transform': transform
     };
-    console.log(chalk.green('Adding ' + transform.join(' ') + ' transforms to package.json.'));
+    console.log(chalk.green(`Adding ${transform.join(' ')} transform(s) to package.json.`));
   } else if (!pkg.browserify.transform) {
     pkg.browserify.transform = transform;
-    console.log(chalk.green('Adding ' + transform.join(' ') + ' transforms to package.json.'));
+    console.log(chalk.green(`Adding ${transform.join(' ')} transform(s) to package.json.`));
   } else {
 
     let transforms = pkg.browserify.transform;
@@ -105,11 +105,11 @@ function updatePackageFile(appName, transform, extensions) {
 
       pkg.browserify.transform = transforms;
 
-      console.log(chalk.green('Adding ' + newTransforms.join(' ') + ' transforms to package.json.'));
+      console.log(chalk.green(`Adding ${newTransforms.join(' ')} transform(s) to package.json.`));
     }
   }
 
-  fs.writeFile(path, JSON.stringify(pkg, undefined, 2));
+  fs.writeFile(`${process.cwd()}/package.json`, JSON.stringify(pkg, undefined, 2));
 }
 
 
@@ -133,4 +133,9 @@ function updateDependencies(dependencies, devDependencies) {
       }
     });
   }
+}
+
+function updateSourceFiles(extensions) {
+  del([`${pkg.directories.source}/styles/**/*.!(${extensions.styles})`]);
+  del([`${pkg.directories.source}/scripts/**/*.!(${extensions.scripts})`]);
 }

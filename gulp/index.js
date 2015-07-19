@@ -5,11 +5,11 @@
 import fs from 'fs';
 
 import gulp from 'gulp';
-import config from './config';
+import cfg from './config';
 import pkg from '../package.json';
 
 global.gulp = gulp;
-global.config = config;
+global.config = Object.assign(cfg, pkg.config, pkg.directories);
 global.pkg = pkg;
 
 let tasks = fs.readdirSync('./gulp/tasks/');
