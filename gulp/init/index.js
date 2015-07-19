@@ -3,8 +3,10 @@ import fs from 'fs'
 
 import chalk from 'chalk'
 import inquirer from 'inquirer'
+import del from 'del';
 
 import choices from './choices.js'
+import pkg from '../../package.json';
 
 let questions = [{
   type: "input",
@@ -38,6 +40,7 @@ inquirer.prompt(questions, function(data) {
   updatePackageFile(data.app_name, transform.filter(function(t) {
     return t;
   }), extensions);
+  updateSourceFiles(extensions);
 
   let dependencies = [].concat(data.language.dependencies, data.framework.dependencies, data.preprocessor.dependencies).filter(function(n) {
     return n != undefined;
@@ -63,9 +66,6 @@ function hasTransform(transforms, key) {
 }
 
 function updatePackageFile(appName, transform, extensions) {
-  let path = './package.json';
-  let file = fs.readFileSync(path);
-  let pkg = JSON.parse(file);
 
   pkg.title = appName;
   pkg.extensions = extensions;
@@ -109,7 +109,7 @@ function updatePackageFile(appName, transform, extensions) {
     }
   }
 
-  fs.writeFile(path, JSON.stringify(pkg, undefined, 2));
+  fs.writeFile('../../package.json', JSON.stringify(pkg, undefined, 2));
 }
 
 
@@ -133,4 +133,8 @@ function updateDependencies(dependencies, devDependencies) {
       }
     });
   }
+}
+
+function updateSourceFiles(extensions) {
+  del([pkg.directories.source + '/styles/**/*.!(' + pkg.extensions.styles + ')']);
 }

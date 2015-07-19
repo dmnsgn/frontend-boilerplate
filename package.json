@@ -23,6 +23,7 @@
     "sass",
     "scss",
     "less",
+    "stylus",
     "coffee-script",
     "react",
     "backbone"
@@ -79,7 +80,7 @@
     "watchify": "^3.2.x"
   },
   "scripts": {
-    "init": "npm i inquirer chalk && babel-node ./gulp/init/index.js",
+    "init": "npm i inquirer chalk del && babel-node ./gulp/init/index.js",
     "install": "napa"
   },
   "directories": {
