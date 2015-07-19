@@ -1,7 +1,7 @@
 {
   "name": "gulp-frontend-boilerplate",
   "title": "Gulp Frontend Boilerplate",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "A gulp boilerplate with common frontend tasks.",
   "author": "Damien Seguin <https://twitter.com/dmnsgn>",
   "homepage": "https://github.com/dmnsgn/gulp-frontend-boilerplate",
@@ -102,7 +102,8 @@
       "android 4"
     ],
     "prodUrl": "http://domain.tld",
-    "analyticsUA": "UA-XXXXX-X"
+    "analyticsUA": "UA-XXXXX-X",
+    "developerURL": ""
   },
   "extensions": {
     "scripts": "js",
