@@ -84,7 +84,7 @@
     "install": "napa"
   },
   "directories": {
-    "source": "./src",
+    "src": "./src",
     "dist": "./dist",
     "test": "./test"
   },
