@@ -30,7 +30,7 @@ let envDev = config.args.env === 'dev';
  */
 
 let b = browserify({
-  entries: [`./${config.src}/scripts/main.${pkg.extensions.scripts}`],
+  entries: [`${config.src}/scripts/main.${pkg.extensions.scripts}`],
   extensions: [pkg.extensions.scripts],
   debug: envDev
 });
@@ -50,7 +50,7 @@ let bundle = function() {
     .pipe(envDev ? gutil.noop() : rename({
       suffix: '.min'
     }))
-    .pipe(gulp.dest(`./${config.dist}/scripts`))
+    .pipe(gulp.dest(`${config.dist}/scripts`))
     .on('end', function() {
       if (envDev) {
         browserSync.reload();
@@ -70,17 +70,17 @@ gulp.task('scripts:app', bundle);
 gulp.task('scripts:vendor', function() {
   concatenateFiles({
     src: pkg.vendors,
-    dest: `./${config.dist}/scripts`,
+    dest: `${config.dist}/scripts`,
     fileName: 'vendor.js'
   }, function() {
     if (!envDev) {
-      return gulp.src(`./${config.dist}/scripts/vendor.js`)
+      return gulp.src(`${config.dist}/scripts/vendor.js`)
         .pipe(uglify())
         .on('error', handleErrors)
         .pipe(rename({
           suffix: '.min'
         }))
-        .pipe(gulp.dest(`./${config.dist}/scripts`))
+        .pipe(gulp.dest(`${config.dist}/scripts`))
     }
   });
 });
