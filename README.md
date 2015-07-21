@@ -15,16 +15,10 @@ Node (use brew or install it from [here](http://nodejs.org/download/))
 $ brew install node
 ```
 
-Gulp ([Getting started](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started))
+Gulp ([Getting started](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started)) and Babel ([https://babeljs.io/](https://babeljs.io/))
 
 ```bash
-$ npm install -g gulp
-```
-
-Babel ([https://babeljs.io/](https://babeljs.io/))
-
-```bash
-$ npm install -g babel
+$ npm install -g gulp babel
 ```
 
 [Sass](http://sass-lang.com/)
