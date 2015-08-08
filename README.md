@@ -69,7 +69,7 @@ $ npm install
 
 Open `package.json`:
 
-|Option|Type|Default
+|Option (`directories` and `config` keys)|Type|Default
 |:---------|:---------:|:----------:|
 |**src**: the source folder path, that's where you write code.|String|src|
 |**dist**: the destination folder path, that's where your code is compiled.|String|dist|
