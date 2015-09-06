@@ -39,14 +39,15 @@ or [Stylus](https://learnboost.github.io/stylus/)
 $ npm install -g stylus
 ```
 
-### Clone this repository or grab it from npm
+### Clone this repository
 
 ```bash
+
+// OSX & Linux
 $ git clone --depth 1 https://github.com/dmnsgn/gulp-frontend-boilerplate.git && cd gulp-frontend-boilerplate && rm -rf .git
 
-or
-
-$ npm i gulp-frontend-boilerplate
+// Windows
+$ git clone --depth 1 https://github.com/dmnsgn/gulp-frontend-boilerplate.git && cd gulp-frontend-boilerplate && rd /s /q .git
 ```
 
 ### Init
