@@ -80,7 +80,7 @@
     "watchify": "^3.2.x"
   },
   "scripts": {
-    "init": "npm i inquirer chalk del && babel-node ./gulp/init/index.js",
+    "init": "npm i inquirer chalk del && babel-node ./boilerplate/init/index.js",
     "install": "napa"
   },
   "directories": {
