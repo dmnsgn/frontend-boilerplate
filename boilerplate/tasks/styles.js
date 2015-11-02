@@ -15,7 +15,7 @@ import Fontmin from 'fontmin';
 import sourcemaps from 'gulp-sourcemaps';
 
 import postcss from 'gulp-postcss';
-import autoprefixer from 'autoprefixer-core';
+import autoprefixer from 'autoprefixer';
 import mqpacker from 'css-mqpacker';
 import csswring from 'csswring';
 

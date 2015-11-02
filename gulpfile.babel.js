@@ -7,7 +7,7 @@
  */
 
 // Modularized tasks for a better SoC
-import tasks from './gulp';
+import tasks from './boilerplate/tasks';
 
 // gulp-devtools
 // https://github.com/niki4810/gulp-devtools

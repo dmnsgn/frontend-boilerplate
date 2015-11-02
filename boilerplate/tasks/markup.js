@@ -24,7 +24,7 @@ function process(changed) {
 		.pipe(changed ? newer(config.dist) : gutil.noop())
 		.pipe(preprocess({
 			context: {
-				NODE_ENV: 'dev',
+				ENV: config.args.env,
 				UA: config.analyticsUA
 			}
 		}))
