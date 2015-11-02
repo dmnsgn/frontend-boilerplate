@@ -28,10 +28,10 @@ gulp.task('default:prod', function() {
   runSequence(['markup:all', 'styles:fonts', 'images'], 'build', function() {
     if (config.args.serve) {
       gulp.start('serve');
+      gutil.log(gutil.colors.yellow('Build ready, preparing to serve...'));
     } else {
-      process.exit();
+      // process.exit();
     }
-    gutil.log(gutil.colors.yellow('Build ready, preparing to serve...'));
   });
 
 });
