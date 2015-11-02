@@ -65,7 +65,6 @@
     "gulp-sourcemaps": "^1.6.x",
     "gulp-task-listing": "^1.0.x",
     "gulp-uglify": "^1.4.x",
-    "gulp-useref": "^2.0.x",
     "gulp-util": "^3.0.x",
     "gulp-w3cjs": "^1.1.x",
     "gulp-watch": "^4.3.x",

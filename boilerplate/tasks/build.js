@@ -1,45 +1,18 @@
 /**
  * Build task
- *
- * Basically build all assets, optimize them (size & usage).
- * Add some copyright stuffs.
- *
  */
 
-import handleErrors from '../utils/handleErrors';
-
-import del from 'del';
 import runSequence from 'run-sequence';
 
-import useref from 'gulp-useref';
 import sitemap from 'gulp-sitemap';
 
 gulp.task('build', function() {
 
-  runSequence('scripts', 'styles', 'build:markup');
+  runSequence('scripts', 'styles', 'build:sitemap');
 
 });
 
-/**
- * Build markup
- *
- * Markup tasks, change building blocks
- *
- */
-
-gulp.task('build:markup', function() {
-  gulp.start('build:markup:sitemap');
-
-  let assets = useref.assets();
-  return gulp.src(`${config.dist}/*.html`)
-    .pipe(assets)
-    .on('error', handleErrors)
-    .pipe(assets.restore())
-    .pipe(useref())
-    .pipe(gulp.dest(config.dist));
-});
-
-gulp.task('build:markup:sitemap', function() {
+gulp.task('build:sitemap', function() {
   let isUrlDefinned = (typeof config.prodUrl === 'string' && config.prodUrl !== '') ? true : false;
 
   if (isUrlDefinned) {
