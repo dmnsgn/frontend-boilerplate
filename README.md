@@ -24,7 +24,7 @@ $ npm install -g gulp babel
 [Sass](http://sass-lang.com/)
 
 ```bash
-$ gem install sass compass sass-css-importer sass-globbing
+$ gem install sass compass sass-globbing --pre sass-css-importer
 ```
 
 or [Less](http://lesscss.org/)
