@@ -18,7 +18,7 @@ $ brew install node
 Gulp ([Getting started](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started)) and Babel ([https://babeljs.io/](https://babeljs.io/))
 
 ```bash
-$ npm install -g gulp babel
+$ npm install -g gulp babel-core
 ```
 
 [Sass](http://sass-lang.com/)
