@@ -15,22 +15,16 @@ Node (use brew or install it from [here](http://nodejs.org/download/))
 $ brew install node
 ```
 
-Gulp ([Getting started](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started))
+Gulp ([Getting started](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started)) and Babel ([https://babeljs.io/](https://babeljs.io/))
 
 ```bash
-$ npm install -g gulp
-```
-
-Babel ([https://babeljs.io/](https://babeljs.io/))
-
-```bash
-$ npm install -g babel
+$ npm install -g gulp babel
 ```
 
 [Sass](http://sass-lang.com/)
 
 ```bash
-$ gem install sass compass sass-css-importer sass-globbing
+$ gem install sass compass sass-globbing --pre sass-css-importer
 ```
 
 or [Less](http://lesscss.org/)
@@ -45,14 +39,15 @@ or [Stylus](https://learnboost.github.io/stylus/)
 $ npm install -g stylus
 ```
 
-### Clone this repository or grab it from npm
+### Clone this repository
 
 ```bash
+
+// OSX & Linux
 $ git clone --depth 1 https://github.com/dmnsgn/gulp-frontend-boilerplate.git && cd gulp-frontend-boilerplate && rm -rf .git
 
-or
-
-$ npm i gulp-frontend-boilerplate
+// Windows
+$ git clone --depth 1 https://github.com/dmnsgn/gulp-frontend-boilerplate.git && cd gulp-frontend-boilerplate && rd /s /q .git
 ```
 
 ### Init
@@ -75,7 +70,7 @@ $ npm install
 
 Open `package.json`:
 
-|Option|Type|Default
+|Option (`directories` and `config` keys)|Type|Default
 |:---------|:---------:|:----------:|
 |**src**: the source folder path, that's where you write code.|String|src|
 |**dist**: the destination folder path, that's where your code is compiled.|String|dist|

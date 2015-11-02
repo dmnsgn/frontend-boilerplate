@@ -118,7 +118,7 @@ function updateDependencies(dependencies, devDependencies) {
   let command = '';
 
   if (dependencies.join('') !== '') {
-    command += 'npm install --save' + dependencies.join(' ') + ' && ';
+    command += 'npm install --save ' + dependencies.join(' ') + ' && ';
   }
   if (devDependencies.join('') !== '') {
     command += 'npm install --save-dev ' + devDependencies.join(' ') + ' && ';
