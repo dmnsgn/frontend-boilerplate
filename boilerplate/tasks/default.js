@@ -29,8 +29,6 @@ gulp.task('default:prod', function() {
     if (config.args.serve) {
       gulp.start('serve');
       gutil.log(gutil.colors.yellow('Build ready, preparing to serve...'));
-    } else {
-      // process.exit();
     }
   });
 

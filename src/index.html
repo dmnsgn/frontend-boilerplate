@@ -5,9 +5,14 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<title>Gulp Frontend Boilerplate</title>
-	<!-- build:css styles/main.min.css -->
+
+	<!-- @if ENV='dev' -->
 	<link rel="stylesheet" href="styles/main.css">
-	<!-- endbuild -->
+	<!-- @endif -->
+	<!-- @if ENV='prod' -->
+	<link rel="stylesheet" href="styles/main.min.css">
+	<!-- @endif -->
+
 	<!-- @include inc/_favicons.html -->
 </head>
 <body>
@@ -15,12 +20,15 @@
 
 	<div id="main"></div>
 
-	<!-- build:js scripts/vendor.min.js -->
+	<!-- @if ENV='dev' -->
 	<script src="scripts/vendor.js"></script>
-	<!-- endbuild -->
-	<!-- build:js scripts/main.min.js -->
 	<script src="scripts/main.js"></script>
-	<!-- endbuild -->
+	<!-- @endif -->
+	<!-- @if ENV='prod' -->
+	<script src="scripts/vendor.min.js"></script>
+	<script src="scripts/main.min.js"></script>
+	<!-- @endif -->
+
 	<!-- //@include inc/_analytics.html -->
 </body>
 </html>

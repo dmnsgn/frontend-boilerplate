@@ -18,7 +18,7 @@ $ brew install node
 Gulp ([Getting started](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started)) and Babel ([https://babeljs.io/](https://babeljs.io/))
 
 ```bash
-$ npm install -g gulp babel
+$ npm install -g gulp babel-core
 ```
 
 [Sass](http://sass-lang.com/)
@@ -41,22 +41,27 @@ $ npm install -g stylus
 
 ### Clone this repository
 
+*OSX & Linux*
+
 ```bash
-
-// OSX & Linux
 $ git clone --depth 1 https://github.com/dmnsgn/gulp-frontend-boilerplate.git && cd gulp-frontend-boilerplate && rm -rf .git
+```
 
-// Windows
+*Windows*
+
+```bash
 $ git clone --depth 1 https://github.com/dmnsgn/gulp-frontend-boilerplate.git && cd gulp-frontend-boilerplate && rd /s /q .git
 ```
 
-### Init
+### Init (once)
 
 This step sets up the boilerplate to fit your needs (App Name, JS compiler/transpiler, JS framework, CSS preprocessor).
 
 ```bash
 $ npm run init
 ```
+
+### Install
 
 Then each time you clone the repo, use:
 
@@ -77,7 +82,7 @@ Open `package.json`:
 |**test**: the `test` folder path.|String|test|
 |**verbose**: provide a more verbose output when available (useful for debugging).|Boolean|false|
 |**port**: the server port.|Number|3000|
-|**browsers**: the browser(s) targeted for autoprefixer and autopolyfiller (see full list of options [here](https://github.com/ai/autoprefixer#browsers))|Array|['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']|
+|**browsers**: the browser(s) targeted for autoprefixer (see full list of options [here](https://github.com/ai/autoprefixer#browsers))|Array|['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']|
 |**prodUrl**: the absolute url to use in the sitemap|String|''|
 |**analyticsUA**: your google analytics UA|String|''|
 |**developerURL**: your URL.|String|''|
@@ -85,7 +90,9 @@ Open `package.json`:
 ### Gulp tasks
 
 #### Launch it
+
 This is the default task.
+
 ```bash
 gulp
 ```
@@ -119,6 +126,7 @@ When you are happy with your changes, run:
 ```bash
 gulp --env prod
 ```
+
 * Replace build tags with `.min` files, generates these minified files in `dist` folder (with optimization tasks)
 * Add copyright headers and generate a `sitemap.xml`file
 
