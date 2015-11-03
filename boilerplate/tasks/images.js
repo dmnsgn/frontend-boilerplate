@@ -54,7 +54,7 @@ gulp.task('images:spritesheet', function() {
 
 gulp.task('images:favicons', function() {
 
-  fs.writeFile(`${config.src}/inc/_favicons.html`, '<link rel="favicons" href="..." />');
+  fs.writeFileSync(`${config.src}/inc/_favicons.html`, '<link rel="favicons" href="..." />');
 
   return gulp.src(`${config.src}/inc/_favicons.html`)
     .pipe(favicons({
