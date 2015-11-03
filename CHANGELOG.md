@@ -1,5 +1,13 @@
 ### Change log
 
+0.6.0
+
+* Rename boilerplate folder
+* Update to Babel 6
+* Update dependencies
+* Clean build process
+* Fix favicon task
+
 0.5.4
 
 * Clean on init
