@@ -7,6 +7,8 @@
  *
  */
 
+import fs from 'fs';
+
 import gutil from 'gulp-util';
 
 import newer from 'gulp-newer';
@@ -18,7 +20,7 @@ import spritesmith from 'gulp.spritesmith';
 
 import favicons from 'gulp-favicons';
 
-gulp.task('images', ['images:optimization', 'images:spritesheet' , 'images:favicons' ]);
+gulp.task('images', ['images:optimization', 'images:spritesheet' , 'images:favicons']);
 
 gulp.task('images:optimization', function() {
   return gulp.src([`${config.src}/images/**/*`, `!${config.src}/images/{sprite,sprite/**}`])
@@ -51,6 +53,8 @@ gulp.task('images:spritesheet', function() {
 });
 
 gulp.task('images:favicons', function() {
+
+  fs.writeFile(`${config.src}/inc/_favicons.html`, '<link rel="favicons" href="..." />');
 
   return gulp.src(`${config.src}/inc/_favicons.html`)
     .pipe(favicons({
