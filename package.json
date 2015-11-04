@@ -101,7 +101,9 @@
       "ios 6",
       "android 4"
     ],
-    "prodUrl": "http://domain.tld",
+    "prodURL": "http://domain.tld",
+    "shareImageURL": "http://domain.tld/share/image.png",
+    "twitterHandle": "@domain",
     "analyticsUA": "UA-XXXXX-X",
     "developerURL": ""
   },

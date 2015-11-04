@@ -83,7 +83,9 @@ Open `package.json`:
 |**verbose**: provide a more verbose output when available (useful for debugging).|Boolean|false|
 |**port**: the server port.|Number|3000|
 |**browsers**: the browser(s) targeted for autoprefixer (see full list of options [here](https://github.com/ai/autoprefixer#browsers))|Array|['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']|
-|**prodUrl**: the absolute url to use in the sitemap|String|''|
+|**prodURL**: the absolute url to use in the sitemap and for metas|String|''|
+|**shareImageURL**: the absolute url of the share image for metas|String|''|
+|**twitterHandle**: twitter handle for metas|String|''|
 |**analyticsUA**: your google analytics UA|String|''|
 |**developerURL**: your URL.|String|''|
 
