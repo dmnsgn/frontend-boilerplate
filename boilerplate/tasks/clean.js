@@ -2,7 +2,6 @@
  * Clean task
  *
  * Clean dist folder, gulp all caches and sass cache
- *
  */
 
 import gutil from 'gulp-util';

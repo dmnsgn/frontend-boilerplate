@@ -3,7 +3,7 @@ import path from 'path';
 
 export default function(opts, cb) {
 
-  let out = opts.src.map(function(filePath) {
+  const out = opts.src.map(function(filePath) {
     return fs.readFileSync(filePath).toString();
   });
 
@@ -19,4 +19,5 @@ export default function(opts, cb) {
       }
     });
   });
+
 }

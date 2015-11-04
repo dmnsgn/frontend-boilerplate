@@ -8,7 +8,7 @@ import del from 'del';
 import choices from './choices.js'
 import pkg from '../../package.json';
 
-let questions = [{
+const questions = [{
   type: "input",
   name: "app_name",
   message: "App name",
@@ -32,8 +32,8 @@ let questions = [{
 
 inquirer.prompt(questions, function(data) {
 
-  let transform = [].concat(data.language.transform, data.framework.transform);
-  let extensions = {
+  const transform = [].concat(data.language.transform, data.framework.transform);
+  const extensions = {
     scripts: data.language.extension || 'js',
     styles: data.preprocessor.extension || 'css'
   }
@@ -42,10 +42,10 @@ inquirer.prompt(questions, function(data) {
   }), extensions);
   updateSourceFiles(extensions);
 
-  let dependencies = [].concat(data.language.dependencies, data.framework.dependencies, data.preprocessor.dependencies).filter(function(n) {
+  const dependencies = [].concat(data.language.dependencies, data.framework.dependencies, data.preprocessor.dependencies).filter(function(n) {
     return n != undefined;
   });
-  let devDependencies = [].concat(data.language.devDependencies, data.framework.devDependencies, data.preprocessor.devDependencies).filter(function(n) {
+  const devDependencies = [].concat(data.language.devDependencies, data.framework.devDependencies, data.preprocessor.devDependencies).filter(function(n) {
     return n != undefined;
   });
   updateDependencies(dependencies, devDependencies);
@@ -55,7 +55,7 @@ inquirer.prompt(questions, function(data) {
 // Inspired by https://github.com/mattdesl/shimbro/
 function hasTransform(transforms, key) {
   for (let i = 0; i < transforms.length; i++) {
-    let t = transforms[i];
+    const t = transforms[i];
     if (typeof t === "string" && t == key) {
       return true;
     } else if (t[0] == key) {
@@ -109,7 +109,7 @@ function updatePackageFile(appName, transform, extensions) {
     }
   }
 
-  fs.writeFile(`${process.cwd()}/package.json`, JSON.stringify(pkg, undefined, 2));
+  // fs.writeFile(`${process.cwd()}/package.json`, JSON.stringify(pkg, undefined, 2));
 }
 
 
@@ -126,16 +126,16 @@ function updateDependencies(dependencies, devDependencies) {
   command += 'npm install';
   if (dependencies || devDependencies) {
     console.log(chalk.green('Installing dependencies and adding them to package.json...', dependencies.join(' '), devDependencies.join(' ')));
-    exec(command, function (error, stdout, stderr) {
-      console.log(stdout);
-      if (error !== null) {
-        console.log(error);
-      }
-    });
+    // exec(command, function (error, stdout, stderr) {
+    //   console.log(stdout);
+    //   if (error !== null) {
+    //     console.log(error);
+    //   }
+    // });
   }
 }
 
 function updateSourceFiles(extensions) {
-  del([`${pkg.directories.source}/styles/**/*.!(${extensions.styles})`]);
-  del([`${pkg.directories.source}/scripts/**/*.!(${extensions.scripts})`]);
+  // del([`${pkg.directories.source}/styles/**/*.!(${extensions.styles})`]);
+  // del([`${pkg.directories.source}/scripts/**/*.!(${extensions.scripts})`]);
 }

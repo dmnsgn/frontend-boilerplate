@@ -4,7 +4,6 @@
  * 'test:markup' validate w3c.
  * 'test:scripts' run mocha tests.
  * 'test:psi' PageSpeed Insights reportings.
- *
  */
 
 import handleErrors from '../utils/handleErrors';
@@ -17,22 +16,21 @@ import mocha from 'gulp-mocha';
 import psi from 'psi';
 
 gulp.task('test', ['test:markup', 'test:scripts'], function() {
-	gutil.log(gutil.colors.bgGreen('Test task completed.'));
+  gutil.log(gutil.colors.bgGreen('Test task completed.'));
 });
 
 gulp.task('test:markup', function() {
-	return gulp.src(`${config.dist}/*.html`)
-		.pipe(w3cjs());
+  return gulp.src(`${config.dist}/*.html`).pipe(w3cjs());
 });
 
 gulp.task('test:scripts', function() {
-	return gulp.src(`${config.test}/*.js`, {
-			read: false
-		})
-		.pipe(mocha({
-			reporter: 'progress'
-		}))
-		.on('error', handleErrors);
+  return gulp.src(`${config.test}/*.js`, {
+      read: false
+    })
+    .pipe(mocha({
+      reporter: 'progress'
+    }))
+    .on('error', handleErrors);
 });
 
 // https://github.com/addyosmani/psi-gulp-sample/blob/master/gulpfile.js
@@ -45,19 +43,19 @@ gulp.task('test:scripts', function() {
 gulp.task('test:psi', ['test:psi:mobile', 'test:psi:desktop']);
 
 gulp.task('test:psi:mobile', function(cb) {
-	psi({
-		// key: key
-		nokey: 'true',
-		url: config.prodUrl,
-		strategy: 'mobile',
-	}, cb);
+  psi({
+    // key: key
+    nokey: 'true',
+    url: config.prodURL,
+    strategy: 'mobile',
+  }, cb);
 });
 
 gulp.task('test:psi:desktop', function(cb) {
-	psi({
-		// key: key,
-		nokey: 'true',
-		url: config.prodUrl,
-		strategy: 'desktop',
-	}, cb);
+  psi({
+    // key: key,
+    nokey: 'true',
+    url: config.prodURL,
+    strategy: 'desktop',
+  }, cb);
 });

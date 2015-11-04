@@ -13,12 +13,12 @@ gulp.task('build', function() {
 });
 
 gulp.task('build:sitemap', function() {
-  let isUrlDefinned = (typeof config.prodUrl === 'string' && config.prodUrl !== '') ? true : false;
+  const isUrlDefinned = (typeof config.prodURL === 'string' && config.prodURL !== '') ? true : false;
 
   if (isUrlDefinned) {
     return gulp.src(`${config.dist}/*.html`).pipe(sitemap({
         fileName: 'sitemap.xml',
-        siteUrl: config.prodUrl
+        siteUrl: config.prodURL
       }))
       .pipe(gulp.dest(config.dist));
   }
