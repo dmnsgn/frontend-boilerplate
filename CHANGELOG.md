@@ -1,5 +1,10 @@
 ### Change log
 
+0.6.1
+
+* Fix ES6/Babel code
+* Add meta tag for Facebook and Twitter
+
 0.6.0
 
 * Rename boilerplate folder
