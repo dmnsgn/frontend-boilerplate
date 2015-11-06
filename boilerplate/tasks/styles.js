@@ -3,7 +3,6 @@
  *
  * 'styles' compile sass/less/stylus files with sourcemaps and autoprefixer.
  * 'styles:fonts' convert fonts.
- *
  */
 
 import gutil from 'gulp-util';
@@ -114,7 +113,7 @@ gulp.task('styles', function() {
 
 
 gulp.task('styles:fonts', function() {
-  let fontmin = new Fontmin()
+  const fontmin = new Fontmin()
     .src(`${config.src}/styles/fonts/*.ttf`)
     .use(Fontmin.ttf2eot({
       clone: true

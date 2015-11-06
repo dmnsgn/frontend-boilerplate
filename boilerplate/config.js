@@ -6,7 +6,7 @@ import pkg from '../package.json';
 import minimist from 'minimist';
 
 // Options
-let options = {
+const options = {
   string: 'env',
   default: {
     env: process.env.NODE_ENV || 'dev'

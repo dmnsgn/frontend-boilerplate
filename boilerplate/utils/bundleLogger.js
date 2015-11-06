@@ -7,7 +7,7 @@
 import gutil from 'gulp-util';
 import prettyHrtime from 'pretty-hrtime';
 
-var startTime;
+let startTime;
 
 export default {
   start: function() {
@@ -16,8 +16,8 @@ export default {
   },
 
   end: function() {
-    let taskTime = process.hrtime(startTime);
-    let prettyTime = prettyHrtime(taskTime);
+    const taskTime = process.hrtime(startTime);
+    const prettyTime = prettyHrtime(taskTime);
     gutil.log('Bundled in', gutil.colors.magenta(prettyTime));
   }
 };

@@ -2,7 +2,6 @@
  * Scripts task
  *
  * Bundle scripts with browserify
- *
  */
 
 import gutil from 'gulp-util';
@@ -29,14 +28,14 @@ let envDev = config.args.env === 'dev';
  * Build app
  */
 
-let b = browserify({
+const b = browserify({
   entries: [`${config.src}/scripts/main.${pkg.extensions.scripts}`],
   extensions: [pkg.extensions.scripts],
   debug: envDev
 });
-let bundler = envDev ? watchify(b) : b;
+const bundler = envDev ? watchify(b) : b;
 
-let bundle = function() {
+const bundle = function() {
   bundleLogger.start();
 
   return bundler

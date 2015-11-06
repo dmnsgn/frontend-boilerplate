@@ -4,7 +4,6 @@
  * 'images:optimization' optimize new images added to images folder (except sprite folder) and cache them.
  * 'images:spritesheet' create a spritesheet from images located in config.src/images/sprite folder.
  * 'images:favicon' generate favicons
- *
  */
 
 import fs from 'fs';
@@ -42,10 +41,13 @@ gulp.task('images:spritesheet', function() {
     algorithm: 'binary-tree'
   }));
   spriteData.on('finish', function() {
-    gutil.log(gutil.colors.yellow('Spritesmith ready to process....'));
+    gutil.log(gutil.colors.yellow('Spritesheet ready to process....'));
+  });
+  spriteData.on('error', function(err) {
+    gutil.log(gutil.colors.red('Spritesheet ', err));
   });
   spriteData.css.pipe(gulp.dest(`${config.src}/styles/`)).on('end', function() {
-    gutil.log(gutil.colors.yellow('_sprite file written...'));
+    gutil.log(gutil.colors.green('Spritesheet _sprite file written...'));
   });
   return spriteData.img.pipe(gulp.dest(`${config.dist}/images/`)).on('end', function() {
     gutil.log(gutil.colors.green('Spritesheet generated.'));
@@ -70,7 +72,7 @@ gulp.task('images:favicons', function() {
         developerURL: config.developerURL,
         background: 'transparent',
         index: 'index.html',
-        url: config.prodUrl,
+        url: config.prodURL,
         logging: config.verbose
       }
     }, function(err) {

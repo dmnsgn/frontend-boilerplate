@@ -2,7 +2,6 @@
  * Watch task
  *
  * Watch all changes in source folder and launch task accordingly
- *
  */
 
 import gutil from 'gulp-util';
@@ -54,7 +53,7 @@ gulp.task('watch', function() {
   }, function() {
     gulp.start('styles');
   });
-  watch(`${config.src} + '/styles/fonts/**/*`, {
+  watch(`${config.src}/styles/fonts/**/*`, {
     emitOnGlob: false,
     read: false,
     name: 'Fonts watcher',
@@ -77,7 +76,7 @@ gulp.task('watch', function() {
   });
 
   // Watch images files
-  watch([`${config.src} + '/images/**/*`, `!${config.src}/images/sprite/**/*`], {
+  watch([`${config.src}/images/**/*`, `!${config.src}/images/sprite/**/*`], {
     emitOnGlob: false,
     read: false,
     name: 'Images watcher',
@@ -93,7 +92,6 @@ gulp.task('watch', function() {
   }, function() {
     gulp.start('images:spritesheet');
   });
-
 
   // TODO: waiting for https://github.com/shama/gaze/issues/56 to be resolved
   // Watch html files
