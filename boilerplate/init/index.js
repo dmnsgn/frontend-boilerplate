@@ -109,7 +109,7 @@ function updatePackageFile(appName, transform, extensions) {
     }
   }
 
-  // fs.writeFile(`${process.cwd()}/package.json`, JSON.stringify(pkg, undefined, 2));
+  fs.writeFile(`${process.cwd()}/package.json`, JSON.stringify(pkg, undefined, 2));
 }
 
 
@@ -126,16 +126,16 @@ function updateDependencies(dependencies, devDependencies) {
   command += 'npm install';
   if (dependencies || devDependencies) {
     console.log(chalk.green('Installing dependencies and adding them to package.json...', dependencies.join(' '), devDependencies.join(' ')));
-    // exec(command, function (error, stdout, stderr) {
-    //   console.log(stdout);
-    //   if (error !== null) {
-    //     console.log(error);
-    //   }
-    // });
+    exec(command, function (error, stdout, stderr) {
+      console.log(stdout);
+      if (error !== null) {
+        console.log(error);
+      }
+    });
   }
 }
 
 function updateSourceFiles(extensions) {
-  // del([`${pkg.directories.source}/styles/**/*.!(${extensions.styles})`]);
-  // del([`${pkg.directories.source}/scripts/**/*.!(${extensions.scripts})`]);
+  del([`${pkg.directories.source}/styles/**/*.!(${extensions.styles})`]);
+  del([`${pkg.directories.source}/scripts/**/*.!(${extensions.scripts})`]);
 }
