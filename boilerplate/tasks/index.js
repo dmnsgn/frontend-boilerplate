@@ -14,7 +14,7 @@ global.pkg = pkg;
 
 const tasks = fs.readdirSync('./boilerplate/tasks/');
 tasks.forEach(function(task) {
-  if (task !== 'index') {
+  if (task !== 'index.js') {
     require(`./${task}`);
   }
 });
