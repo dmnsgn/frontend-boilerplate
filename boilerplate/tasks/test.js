@@ -1,29 +1,26 @@
 /**
  * Test task
  *
- * 'test:markup' validate w3c.
- * 'test:scripts' run mocha tests.
- * 'test:psi' PageSpeed Insights reportings.
+ * 'testMarkup' validate w3c.
+ * 'testScripts' run mocha tests.
+ * 'testPsi' PageSpeed Insights reportings.
  */
 
-import handleErrors from '../utils/handleErrors';
+import gulp from 'gulp';
+import psi from 'psi';
 
 import gutil from 'gulp-util';
-
 import w3cjs from 'gulp-w3cjs';
 import mocha from 'gulp-mocha';
 
-import psi from 'psi';
+import config from '../config';
+import handleErrors from '../utils/handleErrors';
 
-gulp.task('test', ['test:markup', 'test:scripts'], function() {
-  gutil.log(gutil.colors.bgGreen('Test task completed.'));
-});
-
-gulp.task('test:markup', function() {
+export function testMarkup() {
   return gulp.src(`${config.dist}/*.html`).pipe(w3cjs());
-});
+}
 
-gulp.task('test:scripts', function() {
+export function testScripts() {
   return gulp.src(`${config.test}/*.js`, {
       read: false
     })
@@ -31,7 +28,7 @@ gulp.task('test:scripts', function() {
       reporter: 'progress'
     }))
     .on('error', handleErrors);
-});
+}
 
 // https://github.com/addyosmani/psi-gulp-sample/blob/master/gulpfile.js
 //
@@ -40,22 +37,21 @@ gulp.task('test:scripts', function() {
 // we recommend registering for your own API key. For more info:
 // https://developers.google.com/speed/docs/insights/v1/getting_started
 
-gulp.task('test:psi', ['test:psi:mobile', 'test:psi:desktop']);
-
-gulp.task('test:psi:mobile', function(cb) {
+export function testPsiMobile(cb) {
   psi({
     // key: key
     nokey: 'true',
     url: config.prodURL,
     strategy: 'mobile',
   }, cb);
-});
+}
 
-gulp.task('test:psi:desktop', function(cb) {
+export function testPsiDesktop(cb) {
   psi({
     // key: key,
     nokey: 'true',
     url: config.prodURL,
     strategy: 'desktop',
   }, cb);
-});
+}
+

@@ -6,9 +6,13 @@
  * Log on device connection
  */
 
+import gulp from 'gulp';
+
 import browserSync from 'browser-sync';
 
-gulp.task('serve', function() {
+import config from '../config';
+
+export function serve() {
 
   const logLevel = config.verbose ? 'debug' : 'info';
 
@@ -21,4 +25,4 @@ gulp.task('serve', function() {
     logConnections: true,
     logLevel: logLevel
   });
-});
+}

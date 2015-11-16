@@ -2,17 +2,13 @@
  * Build task
  */
 
-import runSequence from 'run-sequence';
+import gulp from 'gulp';
 
 import sitemap from 'gulp-sitemap';
 
-gulp.task('build', function() {
+import config from '../config';
 
-  runSequence('scripts', 'styles', 'build:sitemap');
-
-});
-
-gulp.task('build:sitemap', function() {
+export function buildSitemap(done) {
   const isUrlDefinned = (typeof config.prodURL === 'string' && config.prodURL !== '') ? true : false;
 
   if (isUrlDefinned) {
@@ -21,5 +17,7 @@ gulp.task('build:sitemap', function() {
         siteUrl: config.prodURL
       }))
       .pipe(gulp.dest(config.dist));
+  } else {
+    done();
   }
-});
+}

@@ -5,7 +5,6 @@
 import pkg from '../package.json';
 import minimist from 'minimist';
 
-// Options
 const options = {
   string: 'env',
   default: {
@@ -13,7 +12,7 @@ const options = {
   }
 };
 
-export default {
+export default Object.assign({
   args: minimist(process.argv.slice(2), options),
   banner: ['/**',
     ' * ' + pkg.title,
@@ -25,4 +24,10 @@ export default {
     ' */',
     ''
   ].join('\n')
-};
+}, {
+  title: pkg.title,
+  description: pkg.description,
+  author: pkg.author,
+  extensions: pkg.extensions,
+  vendors: pkg.vendors
+}, pkg.config, pkg.directories);

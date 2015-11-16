@@ -9,24 +9,28 @@
  * Reload connection.
  */
 
-import gutil from 'gulp-util';
+import gulp from 'gulp';
 
 import browserSync from 'browser-sync';
 
+import gutil from 'gulp-util';
 import newer from 'gulp-newer';
 import preprocess from 'gulp-preprocess';
 
-function process(changed) {
+import config from '../config';
+
+export function markupAll() {
+
   return gulp.src(`${config.src}/*.html`, {
       base: config.src
     })
-    .pipe(changed ? newer(config.dist) : gutil.noop())
+    // .pipe(changed ? newer(config.dist) : gutil.noop())
     .pipe(preprocess({
       context: {
         ENV: config.args.env,
         META: {
-          title: pkg.title,
-          description: pkg.description,
+          title: config.title,
+          description: config.description,
           url: config.prodURL,
           image: config.shareImageURL,
           twitterHandle: config.twitterHandle
@@ -38,12 +42,5 @@ function process(changed) {
     .on('end', function() {
       browserSync.reload()
     });
-};
 
-gulp.task('markup:changed', function() {
-  return process(true);
-});
-
-gulp.task('markup:all', function() {
-  return process();
-});
+}

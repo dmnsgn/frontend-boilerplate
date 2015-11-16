@@ -162,7 +162,7 @@ This command will give you a list of all tasks available.
 gulp help
 ```
 ---
-Note: Each task is self documented. You can use them individually (e.g. `gulp images:spritesheet`, `gulp images:optimization`) but you should use the tasks above.
+Note: Each task is self documented. You can use them individually (e.g. `gulp imagesSpritesheet`, `gulp imagesOptimization`) but you should use the tasks above.
 
 
 ## External issues

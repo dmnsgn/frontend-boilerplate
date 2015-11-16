@@ -4,17 +4,18 @@
  * Clean dist folder, gulp all caches and sass cache
  */
 
-import gutil from 'gulp-util';
+import gulp from 'gulp';
 import del from 'del';
 
+import gutil from 'gulp-util';
 import cache from 'gulp-cache';
 
-gulp.task('clean', ['clean:clearCache', 'clean:deleteFiles']);
+import config from '../config';
 
-gulp.task('clean:deleteFiles', function() {
-  del([`${config.dist}/*`, '.sass-cache']);
-});
+export function cleanDeleteFiles(done) {
+  return del([`${config.dist}/*`, '.sass-cache'], done);
+}
 
-gulp.task('clean:clearCache', function() {
-  cache.clearAll();
-});
+export function cleanClearCache(done) {
+  return cache.clearAll(done);
+}

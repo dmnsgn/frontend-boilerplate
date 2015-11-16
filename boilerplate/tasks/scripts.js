@@ -4,7 +4,7 @@
  * Bundle scripts with browserify
  */
 
-import gutil from 'gulp-util';
+import gulp from 'gulp';
 
 import source from 'vinyl-source-stream';
 import buffer from 'vinyl-buffer';
@@ -12,25 +12,21 @@ import browserify from 'browserify';
 import watchify from 'watchify';
 import browserSync from 'browser-sync';
 
+import gutil from 'gulp-util';
 import uglify from 'gulp-uglify';
 import header from 'gulp-header';
 import rename from 'gulp-rename';
 
+import config from '../config';
 import bundleLogger from '../utils/bundleLogger';
 import handleErrors from '../utils/handleErrors';
 import concatenateFiles from '../utils/concatenateFiles';
 
-gulp.task('scripts', ['scripts:app', 'scripts:vendor']);
-
 let envDev = config.args.env === 'dev';
 
-/**
- * Build app
- */
-
 const b = browserify({
-  entries: [`${config.src}/scripts/main.${pkg.extensions.scripts}`],
-  extensions: [pkg.extensions.scripts],
+  entries: [`${config.src}/scripts/main.${config.extensions.scripts}`],
+  extensions: [config.extensions.scripts],
   debug: envDev
 });
 const bundler = envDev ? watchify(b) : b;
@@ -60,15 +56,13 @@ const bundle = function() {
 if (envDev) {
   bundler.on('update', bundle);
 }
-gulp.task('scripts:app', bundle);
+export function bundleApp() {
+  bundle();
+}
 
-/**
- * Build vendor
- */
-
-gulp.task('scripts:vendor', function() {
+export function bundleVendor() {
   concatenateFiles({
-    src: pkg.vendors,
+    src: config.vendors,
     dest: `${config.dist}/scripts`,
     fileName: 'vendor.js'
   }, function() {
@@ -82,4 +76,4 @@ gulp.task('scripts:vendor', function() {
         .pipe(gulp.dest(`${config.dist}/scripts`))
     }
   });
-});
+}

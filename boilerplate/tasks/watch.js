@@ -4,14 +4,18 @@
  * Watch all changes in source folder and launch task accordingly
  */
 
+import gulp from 'gulp';
+
 import gutil from 'gulp-util';
 import watch from 'gulp-watch';
+
+import config from '../config';
 
 // function onWatchChange(event) {
 //  gutil.log(gutil.colors.gray('File ' + event.path + ' was ' + event.type + ', running tasks...'));
 // }
 
-gulp.task('watch', function() {
+export function watchFiles(done) {
 
   // Watch html files
   watch(`${config.src}/*.html`, {
@@ -20,7 +24,7 @@ gulp.task('watch', function() {
     name: 'Html watcher',
     verbose: config.verbose
   }, function() {
-    gulp.start('markup:changed');
+    // gulp.start('markupChanged');
   });
 
   watch(`${config.src}/inc/**/*`, {
@@ -29,7 +33,7 @@ gulp.task('watch', function() {
     name: 'Includes watcher',
     verbose: config.verbose
   }, function() {
-    gulp.start('markup:all');
+    // gulp.start('markupAll');
   });
 
   // Watch dependencies
@@ -40,8 +44,8 @@ gulp.task('watch', function() {
     verbose: config.verbose
   }, function(file) {
     global.pkg = JSON.parse(file.contents.toString());
-    gulp.start('markup:all');
-    gulp.start('scripts:vendor');
+    // gulp.start('markup:all');
+    // gulp.start('scriptsVendor');
   });
 
   // Watch styles files
@@ -51,7 +55,7 @@ gulp.task('watch', function() {
     name: 'Styles watcher',
     verbose: config.verbose
   }, function() {
-    gulp.start('styles');
+    // gulp.start('styles');
   });
   watch(`${config.src}/styles/fonts/**/*`, {
     emitOnGlob: false,
@@ -59,11 +63,11 @@ gulp.task('watch', function() {
     name: 'Fonts watcher',
     verbose: config.verbose
   }, function() {
-    gulp.start('styles:fonts');
+    // gulp.start('stylesFonts');
   });
 
   // Watch scripts files (using watchify)
-  gulp.start('scripts');
+  // gulp.start('scripts');
 
   // Watch test files
   watch(`${config.test}/**/*.js`, {
@@ -72,7 +76,7 @@ gulp.task('watch', function() {
     name: 'Test watcher',
     verbose: config.verbose
   }, function() {
-    gulp.start('test:scripts');
+    // gulp.start('test:scripts');
   });
 
   // Watch images files
@@ -82,7 +86,7 @@ gulp.task('watch', function() {
     name: 'Images watcher',
     verbose: config.verbose
   }, function() {
-    gulp.start('images:optimization');
+    // gulp.start('imagesOptimization');
   });
   watch(`${config.src}/images/sprite/**/*`, {
     emitOnGlob: false,
@@ -90,7 +94,7 @@ gulp.task('watch', function() {
     name: 'Spritesheet watcher',
     verbose: config.verbose
   }, function() {
-    gulp.start('images:spritesheet');
+    // gulp.start('imagesSpritesheet');
   });
 
   // TODO: waiting for https://github.com/shama/gaze/issues/56 to be resolved
@@ -112,8 +116,10 @@ gulp.task('watch', function() {
 
   // // Watch images files
   // gulp.watch(config.src + '/images/**/*', ['images']).on('change', onWatchChange);
-  // gulp.watch(config.src + '/images/sprite/**/*', ['images:spritesheet']).on('change', onWatchChange);
+  // gulp.watch(config.src + '/images/sprite/**/*', ['imagesSpritesheet']).on('change', onWatchChange);
+
+  done();
 
   gutil.log(gutil.colors.green('Watching changes...'));
 
-});
+}
