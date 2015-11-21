@@ -22,13 +22,14 @@ import bundleLogger from '../utils/bundleLogger';
 import handleErrors from '../utils/handleErrors';
 import concatenateFiles from '../utils/concatenateFiles';
 
-let envDev = config.args.env === 'dev';
+const envDev = config.args.env === 'dev';
 
 const b = browserify({
   entries: [`${config.src}/scripts/main.${config.extensions.scripts}`],
   extensions: [config.extensions.scripts],
   debug: envDev
 });
+
 const bundler = envDev ? watchify(b) : b;
 
 const bundle = function() {
@@ -45,13 +46,13 @@ const bundle = function() {
     .pipe(envDev ? gutil.noop() : rename({
       suffix: '.min'
     }))
-    .pipe(gulp.dest(`${config.dist}/scripts`))
     .on('end', function() {
       if (envDev) {
         browserSync.reload();
       }
       bundleLogger.end();
     })
+    .pipe(gulp.dest(`${config.dist}/scripts`));
 };
 if (envDev) {
   bundler.on('update', bundle);
