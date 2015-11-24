@@ -44,6 +44,7 @@
     "babel-preset-es2015": "^6.1.x",
     "browser-sync": "^2.10.x",
     "browserify": "^12.0.x",
+    "chalk": "^1.1.x",
     "css-mqpacker": "^4.0.x",
     "csswring": "^4.0.x",
     "del": "^2.0.x",

@@ -1,7 +1,3 @@
-/**
- * Build task
- */
-
 import gulp from 'gulp';
 
 import sitemap from 'gulp-sitemap';

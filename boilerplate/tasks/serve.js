@@ -1,11 +1,3 @@
-/**
- * Serve task
- *
- * Serve dist directory
- * Log url to access from external devices (such as smartphone on the same network)
- * Log on device connection
- */
-
 import gulp from 'gulp';
 
 import browserSync from 'browser-sync';
@@ -26,3 +18,5 @@ export function serve() {
     logLevel: logLevel
   });
 }
+
+serve.description = 'Serve dist directory using browserSync.';

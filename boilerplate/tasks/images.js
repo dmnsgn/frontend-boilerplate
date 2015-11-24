@@ -1,17 +1,9 @@
-/**
- * Images tasks
- *
- * 'imagesOptimization' optimize new images added to images folder (except sprite folder) and cache them.
- * 'imagesSpritesheet' create a spritesheet from images located in config.src/images/sprite folder.
- * 'images:favicon' generate favicons
- */
-
 import fs from 'fs';
 
 import gulp from 'gulp';
 import pngquant from 'imagemin-pngquant';
 
-import gutil from 'gulp-util';
+import chalk from 'chalk';
 import newer from 'gulp-newer';
 import cache from 'gulp-cache';
 import imagemin from 'gulp-imagemin';
@@ -41,20 +33,21 @@ export function generateSpritesheet() {
     algorithm: 'binary-tree'
   }));
   spriteData.on('finish', function() {
-    gutil.log(gutil.colors.yellow('Spritesheet ready to process....'));
+    console.log(chalk.yellow('Spritesheet ready to process....'));
   });
   spriteData.on('error', function(err) {
-    gutil.log(gutil.colors.red('Spritesheet ', err));
+    console.log(chalk.red('Spritesheet ', err));
   });
   spriteData.css.pipe(gulp.dest(`${config.src}/styles/`)).on('end', function() {
-    gutil.log(gutil.colors.green('Spritesheet _sprite file written...'));
+    console.log(chalk.green('Spritesheet _sprite file written...'));
   });
   return spriteData.img.pipe(gulp.dest(`${config.dist}/images/`)).on('end', function() {
-    gutil.log(gutil.colors.green('Spritesheet generated.'));
+    console.log(chalk.green('Spritesheet generated.'));
   });
 }
 
-export function generateFavicons() {
+export function generateFavicons(done) {
+  done();
   return;
   // fs.writeFileSync(`${config.src}/inc/_favicons.html`, '<link rel="favicons" href="..." />');
 

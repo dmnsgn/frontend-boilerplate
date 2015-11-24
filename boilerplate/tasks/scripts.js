@@ -1,10 +1,5 @@
-/**
- * Scripts task
- *
- * Bundle scripts with browserify
- */
-
 import gulp from 'gulp';
+import { exec } from 'child_process';
 
 import source from 'vinyl-source-stream';
 import buffer from 'vinyl-buffer';
@@ -32,7 +27,7 @@ const b = browserify({
 
 const bundler = envDev ? watchify(b) : b;
 
-const bundle = function() {
+const bundle = function(done) {
   bundleLogger.start();
 
   return bundler
@@ -50,6 +45,7 @@ const bundle = function() {
       if (envDev) {
         browserSync.reload();
       }
+      done();
       bundleLogger.end();
     })
     .pipe(gulp.dest(`${config.dist}/scripts`));
@@ -57,24 +53,25 @@ const bundle = function() {
 if (envDev) {
   bundler.on('update', bundle);
 }
-export function bundleApp() {
-  bundle();
+export function bundleApp(done) {
+  bundle(done);
 }
 
-export function bundleVendor() {
+export function bundleVendor(done) {
+
   concatenateFiles({
     src: config.vendors,
     dest: `${config.dist}/scripts`,
     fileName: 'vendor.js'
   }, function() {
     if (!envDev) {
-      return gulp.src(`${config.dist}/scripts/vendor.js`)
-        .pipe(uglify())
-        .on('error', handleErrors)
-        .pipe(rename({
-          suffix: '.min'
-        }))
-        .pipe(gulp.dest(`${config.dist}/scripts`))
+      const cmd = `uglifyjs ${config.dist}/scripts/vendor.js -o ${config.dist}/scripts/vendor.min.js`;
+      exec(cmd, function(error, stdout, stderr) {
+        done();
+      });
+    } else {
+      done();
     }
   });
+
 }

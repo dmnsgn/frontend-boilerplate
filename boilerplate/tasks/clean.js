@@ -1,13 +1,6 @@
-/**
- * Clean task
- *
- * Clean dist folder, gulp all caches and sass cache
- */
-
 import gulp from 'gulp';
 import del from 'del';
 
-import gutil from 'gulp-util';
 import cache from 'gulp-cache';
 
 import config from '../config';

@@ -2,7 +2,6 @@
  * bundleLogger
  */
 
-import gutil from 'gulp-util';
 import prettyHrtime from 'pretty-hrtime';
 
 let startTime;
@@ -10,12 +9,12 @@ let startTime;
 export default {
   start: function() {
     startTime = process.hrtime();
-    gutil.log('Bundling...');
+    console.log('Bundling...');
   },
 
   end: function() {
     const taskTime = process.hrtime(startTime);
     const prettyTime = prettyHrtime(taskTime);
-    gutil.log('Bundled in', gutil.colors.magenta(prettyTime));
+    console.log('Bundled in', chalk.magenta(prettyTime));
   }
 }

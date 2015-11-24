@@ -1,10 +1,3 @@
-/**
- * Styles tasks
- *
- * 'styles' compile sass/less/stylus files with sourcemaps and autoprefixer.
- * 'stylesFonts' convert fonts.
- */
-
 import gulp from 'gulp';
 
 import browserSync from 'browser-sync';
@@ -112,7 +105,7 @@ export function processStyles() {
 
 }
 
-export function generateFonts() {
+export function generateFonts(done) {
   const fontmin = new Fontmin()
     .src(`${config.src}/styles/fonts/*.ttf`)
     .use(Fontmin.ttf2eot({
@@ -128,6 +121,7 @@ export function generateFonts() {
 
   return fontmin.run(
     function(err, files, stream) {
+      done();
       if (err) {
         console.log(err);
       }

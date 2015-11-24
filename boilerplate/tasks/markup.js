@@ -1,14 +1,3 @@
-/**
- * Markup tasks
- *
- * 'markup:all' when all html files need to be processed.
- * 'markup:changed' when only the main files changed.
- *
- * Process html files.
- * Copy them to dist folder.
- * Reload connection.
- */
-
 import gulp from 'gulp';
 
 import browserSync from 'browser-sync';
@@ -19,12 +8,12 @@ import preprocess from 'gulp-preprocess';
 
 import config from '../config';
 
-export function markupAll() {
+export function markup(done, all) {
 
   return gulp.src(`${config.src}/*.html`, {
       base: config.src
     })
-    // .pipe(changed ? newer(config.dist) : gutil.noop())
+    // .pipe(all ? gutil.noop() : newer(config.dist))
     .pipe(preprocess({
       context: {
         ENV: config.args.env,
@@ -44,3 +33,5 @@ export function markupAll() {
     });
 
 }
+
+markup.description = `Process html files with environment configuration.`;

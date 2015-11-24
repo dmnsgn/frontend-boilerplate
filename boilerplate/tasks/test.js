@@ -1,15 +1,6 @@
-/**
- * Test task
- *
- * 'testMarkup' validate w3c.
- * 'testScripts' run mocha tests.
- * 'testPsi' PageSpeed Insights reportings.
- */
-
 import gulp from 'gulp';
 import psi from 'psi';
 
-import gutil from 'gulp-util';
 import w3cjs from 'gulp-w3cjs';
 import mocha from 'gulp-mocha';
 

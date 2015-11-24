@@ -1,11 +1,11 @@
-import { exec } from 'child_process'
-import fs from 'fs'
+import { exec } from 'child_process';
+import fs from 'fs';
 
-import chalk from 'chalk'
-import inquirer from 'inquirer'
+import chalk from 'chalk';
+import inquirer from 'inquirer';
 import del from 'del';
 
-import choices from './choices.js'
+import choices from './choices.js';
 import pkg from '../../package.json';
 
 const questions = [{
