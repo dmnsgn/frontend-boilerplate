@@ -1,125 +1,69 @@
-/**
- * Watch task
- *
- * Watch all changes in source folder and launch task accordingly
- */
-
 import gulp from 'gulp';
 
-import gutil from 'gulp-util';
-import watch from 'gulp-watch';
+import chalk from 'chalk';
 
 import config from '../config';
 
-// function onWatchChange(event) {
-//  gutil.log(gutil.colors.gray('File ' + event.path + ' was ' + event.type + ', running tasks...'));
-// }
+import { markup } from './markup';
+import { processStyles, generateFonts } from './styles';
+import { optimizeImages, generateSpritesheet } from './images';
+import { testScripts } from './test';
 
-export function watchFiles(done) {
+function onWatchAdd(path) {
+  console.log(`File ${chalk.underline.green(path)} has been added.`);
+}
 
-  // Watch html files
-  watch(`${config.src}/*.html`, {
-    emitOnGlob: false,
-    read: false,
-    name: 'Html watcher',
-    verbose: config.verbose
-  }, function() {
-    // gulp.start('markupChanged');
-  });
+function onWatchChange(path) {
+  console.log(`File ${chalk.underline.yellow(path)} was changed.`);
+}
 
-  watch(`${config.src}/inc/**/*`, {
-    emitOnGlob: false,
-    read: false,
-    name: 'Includes watcher',
-    verbose: config.verbose
-  }, function() {
-    // gulp.start('markupAll');
-  });
+function onWatchRemove(path) {
+  console.log(`File ${chalk.underline.red(path)} has been removed.`);
+}
+
+function onWatchError(error) {
+  console.log(chalk.underline.red('Error happened', error));
+}
+
+function addEventsHandlers(watcher) {
+  return watcher
+    .on('add', onWatchAdd)
+    .on('change', onWatchChange)
+    .on('unlink', onWatchRemove)
+    .on('error', onWatchError);
+}
+
+export function watch(done) {
+
+  const watchers = [
+    // Watch html files
+    gulp.watch(`${config.src}/*.html`, markup),
+    gulp.watch(`${config.src}/inc/**/*`, markup),
+
+    // Watch styles files
+    gulp.watch(`${config.src}/styles/**/*.${config.extensions.styles}`, processStyles),
+    gulp.watch(`${config.src}/styles/fonts/**/*`, generateFonts),
+
+    // Watch images files
+    gulp.watch([`${config.src}/images/**/*`, `!${config.src}/images/sprite/**/*`], optimizeImages),
+    gulp.watch(`${config.src}/images/sprite/**/*`, generateSpritesheet),
+
+    // Watch test files
+    gulp.watch(`${config.test}/**/*.js`, testScripts)
+  ];
+
+  watchers.map(watcher => addEventsHandlers(watcher));
 
   // Watch dependencies
-  watch('package.json', {
-    emitOnGlob: false,
-    read: true,
-    name: 'Package watcher',
-    verbose: config.verbose
-  }, function(file) {
-    global.pkg = JSON.parse(file.contents.toString());
-    // gulp.start('markup:all');
-    // gulp.start('scriptsVendor');
-  });
+  // TODO: read file and update config
+  // gulp.watch('package.json', function(file) {
+  //   global.pkg = JSON.parse(file.contents.toString());
+  //   // gulp.start('markup:all');
+  //   // gulp.start('scriptsVendor');
+  // });
 
-  // Watch styles files
-  watch(`${config.src}/styles/**/*.${pkg.extensions.styles}`, {
-    emitOnGlob: false,
-    read: false,
-    name: 'Styles watcher',
-    verbose: config.verbose
-  }, function() {
-    // gulp.start('styles');
-  });
-  watch(`${config.src}/styles/fonts/**/*`, {
-    emitOnGlob: false,
-    read: false,
-    name: 'Fonts watcher',
-    verbose: config.verbose
-  }, function() {
-    // gulp.start('stylesFonts');
-  });
-
-  // Watch scripts files (using watchify)
-  // gulp.start('scripts');
-
-  // Watch test files
-  watch(`${config.test}/**/*.js`, {
-    emitOnGlob: false,
-    read: false,
-    name: 'Test watcher',
-    verbose: config.verbose
-  }, function() {
-    // gulp.start('test:scripts');
-  });
-
-  // Watch images files
-  watch([`${config.src}/images/**/*`, `!${config.src}/images/sprite/**/*`], {
-    emitOnGlob: false,
-    read: false,
-    name: 'Images watcher',
-    verbose: config.verbose
-  }, function() {
-    // gulp.start('imagesOptimization');
-  });
-  watch(`${config.src}/images/sprite/**/*`, {
-    emitOnGlob: false,
-    read: false,
-    name: 'Spritesheet watcher',
-    verbose: config.verbose
-  }, function() {
-    // gulp.start('imagesSpritesheet');
-  });
-
-  // TODO: waiting for https://github.com/shama/gaze/issues/56 to be resolved
-  // Watch html files
-  // gulp.watch(config.src + '/*.html', ['markup:changed']).on('change', onWatchChange);
-  // gulp.watch(config.src + '/inc/**/*', ['markup:all']).on('change', onWatchChange);
-
-  // // Watch .scss files
-  // gulp.watch(config.src + '/styles/**/*.scss', ['styles']).on('change', onWatchChange);
-
-  // // Watch .js files
-  // gulp.watch(config.src + '/scripts/**/*.js', ['scripts']).on('change', onWatchChange);
-
-  // // Watch .coffee files
-  // gulp.watch(config.src + '/scripts/**/*.coffee', ['scripts:coffee']).on('change', onWatchChange);;
-
-  // // Watch test files
-  // gulp.watch(config.test + '/**', ['test:scripts']).on('change', onWatchChange);
-
-  // // Watch images files
-  // gulp.watch(config.src + '/images/**/*', ['images']).on('change', onWatchChange);
-  // gulp.watch(config.src + '/images/sprite/**/*', ['imagesSpritesheet']).on('change', onWatchChange);
-
+  console.log(chalk.green('Watching changes...'));
   done();
-
-  gutil.log(gutil.colors.green('Watching changes...'));
-
 }
+
+watch.description = 'Watch all changes in source folder and launch task accordingly.';
