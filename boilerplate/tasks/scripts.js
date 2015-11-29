@@ -44,17 +44,27 @@ const bundle = function(done) {
     .on('end', function() {
       if (envDev) {
         browserSync.reload();
+      } else {
+        done();
       }
-      done();
       bundleLogger.end();
     })
     .pipe(gulp.dest(`${config.dist}/scripts`));
 };
+
 if (envDev) {
   bundler.on('update', bundle);
 }
+
 export function bundleApp(done) {
-  bundle(done);
+
+  if (envDev) {
+    bundle();
+    done();
+  } else {
+    bundle(done);
+  }
+
 }
 
 export function bundleVendor(done) {
