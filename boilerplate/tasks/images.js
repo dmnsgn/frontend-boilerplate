@@ -1,14 +1,15 @@
 import fs from 'fs';
 
 import gulp from 'gulp';
-import pngquant from 'imagemin-pngquant';
-
 import chalk from 'chalk';
+import pngquant from 'imagemin-pngquant';
+import favicons from 'favicons';
+import mkdirp from 'mkdirp';
+
 import newer from 'gulp-newer';
 import cache from 'gulp-cache';
 import imagemin from 'gulp-imagemin';
 import spritesmith from 'gulp.spritesmith';
-import favicons from 'gulp-favicons';
 
 import config from '../config';
 import pkg from '../../package.json';
@@ -47,29 +48,61 @@ export function generateSpritesheet() {
 }
 
 export function generateFavicons(done) {
-  done();
-  return;
-  // fs.writeFileSync(`${config.src}/inc/_favicons.html`, '<link rel="favicons" href="..." />');
 
-  // return gulp.src(`${config.src}/inc/_favicons.html`)
-  //   .pipe(favicons({
-  //     files: {
-  //       src: `${config.src}/favicon.png`,
-  //       dest: `../../${config.dist}/images/favicon`,
-  //       iconsPath: 'images/favicon'
-  //     },
-  //     settings: {
-  //       appName: config.title,
-  //       appDescription: config.description,
-  //       developer: config.author,
-  //       developerURL: config.developerURL,
-  //       background: 'transparent',
-  //       index: 'index.html',
-  //       url: config.prodURL,
-  //       logging: config.verbose
-  //     }
-  //   }, function(err) {
-  //     console.log(err)
-  //   }));
+  return favicons(`${config.src}/favicon.png`, {
+        appName: config.title,
+        appDescription: config.description,
+        developerName: config.author,
+        developerURL: config.developerURL,
+        background: 'transparent',
+        path: 'images/favicon/',
+        url: 'images/share.jpg',
+        display: 'standalone',
+        orientation: 'portrait',
+        version: config.version,
+        logging: config.verbose,
+        online: false,
+        icons: {
+            android: true,
+            appleIcon: true,
+            appleStartup: true,
+            coast: true,
+            favicons: true,
+            firefox: true,
+            opengraph: false,
+            twitter: false,
+            windows: true,
+            yandex: true
+        }
+    }, function (error, response) {
+
+        if (error) {
+          console.log(error.status);
+          console.log(error.name);
+          console.log(error.message);
+        }
+
+        const faviconFolder = `${config.dist}/images/favicon/`;
+
+        if (response.images) {
+          mkdirp.sync(faviconFolder);
+          response.images.forEach((image) =>
+            fs.writeFileSync(`${faviconFolder}${ image.name }`, image.contents)
+          );
+        }
+
+        if (response.files) {
+          mkdirp.sync(faviconFolder);
+          response.files.forEach((file) =>
+            fs.writeFileSync(`${faviconFolder}${ file.name }`, file.contents)
+          );
+        }
+
+        if (response.html) {
+          fs.writeFileSync(`${config.src}/inc/_favicons.html`, response.html.join('\n'));
+        }
+
+        done();
+    });
 
 }

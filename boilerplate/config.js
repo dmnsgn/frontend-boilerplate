@@ -25,6 +25,7 @@ export default Object.assign({
     ''
   ].join('\n')
 }, {
+  version: pkg.version,
   title: pkg.title,
   description: pkg.description,
   author: pkg.author,
