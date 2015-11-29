@@ -4,11 +4,11 @@ import browserSync from 'browser-sync';
 
 import config from '../config';
 
-export function serve() {
+export function serve(done) {
 
   const logLevel = config.verbose ? 'debug' : 'info';
 
-  browserSync({
+  browserSync.init({
     server: {
       baseDir: config.dist,
       directory: true
@@ -16,7 +16,7 @@ export function serve() {
     port: config.port,
     logConnections: true,
     logLevel: logLevel
-  });
+  }, done);
 }
 
 serve.description = 'Serve dist directory using browserSync.';
