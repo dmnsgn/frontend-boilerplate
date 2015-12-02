@@ -1,7 +1,3 @@
-/**
- * bundleLogger
- */
-
 import prettyHrtime from 'pretty-hrtime';
 import chalk from 'chalk';
 
