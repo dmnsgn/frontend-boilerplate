@@ -6,6 +6,7 @@ import config from '../config';
 
 import { markup } from './markup';
 import { processStyles, generateFonts } from './styles';
+import { bundleVendor } from './scripts';
 import { optimizeImages, generateSpritesheet } from './images';
 import { testScripts } from './test';
 
@@ -44,6 +45,9 @@ export function watch(done) {
     gulp.watch(`${config.src}/styles/**/*.${config.extensions.styles}`, processStyles),
     gulp.watch(`${config.src}/styles/fonts/**/*`, generateFonts),
 
+    // Watch package.json file
+    gulp.watch(`package.json`, bundleVendor),
+
     // Watch images files
     gulp.watch([`${config.src}/images/**/*`, `!${config.src}/images/sprite/**/*`], optimizeImages),
     gulp.watch(`${config.src}/images/sprite/**/*`, generateSpritesheet),
@@ -53,14 +57,6 @@ export function watch(done) {
   ];
 
   watchers.map(watcher => addEventsHandlers(watcher));
-
-  // Watch dependencies
-  // TODO: read file and update config
-  // gulp.watch('package.json', function(file) {
-  //   global.pkg = JSON.parse(file.contents.toString());
-  //   // gulp.start('markup:all');
-  //   // gulp.start('scriptsVendor');
-  // });
 
   console.log(chalk.green('Watching changes...'));
   done();
