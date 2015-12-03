@@ -8,8 +8,12 @@ import config from '../config';
 import handleErrors from '../utils/handleErrors';
 
 export function testMarkup() {
-  return gulp.src(`${config.dist}/*.html`).pipe(w3cjs());
+  return gulp.src(`${config.dist}/*.html`)
+    .pipe(w3cjs())
+    .pipe(w3cjs.reporter());
 }
+
+testMarkup.description = 'Validate markup.';
 
 export function testScripts() {
   return gulp.src(`${config.test}/*.js`, {
@@ -20,6 +24,8 @@ export function testScripts() {
     }))
     .on('error', handleErrors);
 }
+
+testScripts.description = 'Run mocha tests.';
 
 // https://github.com/addyosmani/psi-gulp-sample/blob/master/gulpfile.js
 //

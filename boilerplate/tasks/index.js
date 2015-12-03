@@ -12,12 +12,11 @@ import { processStyles, generateFonts } from './styles';
 import { optimizeImages, generateSpritesheet, generateFavicons } from './images';
 import { serve } from './serve';
 import { watch } from './watch';
-
-import { buildSitemap } from './build';
 import { cleanClearCache, cleanDeleteFiles } from './clean';
+import { buildSitemap } from './build';
 import { testMarkup, testScripts, testPsiMobile, testPsiDesktop } from './test';
 
-// Tasks
+// Content
 gulp.task(markup);
 
 gulp.task(
@@ -41,16 +40,9 @@ gulp.task(
 const imagesTask = gulp.task('images');
 imagesTask.description = 'Optimize new images and cache them, create a spritesheet and generate favicons/metas.';
 
+// Utils
 gulp.task(serve);
 gulp.task(watch);
-
-gulp.task(
-  'build',
-  gulp.parallel('scripts', 'styles', buildSitemap)
-);
-const buildTask = gulp.task('build');
-buildTask.description = 'Build scripts and styles with minification tasks.';
-
 gulp.task(
   'clean',
   gulp.parallel(cleanClearCache, cleanDeleteFiles)
@@ -58,6 +50,15 @@ gulp.task(
 const cleanTask = gulp.task('clean');
 cleanTask.description = 'Clean dist folder, gulp all caches and sass cache.';
 
+// Build
+gulp.task(
+  'build',
+  gulp.parallel('scripts', 'styles', buildSitemap)
+);
+const buildTask = gulp.task('build');
+buildTask.description = 'Build scripts and styles with minification tasks.';
+
+// Tests
 gulp.task(
   'testPsi',
   gulp.parallel(testPsiMobile, testPsiDesktop)
@@ -65,12 +66,8 @@ gulp.task(
 const testPsiTask = gulp.task('testPsi');
 testPsiTask.description = 'PageSpeed Insights reportings.';
 
-gulp.task(
-  'test',
-  gulp.parallel(testMarkup, testScripts)
-);
-const testTask = gulp.task('test');
-testTask.description = 'Validate markup, run mocha tests.';
+gulp.task(testScripts);
+gulp.task(testMarkup);
 
 // Default task
 if (config.args.env === 'dev') {
