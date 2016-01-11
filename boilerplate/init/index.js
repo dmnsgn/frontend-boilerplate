@@ -143,6 +143,6 @@ function updateDependencies(dependencies, devDependencies) {
 }
 
 function updateSourceFiles(extensions) {
-  del([`${pkg.directories.source}/styles/**/*.!(${extensions.styles})`]);
-  del([`${pkg.directories.source}/scripts/**/*.!(${extensions.scripts})`]);
+  del([`${pkg.directories.src}/styles/**/*.!(${extensions.styles})`]);
+  del([`${pkg.directories.src}/scripts/**/*.!(${extensions.scripts})`]);
 }
