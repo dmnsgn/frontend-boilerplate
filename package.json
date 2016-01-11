@@ -79,7 +79,7 @@
     "watchify": "^3.6.x"
   },
   "scripts": {
-    "init": "npm i inquirer chalk del && babel-node ./boilerplate/init/index.js",
+    "init": "npm i inquirer chalk del babel-cli babel-preset-es2015 && babel-node ./boilerplate/init/index.js",
     "install": "napa"
   },
   "directories": {
