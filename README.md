@@ -1,9 +1,9 @@
 gulp-frontend-boilerplate
 =========================
 
-> An ES6 boilerplate with common frontend tasks using gulp 4 as build system.
+> An ES6 boilerplate with common frontend tasks using Gulp 4 as build system.
 
-This is a work in progress. Feel free to contribute.
+This is a work in progress. Feel free to contribute. For an older version without Gulp 4, see [0.6.1](https://github.com/dmnsgn/gulp-frontend-boilerplate/releases/tag/0.6.1).
 
 
 ## Install
@@ -137,13 +137,13 @@ gulp --env prod
 Quick tests and stats with:
 
 ```bash
-// w3c validation
+# w3c validation
 gulp testMarkup
 
-// mocha tests (written in test folder)
+# mocha tests (written in test folder)
 gulp testScripts
 
-// PageSpeed Insights reporter for mobile and desktop
+# PageSpeed Insights reporter for mobile and desktop
 gulp testPsi
 ```
 
