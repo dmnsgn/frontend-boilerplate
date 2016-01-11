@@ -164,7 +164,7 @@ gulp --tasks
 
 ## External issues
 
-* On some OS, napa needs to be installed globally first `npm install -g napa`s://github.com/gulpjs/gulp/issues/347
+* On some OS, napa needs to be installed globally first `npm install -g napa`
 
 ## Licence
 
