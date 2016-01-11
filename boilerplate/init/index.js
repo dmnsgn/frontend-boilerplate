@@ -3,6 +3,7 @@ import fs from 'fs';
 
 import chalk from 'chalk';
 import inquirer from 'inquirer';
+import { Spinner } from 'cli-spinner';
 import del from 'del';
 
 import choices from './choices.js';
@@ -125,8 +126,14 @@ function updateDependencies(dependencies, devDependencies) {
   }
   command += 'npm install';
   if (dependencies || devDependencies) {
+    const spinner = new Spinner('This may take a while.');
+    spinner.setSpinnerString('|/-\\');
+    spinner.start();
+
     console.log(chalk.green('Installing dependencies and adding them to package.json...', dependencies.join(' '), devDependencies.join(' ')));
+
     exec(command, function (error, stdout, stderr) {
+      spinner.stop();
       console.log(stdout);
       if (error !== null) {
         console.log(error);
