@@ -41,15 +41,16 @@ inquirer.prompt(questions, function(data) {
   updatePackageFile(data.app_name, transform.filter(function(t) {
     return t;
   }), extensions);
-  updateSourceFiles(extensions);
 
-  const dependencies = [].concat(data.language.dependencies, data.framework.dependencies, data.preprocessor.dependencies).filter(function(n) {
-    return n != undefined;
+  updateSourceFiles(extensions, function() {
+    const dependencies = [].concat(data.language.dependencies, data.framework.dependencies, data.preprocessor.dependencies).filter(function(n) {
+      return n != undefined;
+    });
+    const devDependencies = [].concat(data.language.devDependencies, data.framework.devDependencies, data.preprocessor.devDependencies).filter(function(n) {
+      return n != undefined;
+    });
+    updateDependencies(dependencies, devDependencies);
   });
-  const devDependencies = [].concat(data.language.devDependencies, data.framework.devDependencies, data.preprocessor.devDependencies).filter(function(n) {
-    return n != undefined;
-  });
-  updateDependencies(dependencies, devDependencies);
 
 });
 
@@ -113,6 +114,23 @@ function updatePackageFile(appName, transform, extensions) {
   fs.writeFile(`${process.cwd()}/package.json`, JSON.stringify(pkg, undefined, 2));
 }
 
+function updateSourceFiles(extensions, cb) {
+  inquirer.prompt([{
+    type: "confirm",
+    name: "delete_sourcefiles",
+    message: `Remove files in source folder that don't have the following extensions: ${extensions.styles} ${extensions.scripts}`,
+    default: true
+  }], function(data) {
+    if(data.delete_sourcefiles) {
+      del(
+        [`${pkg.directories.src}/styles/**/*.!(${extensions.styles})`, `${pkg.directories.src}/scripts/**/*.!(${extensions.scripts})`],
+        cb()
+      );
+    } else {
+      cb();
+    }
+  });
+}
 
 function updateDependencies(dependencies, devDependencies) {
 
@@ -140,9 +158,4 @@ function updateDependencies(dependencies, devDependencies) {
       }
     });
   }
-}
-
-function updateSourceFiles(extensions) {
-  del([`${pkg.directories.src}/styles/**/*.!(${extensions.styles})`]);
-  del([`${pkg.directories.src}/scripts/**/*.!(${extensions.scripts})`]);
 }
