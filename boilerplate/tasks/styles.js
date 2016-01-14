@@ -50,7 +50,7 @@ switch (config.extensions.styles) {
     break;
 
   case 'styl':
-    preprocessor = require('gulp-styl');
+    preprocessor = require('gulp-stylus');
     break;
 }
 
