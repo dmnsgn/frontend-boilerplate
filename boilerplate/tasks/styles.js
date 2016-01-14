@@ -1,31 +1,25 @@
-/**
- * Styles tasks
- *
- * 'styles' compile sass/less/stylus files with sourcemaps and autoprefixer.
- * 'styles:fonts' convert fonts.
- */
-
-import gutil from 'gulp-util';
-import handleErrors from '../utils/handleErrors';
+import gulp from 'gulp';
 
 import browserSync from 'browser-sync';
-import Fontmin from 'fontmin';
-
-import sourcemaps from 'gulp-sourcemaps';
-
-import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
 import mqpacker from 'css-mqpacker';
 import csswring from 'csswring';
+import Fontmin from 'fontmin';
 
+import gutil from 'gulp-util';
+import postcss from 'gulp-postcss';
+import sourcemaps from 'gulp-sourcemaps';
 import filter from 'gulp-filter';
 import header from 'gulp-header';
 import rename from 'gulp-rename';
 
+import config from '../config';
+import handleErrors from '../utils/handleErrors';
+
 let preprocessor, processors, envDev = config.args.env === 'dev';
 
 // Processors
-if (config.args.env === 'dev') {
+if (envDev) {
   processors = [
     autoprefixer({
       browsers: config.browsers
@@ -45,7 +39,7 @@ if (config.args.env === 'dev') {
 }
 
 // Preprocessor
-switch (pkg.extensions.styles) {
+switch (config.extensions.styles) {
   case 'scss':
   preprocessor = require('gulp-ruby-sass');
     break;
@@ -93,9 +87,9 @@ function getStylesStream(extension) {
   }
 }
 
-gulp.task('styles', function() {
+export function processStyles() {
 
-  return getStylesStream(pkg.extensions.styles)
+  return getStylesStream(config.extensions.styles)
     .on('error', handleErrors)
     .pipe(postcss(processors))
     .pipe(envDev ? sourcemaps.write() : gutil.noop())
@@ -109,10 +103,9 @@ gulp.task('styles', function() {
       stream: true
     }));
 
-});
+}
 
-
-gulp.task('styles:fonts', function() {
+export function generateFonts(done) {
   const fontmin = new Fontmin()
     .src(`${config.src}/styles/fonts/*.ttf`)
     .use(Fontmin.ttf2eot({
@@ -128,9 +121,10 @@ gulp.task('styles:fonts', function() {
 
   return fontmin.run(
     function(err, files, stream) {
+      done();
       if (err) {
         console.log(err);
       }
     }
   );
-});
+}

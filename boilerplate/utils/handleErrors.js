@@ -1,9 +1,3 @@
-/**
- * Handle errors nicely
- *
- * Emit sound and notification
- */
-
 import notify from 'gulp-notify';
 import gutil from 'gulp-util';
 

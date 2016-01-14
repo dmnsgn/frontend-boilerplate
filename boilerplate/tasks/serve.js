@@ -1,18 +1,14 @@
-/**
- * Serve task
- *
- * Serve dist directory
- * Log url to access from external devices (such as smartphone on the same network)
- * Log on device connection
- */
+import gulp from 'gulp';
 
 import browserSync from 'browser-sync';
 
-gulp.task('serve', function() {
+import config from '../config';
+
+export function serve(done) {
 
   const logLevel = config.verbose ? 'debug' : 'info';
 
-  browserSync({
+  browserSync.init({
     server: {
       baseDir: config.dist,
       directory: true
@@ -20,5 +16,7 @@ gulp.task('serve', function() {
     port: config.port,
     logConnections: true,
     logLevel: logLevel
-  });
-});
+  }, done);
+}
+
+serve.description = 'Serve dist directory using browserSync.';
