@@ -1,9 +1,9 @@
 gulp-frontend-boilerplate
 =========================
 
-> An ES6 boilerplate with common frontend tasks using gulp as build system.
+> An ES6 boilerplate with common frontend tasks using Gulp 4 as build system.
 
-This is a work in progress. Feel free to contribute.
+This is a work in progress. Feel free to contribute. For an older version without Gulp 4, see [0.6.1](https://github.com/dmnsgn/gulp-frontend-boilerplate/releases/tag/0.6.1).
 
 
 ## Install
@@ -12,31 +12,31 @@ This is a work in progress. Feel free to contribute.
 Node (use brew or install it from [here](http://nodejs.org/download/))
 
 ```bash
-$ brew install node
+brew install node
 ```
 
-Gulp ([Getting started](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started)) and Babel ([https://babeljs.io/](https://babeljs.io/))
+Gulp ([Getting started](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started))
 
 ```bash
-$ npm install -g gulp babel-core
+npm install -g gulpjs/gulp-cli#4.0
 ```
 
 [Sass](http://sass-lang.com/)
 
 ```bash
-$ gem install sass compass sass-globbing --pre sass-css-importer
+gem install sass compass sass-globbing --pre sass-css-importer
 ```
 
 or [Less](http://lesscss.org/)
 
 ```bash
-$ npm install -g less
+npm install -g less
 ```
 
 or [Stylus](https://learnboost.github.io/stylus/)
 
 ```bash
-$ npm install -g stylus
+npm install -g stylus
 ```
 
 ### Clone this repository
@@ -44,13 +44,13 @@ $ npm install -g stylus
 *OSX & Linux*
 
 ```bash
-$ git clone --depth 1 https://github.com/dmnsgn/gulp-frontend-boilerplate.git && cd gulp-frontend-boilerplate && rm -rf .git
+git clone --depth 1 https://github.com/dmnsgn/gulp-frontend-boilerplate.git && cd gulp-frontend-boilerplate && rm -rf .git
 ```
 
 *Windows*
 
 ```bash
-$ git clone --depth 1 https://github.com/dmnsgn/gulp-frontend-boilerplate.git && cd gulp-frontend-boilerplate && rd /s /q .git
+git clone --depth 1 https://github.com/dmnsgn/gulp-frontend-boilerplate.git && cd gulp-frontend-boilerplate && rd /s /q .git
 ```
 
 ### Init (once)
@@ -58,7 +58,7 @@ $ git clone --depth 1 https://github.com/dmnsgn/gulp-frontend-boilerplate.git &&
 This step sets up the boilerplate to fit your needs (App Name, JS compiler/transpiler, JS framework, CSS preprocessor).
 
 ```bash
-$ npm run init
+npm run init
 ```
 
 ### Install
@@ -66,7 +66,7 @@ $ npm run init
 Then each time you clone the repo, use:
 
 ```bash
-$ npm install
+npm install
 ```
 
 ## Usage
@@ -89,7 +89,7 @@ Open `package.json`:
 |**analyticsUA**: your google analytics UA|String|''|
 |**developerURL**: your URL.|String|''|
 
-### Gulp tasks
+### Tasks
 
 #### Launch it
 
@@ -110,12 +110,12 @@ All the magic begins here:
 Same as running `gulp --env dev`.
 
 ---
-Note: if you just want to build the project and serve it, run `gulp --env prod --serve`.
+Note: if you just want to build the project and serve it, run `gulp --env prod` then `gulp serve`.
 
 
 #### Make changes
 
- * Write your markup in `src` folder and in `src/inc`. Include your partials with `<!-- @include templates/_filename.html -->`
+ * Write your markup in `src` folder and in `src/inc`. Include your partials with `<!-- @include inc/_filename.html -->`
  * Add some `scss`, `less` or `styl` styles.
  * Add some `scripts`: `.js` or `.coffee`.
  * Add images in the - wait for it - `images` folder.
@@ -137,40 +137,34 @@ gulp --env prod
 Quick tests and stats with:
 
 ```bash
-// w3c validation
-gulp test:markup
+# w3c validation
+gulp testMarkup
 
-// mocha tests (written in test folder)
-gulp test:scripts
+# mocha tests (written in test folder)
+gulp testScripts
 
-// PageSpeed Insights reporter for mobile and desktop
-gulp test:psi
+# PageSpeed Insights reporter for mobile and desktop
+gulp testPsi
 ```
 
 #### Clean it
 
-Clean dist dir and clear all caches (sass cache, gulp cache)
+Clean dist dir (except static folder) and clear all caches (sass cache, gulp cache)
 
 ```bash
 gulp clean
 ```
 #### Help
 
-This command will give you a list of all tasks available.
+This command will give you a list of all tasks available and their description.
 
 ```bash
-gulp help
+gulp --tasks
 ```
----
-Note: Each task is self documented. You can use them individually (e.g. `gulp images:spritesheet`, `gulp images:optimization`) but you should use the tasks above.
-
 
 ## External issues
+
 * On some OS, napa needs to be installed globally first `npm install -g napa`
-* Gaze break watchers when renaming folder: https://github.com/shama/gaze/issues/56. Waiting for gaze 0.6 https://github.com/gulpjs/gulp/issues/600
-* watch doesn't work when adding files: https://github.com/floatdrop/gulp-watch/issues/50
-* Run sequence is intended to be a temporary solution until orchestrator is updated to support non-dependent ordered tasks: https://github.com/gulpjs/gulp/issues/347
-* Gulp 4 will change. A lot: https://github.com/gulpjs/gulp/issues/355 & https://github.com/gulpjs/gulp/issues/347
 
 ## Licence
 

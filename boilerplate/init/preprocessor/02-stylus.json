@@ -3,6 +3,6 @@
   "value": {
     "extension": "styl",
     "dependencies": ["styl-easing", "styl-font-face"],
-    "devDependencies": ["gulp-styl"]
+    "devDependencies": ["gulp-stylus"]
   }
 }
