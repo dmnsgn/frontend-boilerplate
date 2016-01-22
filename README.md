@@ -21,13 +21,7 @@ Gulp ([Getting started](https://github.com/gulpjs/gulp/blob/master/docs/getting-
 npm install -g gulpjs/gulp-cli#4.0
 ```
 
-[Sass](http://sass-lang.com/)
-
-```bash
-gem install sass compass sass-globbing --pre sass-css-importer
-```
-
-or [Less](http://lesscss.org/)
+[Less](http://lesscss.org/)
 
 ```bash
 npm install -g less

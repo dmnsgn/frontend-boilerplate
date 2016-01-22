@@ -3,6 +3,6 @@
   "value": {
     "extension": "scss",
     "dependencies": ["sass-easing", "sass-font-face"],
-    "devDependencies": ["gulp-ruby-sass"]
+    "devDependencies": ["gulp-sass", "gulp-sass-glob"]
   }
 }
