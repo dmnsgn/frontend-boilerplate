@@ -1,5 +1,13 @@
 ### Change log
 
+1.1.0
+
+* Use libsass / Remove Ruby dependencies
+
+1.0.0
+
+* Use Gulp 4
+
 0.6.1
 
 * Fix ES6/Babel code

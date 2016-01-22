@@ -41,7 +41,8 @@ if (envDev) {
 // Preprocessor
 switch (config.extensions.styles) {
   case 'scss':
-  preprocessor = require('gulp-ruby-sass');
+    preprocessor = require('gulp-sass');
+    var sassGlob = require('gulp-sass-glob');
     break;
 
   case 'less':
@@ -58,11 +59,10 @@ function getStylesStream(extension) {
   switch (extension) {
 
     case 'scss':
-      return preprocessor(`${config.src}/styles/main.scss`, {
-        sourcemap: true,
-        compass: true,
-        require: ['sass-globbing', 'sass-css-importer']
-      });
+      return gulp.src(`${config.src}/styles/main.scss`)
+        .pipe(sassGlob())
+        .pipe(sourcemaps.init())
+        .pipe(preprocessor());
       break;
 
     case 'less':
