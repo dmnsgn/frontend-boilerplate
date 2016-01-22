@@ -21,18 +21,6 @@ Gulp ([Getting started](https://github.com/gulpjs/gulp/blob/master/docs/getting-
 npm install -g gulpjs/gulp-cli#4.0
 ```
 
-[Less](http://lesscss.org/)
-
-```bash
-npm install -g less
-```
-
-or [Stylus](https://learnboost.github.io/stylus/)
-
-```bash
-npm install -g stylus
-```
-
 ### Clone this repository
 
 *OSX & Linux*
