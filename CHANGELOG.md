@@ -1,5 +1,9 @@
 ### Change log
 
+1.2.0
+
+* Update linting: use airbnb and suitcss as defaults
+
 1.1.0
 
 * Use libsass / Remove Ruby dependencies
