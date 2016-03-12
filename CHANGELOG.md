@@ -1,5 +1,9 @@
 ### Change log
 
+1.3.0
+
+* Update vendor when package.json changes
+
 1.2.0
 
 * Update linting: use airbnb and suitcss as defaults

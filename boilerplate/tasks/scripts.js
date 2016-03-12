@@ -12,7 +12,7 @@ import uglify from 'gulp-uglify';
 import header from 'gulp-header';
 import rename from 'gulp-rename';
 
-import config from '../config';
+import config, { getConfig } from '../config';
 import bundleLogger from '../utils/bundleLogger';
 import handleErrors from '../utils/handleErrors';
 import concatenateFiles from '../utils/concatenateFiles';
@@ -68,14 +68,15 @@ export function bundleApp(done) {
 }
 
 export function bundleVendor(done) {
+  const updatedConfig = getConfig();
 
   concatenateFiles({
-    src: config.vendors,
-    dest: `${config.dist}/scripts`,
+    src: updatedConfig.vendors,
+    dest: `${updatedConfig.dist}/scripts`,
     fileName: 'vendor.js'
   }, function() {
     if (!envDev) {
-      const cmd = `uglifyjs ${config.dist}/scripts/vendor.js -o ${config.dist}/scripts/vendor.min.js`;
+      const cmd = `uglifyjs ${updatedConfig.dist}/scripts/vendor.js -o ${updatedConfig.dist}/scripts/vendor.min.js`;
       exec(cmd, function(error, stdout, stderr) {
         done();
       });
