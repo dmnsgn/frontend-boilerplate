@@ -1,5 +1,9 @@
 ### Change log
 
+1.3.1
+
+* Add Angular and Aurelia setup
+
 1.3.0
 
 * Update vendor when package.json changes

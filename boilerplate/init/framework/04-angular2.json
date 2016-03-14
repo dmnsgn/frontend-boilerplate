@@ -1,0 +1,6 @@
+{
+  "name": "Angular 2",
+  "value": {
+    "dependencies": ["angular2"]
+  }
+}
