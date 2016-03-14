@@ -1,0 +1,6 @@
+{
+  "name": "Aurelia",
+  "value": {
+    "dependencies": ["aurelia-framework"]
+  }
+}
