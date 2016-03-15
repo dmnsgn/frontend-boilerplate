@@ -14,19 +14,15 @@
   },
   "keywords": [
     "gulp",
+    "gulp4",
     "es6",
     "es2015",
     "boilerplate",
     "frontend",
     "tasks",
     "workflow",
-    "sass",
-    "scss",
-    "less",
-    "stylus",
-    "coffee-script",
-    "react",
-    "backbone"
+    "preprocessor",
+    "framework"
   ],
   "license": "MIT",
   "vendors": [
@@ -93,6 +89,22 @@
     "dist": "./dist",
     "test": "./test"
   },
+  "babel": {
+    "presets": ["es2015"]
+  },
+  "stylelint": {
+    "extends": "stylelint-config-suitcss",
+    "rules": {
+      "rule-properties-order": null
+    }
+  },
+  "eslintConfig": {
+    "extends": "airbnb",
+    "plugins": ["react"],
+    "rules": {
+      "comma-dangle": 0
+    }
+  },
   "config": {
     "verbose": false,
     "port": 3000,
@@ -107,7 +119,7 @@
       "android 4"
     ],
     "prodURL": "http://domain.tld",
-    "shareImageURL": "http://domain.tld/share/image.png",
+    "shareImageURL": "http://domain.tld/static/share.png",
     "twitterHandle": "@domain",
     "analyticsUA": "UA-XXXXX-X",
     "developerURL": ""
