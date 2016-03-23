@@ -71,6 +71,12 @@ Open `package.json`:
 |**analyticsUA**: your google analytics UA|String|''|
 |**developerURL**: your URL.|String|''|
 
+Others keys:
+
+* [Babel](https://babeljs.io/docs/usage/babelrc/)
+* [ESLint](http://eslint.org/docs/user-guide/configuring)
+* [stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/configuration.md)
+
 ### Tasks
 
 #### Launch it
