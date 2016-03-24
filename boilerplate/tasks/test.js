@@ -34,21 +34,16 @@ testScripts.description = 'Run mocha tests.';
 // we recommend registering for your own API key. For more info:
 // https://developers.google.com/speed/docs/insights/v1/getting_started
 
-export function testPsiMobile(cb) {
-  psi({
-    // key: key
+export function testPsiMobile() {
+  return psi.output(config.prodURL, {
     nokey: 'true',
-    url: config.prodURL,
-    strategy: 'mobile',
-  }, cb);
+    strategy: 'mobile'
+  });
 }
 
-export function testPsiDesktop(cb) {
-  psi({
-    // key: key,
+export function testPsiDesktop() {
+  return psi.output(config.prodURL, {
     nokey: 'true',
-    url: config.prodURL,
-    strategy: 'desktop',
-  }, cb);
+    strategy: 'desktop'
+  });
 }
-
