@@ -1,11 +1,8 @@
-import gulp from 'gulp';
-
 import browserSync from 'browser-sync';
 
 import config from '../config';
 
 export function serve(done) {
-
   const logLevel = config.verbose ? 'debug' : 'info';
 
   browserSync.init({
@@ -15,7 +12,7 @@ export function serve(done) {
     },
     port: config.port,
     logConnections: true,
-    logLevel: logLevel
+    logLevel
   }, done);
 }
 

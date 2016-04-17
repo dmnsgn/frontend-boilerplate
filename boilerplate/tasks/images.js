@@ -12,11 +12,10 @@ import imagemin from 'gulp-imagemin';
 import spritesmith from 'gulp.spritesmith';
 
 import config from '../config';
-import pkg from '../../package.json';
 
 export function optimizeImages() {
   return gulp.src([`${config.src}/images/**/*`, `!${config.src}/images/{sprite,sprite/**}`])
-    .pipe(newer(config.dist + '/images'))
+    .pipe(newer(`${config.dist}/images`))
     .pipe(cache(imagemin({
       progressive: true,
       interlaced: true,
@@ -26,83 +25,80 @@ export function optimizeImages() {
 }
 
 export function generateSpritesheet() {
-  let spriteData = gulp.src(`${config.src}/images/sprite/*.png`).pipe(spritesmith({
+  const spriteData = gulp.src(`${config.src}/images/sprite/*.png`).pipe(spritesmith({
     retinaSrcFilter: [`${config.src}/images/sprite/*@2x.png`],
     retinaImgName: 'sprite@2x.png',
     imgName: '../images/sprite.png',
     cssName: `_sprite.${config.extensions.styles}`,
     algorithm: 'binary-tree'
   }));
-  spriteData.on('finish', function() {
+  spriteData.on('finish', () => {
     console.log(chalk.yellow('Spritesheet ready to process....'));
   });
-  spriteData.on('error', function(err) {
+  spriteData.on('error', (err) => {
     console.log(chalk.red('Spritesheet ', err));
   });
-  spriteData.css.pipe(gulp.dest(`${config.src}/styles/`)).on('end', function() {
+  spriteData.css.pipe(gulp.dest(`${config.src}/styles/`)).on('end', () => {
     console.log(chalk.green('Spritesheet _sprite file written...'));
   });
-  return spriteData.img.pipe(gulp.dest(`${config.dist}/images/`)).on('end', function() {
+  return spriteData.img.pipe(gulp.dest(`${config.dist}/images/`)).on('end', () => {
     console.log(chalk.green('Spritesheet generated.'));
   });
 }
 
 export function generateFavicons(done) {
-
   return favicons(`${config.src}/favicon.png`, {
-        appName: config.title,
-        appDescription: config.description,
-        developerName: config.author,
-        developerURL: config.developerURL,
-        background: 'transparent',
-        path: 'images/favicon/',
-        url: 'images/share.jpg',
-        display: 'standalone',
-        orientation: 'portrait',
-        version: config.version,
-        logging: config.verbose,
-        online: false,
-        icons: {
-            android: true,
-            appleIcon: true,
-            appleStartup: true,
-            coast: true,
-            favicons: true,
-            firefox: true,
-            opengraph: false,
-            twitter: false,
-            windows: true,
-            yandex: true
-        }
-    }, function (error, response) {
+    appName: config.title,
+    appDescription: config.description,
+    developerName: config.author,
+    developerURL: config.developerURL,
+    background: 'transparent',
+    path: 'images/favicon/',
+    url: 'images/share.jpg',
+    display: 'standalone',
+    orientation: 'portrait',
+    version: config.version,
+    logging: config.verbose,
+    online: false,
+    icons: {
+      android: true,
+      appleIcon: true,
+      appleStartup: true,
+      coast: true,
+      favicons: true,
+      firefox: true,
+      opengraph: false,
+      twitter: false,
+      windows: true,
+      yandex: true
+    }
+  }, (error, response) => {
+    if (error) {
+      console.log(error.status);
+      console.log(error.name);
+      console.log(error.message);
+    }
 
-        if (error) {
-          console.log(error.status);
-          console.log(error.name);
-          console.log(error.message);
-        }
+    const faviconFolder = `${config.dist}/images/favicon/`;
 
-        const faviconFolder = `${config.dist}/images/favicon/`;
+    if (response.images) {
+      mkdirp.sync(faviconFolder);
+      response.images.forEach((image) =>
+        fs.writeFileSync(`${faviconFolder}${image.name}`, image.contents)
+      );
+    }
 
-        if (response.images) {
-          mkdirp.sync(faviconFolder);
-          response.images.forEach((image) =>
-            fs.writeFileSync(`${faviconFolder}${ image.name }`, image.contents)
-          );
-        }
+    if (response.files) {
+      mkdirp.sync(faviconFolder);
+      response.files.forEach((file) =>
+        fs.writeFileSync(`${faviconFolder}${file.name}`, file.contents)
+      );
+    }
 
-        if (response.files) {
-          mkdirp.sync(faviconFolder);
-          response.files.forEach((file) =>
-            fs.writeFileSync(`${faviconFolder}${ file.name }`, file.contents)
-          );
-        }
+    if (response.html) {
+      fs.writeFileSync(`${config.src}/inc/_favicons.html`, response.html.join('\n'));
+    }
 
-        if (response.html) {
-          fs.writeFileSync(`${config.src}/inc/_favicons.html`, response.html.join('\n'));
-        }
-
-        done();
-    });
-
+    done();
+  });
 }

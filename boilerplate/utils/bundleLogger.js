@@ -4,14 +4,14 @@ import chalk from 'chalk';
 let startTime;
 
 export default {
-  start: function() {
+  start: () => {
     startTime = process.hrtime();
     console.log('Bundling...');
   },
 
-  end: function() {
+  end: () => {
     const taskTime = process.hrtime(startTime);
     const prettyTime = prettyHrtime(taskTime);
     console.log('Bundled in', chalk.magenta(prettyTime));
   }
-}
+};

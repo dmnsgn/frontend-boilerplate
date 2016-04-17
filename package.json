@@ -35,50 +35,53 @@
     "normalize.css": "git://github.com/necolas/normalize.css.git#3.0.3"
   },
   "devDependencies": {
-    "autoprefixer": "^6.1.x",
-    "babel-core": "^6.2.x",
-    "babel-preset-es2015": "^6.1.x",
-    "browser-sync": "^2.10.x",
-    "browserify": "^12.0.x",
+    "autoprefixer": "^6.3.x",
+    "babel-core": "^6.7.x",
+    "babel-preset-es2015": "^6.6.x",
+    "browser-sync": "^2.12.x",
+    "browserify": "^13.0.x",
     "chalk": "^1.1.x",
     "css-mqpacker": "^4.0.x",
-    "csswring": "^4.0.x",
-    "del": "^2.1.x",
-    "eslint": "^2.4.0",
-    "eslint-config-airbnb": "^6.1.0",
-    "eslint-plugin-react": "^4.2.1",
-    "favicons": "^4.2.x",
-    "fontmin": "^0.8.x",
+    "csswring": "^4.2.x",
+    "del": "^2.2.x",
+    "eslint": "^2.8.0",
+    "eslint-config-airbnb": "^7.0.x",
+    "eslint-plugin-import": "^1.4.x",
+    "eslint-plugin-jsx-a11y": "^0.6.x",
+    "eslint-plugin-react": "^4.3.x",
+    "favicons": "^4.7.x",
+    "fontmin": "^0.9.x",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-cache": "^0.4.x",
     "gulp-changed": "^1.3.x",
-    "gulp-filter": "^3.0.x",
+    "gulp-filter": "^4.0.x",
     "gulp-header": "^1.7.x",
     "gulp-imagemin": "^2.4.x",
     "gulp-mocha": "^2.2.x",
     "gulp-newer": "^1.1.x",
     "gulp-notify": "^2.2.x",
-    "gulp-postcss": "^6.0.x",
+    "gulp-postcss": "^6.1.x",
     "gulp-preprocess": "^2.0.x",
     "gulp-rename": "^1.2.x",
-    "gulp-sitemap": "^2.2.x",
+    "gulp-sitemap": "^4.0.x",
     "gulp-sourcemaps": "^1.6.x",
     "gulp-uglify": "^1.5.x",
     "gulp-util": "^3.0.x",
     "gulp-w3cjs": "^1.2.x",
     "gulp-watch": "^4.3.x",
-    "gulp.spritesmith": "^6.0.x",
+    "gulp.spritesmith": "^6.2.x",
     "imagemin-pngquant": "^4.2.x",
     "minimist": "^1.2.x",
-    "napa": "^2.0.x",
+    "napa": "^2.3.x",
     "postcss": "^5.0.x",
     "pretty-hrtime": "^1.0.x",
     "psi": "^2.0.x",
-    "stylelint": "^4.4.x",
-    "stylelint-config-suitcss": "^4.0.x",
+    "stylelint": "^5.4.x",
+    "stylelint-config-suitcss": "^5.0.x",
+    "uglify-js": "^2.6.x",
     "vinyl-buffer": "^1.0.x",
     "vinyl-source-stream": "^1.1.x",
-    "watchify": "^3.6.x"
+    "watchify": "^3.7.x"
   },
   "scripts": {
     "init": "npm i inquirer chalk cli-spinner del babel-cli babel-preset-es2015 && babel-node ./boilerplate/init/index.js",
@@ -90,7 +93,9 @@
     "test": "./test"
   },
   "babel": {
-    "presets": ["es2015"]
+    "presets": [
+      "es2015"
+    ]
   },
   "stylelint": {
     "extends": "stylelint-config-suitcss",
@@ -100,7 +105,9 @@
   },
   "eslintConfig": {
     "extends": "airbnb",
-    "plugins": ["react"],
+    "plugins": [
+      "react"
+    ],
     "rules": {
       "comma-dangle": 0
     }

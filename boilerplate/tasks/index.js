@@ -3,6 +3,7 @@
  */
 
 import gulp from 'gulp';
+import chalk from 'chalk';
 
 import config from '../config';
 
@@ -18,6 +19,7 @@ import { testMarkup, testScripts, testPsiMobile, testPsiDesktop } from './test';
 
 // Content
 gulp.task(markup);
+gulp.task(bundleVendor);
 
 gulp.task(
   'scripts',
@@ -31,14 +33,16 @@ gulp.task(
   gulp.parallel(processStyles, generateFonts)
 );
 const stylesTask = gulp.task('styles');
-stylesTask.description = 'Compile sass/less/stylus files with sourcemaps + autoprefixer and convert fonts.';
+stylesTask.description =
+  'Compile sass/less/stylus files with sourcemaps + autoprefixer and convert fonts.';
 
 gulp.task(
   'images',
   gulp.parallel(optimizeImages, generateSpritesheet, generateFavicons)
 );
 const imagesTask = gulp.task('images');
-imagesTask.description = 'Optimize new images and cache them, create a spritesheet and generate favicons/metas.';
+imagesTask.description =
+  'Optimize new images and cache them, create a spritesheet and generate favicons/metas.';
 
 // Utils
 gulp.task(serve);
