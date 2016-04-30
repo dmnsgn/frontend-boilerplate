@@ -1,7 +1,7 @@
 import notify from 'gulp-notify';
 import gutil from 'gulp-util';
 
-export default function() {
+export default function (...args) {
   gutil.beep();
 
   // End the task
@@ -11,5 +11,5 @@ export default function() {
   notify.onError({
     title: 'Error',
     message: '<%= error.message %>'
-  }).apply(this, Array.prototype.slice.call(arguments));
-};
+  }).apply(this, args);
+}

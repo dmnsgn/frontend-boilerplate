@@ -35,7 +35,6 @@ function addEventsHandlers(watcher) {
 }
 
 export function watch(done) {
-
   const watchers = [
     // Watch html files
     gulp.watch(`${config.src}/*.html`, markup),
@@ -46,7 +45,7 @@ export function watch(done) {
     gulp.watch(`${config.src}/styles/fonts/**/*`, generateFonts),
 
     // Watch package.json file
-    gulp.watch(`package.json`, bundleVendor),
+    gulp.watch('package.json', bundleVendor),
 
     // Watch images files
     gulp.watch([`${config.src}/images/**/*`, `!${config.src}/images/sprite/**/*`], optimizeImages),

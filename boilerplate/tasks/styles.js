@@ -16,7 +16,9 @@ import rename from 'gulp-rename';
 import config from '../config';
 import handleErrors from '../utils/handleErrors';
 
-let preprocessor, processors, envDev = config.args.env === 'dev';
+let preprocessor;
+let processors;
+const envDev = config.args.env === 'dev';
 
 // Processors
 if (envDev) {
@@ -39,39 +41,50 @@ if (envDev) {
 }
 
 // Preprocessor
+let sassGlob;
+let lessGlob;
+
 switch (config.extensions.styles) {
-  case 'scss':
+  case 'scss': {
     preprocessor = require('gulp-sass');
-    var sassGlob = require('gulp-sass-glob');
+    sassGlob = require('gulp-sass-glob');
     break;
+  }
 
-  case 'less':
+  case 'less': {
     preprocessor = require('gulp-less');
-    var lessGlob = require('less-plugin-glob');
+    lessGlob = require('less-plugin-glob');
     break;
+  }
 
-  case 'styl':
+  case 'styl': {
     preprocessor = require('gulp-stylus');
+    break;
+  }
+
+  case 'css': {
+    break;
+  }
+
+  default:
+    console.log('Wrong css extension in package.json');
     break;
 }
 
 function getStylesStream(extension) {
   switch (extension) {
-
     case 'scss':
       return gulp.src(`${config.src}/styles/main.scss`)
         .pipe(sassGlob())
         .pipe(sourcemaps.init())
         .pipe(preprocessor());
-      break;
 
     case 'less':
       return gulp.src(`${config.src}/styles/main.less`)
         .pipe(sourcemaps.init())
         .pipe(preprocessor({
-          plugins: [require('less-plugin-glob')]
+          plugins: [lessGlob]
         }));
-      break;
 
     case 'styl':
       return gulp.src(`${config.src}/styles/main.styl`)
@@ -79,16 +92,13 @@ function getStylesStream(extension) {
         .pipe(preprocessor({
           'include css': true
         }));
-      break;
 
     default:
       return gulp.src(`${config.src}/styles/**/*.css`);
-      break;
   }
 }
 
 export function processStyles() {
-
   return getStylesStream(config.extensions.styles)
     .on('error', handleErrors)
     .pipe(postcss(processors))
@@ -102,12 +112,14 @@ export function processStyles() {
     .pipe(browserSync.reload({
       stream: true
     }));
-
 }
 
 export function generateFonts(done) {
   const fontmin = new Fontmin()
-    .src(`${config.src}/styles/fonts/*.ttf`)
+    .src(`${config.src}/styles/fonts/*.{ttf,otf}`)
+    .use(Fontmin.otf2ttf({
+      clone: true
+    }))
     .use(Fontmin.ttf2eot({
       clone: true
     }))
@@ -119,12 +131,10 @@ export function generateFonts(done) {
     }))
     .dest(`${config.dist}/styles/fonts`);
 
-  return fontmin.run(
-    function(err, files, stream) {
-      done();
-      if (err) {
-        console.log(err);
-      }
+  return fontmin.run((err) => {
+    if (err) {
+      console.log(err);
     }
-  );
+    done();
+  });
 }

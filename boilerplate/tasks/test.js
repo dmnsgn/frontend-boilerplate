@@ -17,12 +17,12 @@ testMarkup.description = 'Validate markup.';
 
 export function testScripts() {
   return gulp.src(`${config.test}/*.js`, {
-      read: false
-    })
-    .pipe(mocha({
-      reporter: 'progress'
-    }))
-    .on('error', handleErrors);
+    read: false
+  })
+  .pipe(mocha({
+    reporter: 'progress'
+  }))
+  .on('error', handleErrors);
 }
 
 testScripts.description = 'Run mocha tests.';

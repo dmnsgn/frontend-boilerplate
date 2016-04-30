@@ -27,7 +27,7 @@ const b = browserify({
 
 const bundler = envDev ? watchify(b) : b;
 
-const bundle = function(done) {
+const bundle = (done) => {
   bundleLogger.start();
 
   return bundler
@@ -41,7 +41,7 @@ const bundle = function(done) {
     .pipe(envDev ? gutil.noop() : rename({
       suffix: '.min'
     }))
-    .on('end', function() {
+    .on('end', () => {
       if (envDev) {
         browserSync.reload();
       } else {
@@ -57,14 +57,12 @@ if (envDev) {
 }
 
 export function bundleApp(done) {
-
   if (envDev) {
     bundle();
     done();
   } else {
     bundle(done);
   }
-
 }
 
 export function bundleVendor(done) {
@@ -74,15 +72,20 @@ export function bundleVendor(done) {
     src: updatedConfig.vendors,
     dest: `${updatedConfig.dist}/scripts`,
     fileName: 'vendor.js'
-  }, function() {
+  }, () => {
     if (!envDev) {
-      const cmd = `uglifyjs ${updatedConfig.dist}/scripts/vendor.js -o ${updatedConfig.dist}/scripts/vendor.min.js`;
-      exec(cmd, function(error, stdout, stderr) {
-        done();
+      const cmd = `./node_modules/.bin/uglifyjs ${updatedConfig.dist}/scripts/vendor.js \
+        -o ${updatedConfig.dist}/scripts/vendor.min.js`;
+
+      exec(cmd, (error) => {
+        if (error !== null) {
+          console.log(`exec error: ${error}`);
+        } else {
+          done();
+        }
       });
     } else {
       done();
     }
   });
-
 }
