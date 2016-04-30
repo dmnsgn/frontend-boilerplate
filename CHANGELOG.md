@@ -1,5 +1,10 @@
 ### Change log
 
+1.4.0
+
+* Conform boilerplate to ESLint
+* Add uglifyjs as dev dependency
+
 1.3.1
 
 * Add Angular and Aurelia setup
