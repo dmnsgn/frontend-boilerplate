@@ -1,5 +1,12 @@
 ### Change log
 
+1.5.0
+
+* Add reload to server task
+* Add delete file in dist on watch delete in src
+* Use npm run for uniformity
+* Optimize bundling time
+
 1.4.0
 
 * Conform boilerplate to ESLint
