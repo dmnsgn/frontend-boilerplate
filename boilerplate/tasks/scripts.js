@@ -22,7 +22,10 @@ const envDev = config.args.env === 'dev';
 const b = browserify({
   entries: [`${config.src}/scripts/main.${config.extensions.scripts}`],
   extensions: [config.extensions.scripts],
-  debug: envDev
+  debug: envDev,
+  cache: {},
+  packageCache: {},
+  fullPaths: envDev
 });
 
 const bundler = envDev ? watchify(b) : b;
