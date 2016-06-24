@@ -1,7 +1,7 @@
 {
   "name": "gulp-frontend-boilerplate",
   "title": "Gulp Frontend Boilerplate",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "An ES6 boilerplate with common frontend tasks using Gulp 4 as build system.",
   "author": "Damien Seguin <https://twitter.com/dmnsgn>",
   "homepage": "https://github.com/dmnsgn/gulp-frontend-boilerplate",
@@ -25,12 +25,8 @@
     "framework"
   ],
   "license": "MIT",
-  "vendors": [
-    "./node_modules/greensock/src/uncompressed/TweenMax.js"
-  ],
-  "napa": {
-    "greensock": "greensock/GreenSock-JS"
-  },
+  "vendors": [],
+  "napa": {},
   "dependencies": {
     "normalize.css": "git://github.com/necolas/normalize.css.git#3.0.3"
   },
@@ -41,14 +37,14 @@
     "browser-sync": "^2.12.x",
     "browserify": "^13.0.x",
     "chalk": "^1.1.x",
-    "css-mqpacker": "^4.0.x",
-    "csswring": "^4.2.x",
+    "css-mqpacker": "^5.0.x",
+    "csswring": "^5.0.x",
     "del": "^2.2.x",
     "eslint": "^2.8.0",
-    "eslint-config-airbnb": "^7.0.x",
+    "eslint-config-airbnb": "^9.0.x",
     "eslint-plugin-import": "^1.4.x",
-    "eslint-plugin-jsx-a11y": "^0.6.x",
-    "eslint-plugin-react": "^4.3.x",
+    "eslint-plugin-jsx-a11y": "^1.5.x",
+    "eslint-plugin-react": "^5.2.x",
     "favicons": "^4.7.x",
     "fontmin": "^0.9.x",
     "gulp": "github:gulpjs/gulp#4.0",
@@ -56,7 +52,7 @@
     "gulp-changed": "^1.3.x",
     "gulp-filter": "^4.0.x",
     "gulp-header": "^1.7.x",
-    "gulp-imagemin": "^2.4.x",
+    "gulp-imagemin": "^3.0.x",
     "gulp-mocha": "^2.2.x",
     "gulp-newer": "^1.1.x",
     "gulp-notify": "^2.2.x",
@@ -70,22 +66,24 @@
     "gulp-w3cjs": "^1.2.x",
     "gulp-watch": "^4.3.x",
     "gulp.spritesmith": "^6.2.x",
-    "imagemin-pngquant": "^4.2.x",
+    "imagemin-pngquant": "^5.0.x",
     "minimist": "^1.2.x",
     "napa": "^2.3.x",
     "postcss": "^5.0.x",
     "pretty-hrtime": "^1.0.x",
     "psi": "^2.0.x",
-    "stylelint": "^5.4.x",
-    "stylelint-config-suitcss": "^5.0.x",
+    "stylelint": "^6.7.x",
+    "stylelint-config-suitcss": "^7.0.x",
     "uglify-js": "^2.6.x",
     "vinyl-buffer": "^1.0.x",
     "vinyl-source-stream": "^1.1.x",
     "watchify": "^3.7.x"
   },
   "scripts": {
-    "init": "npm i inquirer@1.0.2 chalk cli-spinner del babel-cli babel-preset-es2015 && babel-node ./boilerplate/init/index.js",
-    "install": "napa"
+    "install": "napa",
+    "init": "npm i inquirer@1.0.3 chalk cli-spinner del babel-cli babel-preset-es2015 && babel-node ./boilerplate/init/index.js",
+    "dev": "gulp --env dev",
+    "prod": "gulp --env prod"
   },
   "directories": {
     "src": "./src",

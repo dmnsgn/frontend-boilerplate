@@ -84,7 +84,7 @@ Others keys:
 This is the default task.
 
 ```bash
-gulp
+npm run dev
 ```
 All the magic begins here:
 
@@ -98,7 +98,7 @@ All the magic begins here:
 Same as running `gulp --env dev`.
 
 ---
-Note: if you just want to build the project and serve it, run `gulp --env prod` then `gulp serve`.
+Note: if you just want to build the project and serve it, run `npm run prod` then `gulp serve`.
 
 
 #### Make changes
@@ -114,7 +114,7 @@ Note: if you just want to build the project and serve it, run `gulp --env prod` 
 When you are happy with your changes, run:
 
 ```bash
-gulp --env prod
+npm run prod
 ```
 
 * Replace build tags with `.min` files, generates these minified files in `dist` folder (with optimization tasks)

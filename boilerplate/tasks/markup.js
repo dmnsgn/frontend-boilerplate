@@ -1,7 +1,5 @@
 import gulp from 'gulp';
 
-import browserSync from 'browser-sync';
-
 import preprocess from 'gulp-preprocess';
 
 import config from '../config';
@@ -23,10 +21,7 @@ export function markup() {
       UA: config.analyticsUA
     }
   }))
-  .pipe(gulp.dest(config.dist))
-  .on('end', () => {
-    browserSync.reload();
-  });
+  .pipe(gulp.dest(config.dist));
 }
 
 markup.description = 'Process html files with environment configuration.';

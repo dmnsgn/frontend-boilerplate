@@ -1,25 +1,32 @@
 import gulp from 'gulp';
 
+import path from 'path';
 import chalk from 'chalk';
+import del from 'del';
 
 import config from '../config';
 
+import { reload } from './serve';
 import { markup } from './markup';
 import { processStyles, generateFonts } from './styles';
 import { bundleVendor } from './scripts';
 import { optimizeImages, generateSpritesheet } from './images';
 import { testScripts } from './test';
 
-function onWatchAdd(path) {
-  console.log(`File ${chalk.underline.green(path)} has been added.`);
+function onWatchAdd(filePath) {
+  console.log(`File ${chalk.underline.green(filePath)} has been added.`);
 }
 
-function onWatchChange(path) {
-  console.log(`File ${chalk.underline.yellow(path)} was changed.`);
+function onWatchChange(filePath) {
+  console.log(`File ${chalk.underline.yellow(filePath)} was changed.`);
 }
 
-function onWatchRemove(path) {
-  console.log(`File ${chalk.underline.red(path)} has been removed.`);
+function onWatchRemove(filePath) {
+  const filePathFromSrc = path.relative(path.resolve(config.src), filePath);
+  const destFilePath = path.resolve(config.dist, filePathFromSrc);
+  del.sync(destFilePath);
+
+  console.log(`File ${chalk.underline.red(filePath)} has been removed.`);
 }
 
 function onWatchError(error) {
@@ -37,11 +44,14 @@ function addEventsHandlers(watcher) {
 export function watch(done) {
   const watchers = [
     // Watch html files
-    gulp.watch(`${config.src}/*.html`, markup),
-    gulp.watch(`${config.src}/inc/**/*`, markup),
+    gulp.watch(`${config.src}/*.html`, gulp.series(markup, reload)),
+    gulp.watch(`${config.src}/inc/**/*`, gulp.series(markup, reload)),
 
     // Watch styles files
-    gulp.watch(`${config.src}/styles/**/*.${config.extensions.styles}`, processStyles),
+    gulp.watch(
+      `${config.src}/styles/**/*.${config.extensions.styles}`,
+      gulp.series(processStyles, reload)
+    ),
     gulp.watch(`${config.src}/styles/fonts/**/*`, generateFonts),
 
     // Watch package.json file

@@ -5,13 +5,13 @@ import source from 'vinyl-source-stream';
 import buffer from 'vinyl-buffer';
 import browserify from 'browserify';
 import watchify from 'watchify';
-import browserSync from 'browser-sync';
 
 import gutil from 'gulp-util';
 import uglify from 'gulp-uglify';
 import header from 'gulp-header';
 import rename from 'gulp-rename';
 
+import { reload } from './serve';
 import config, { getConfig } from '../config';
 import bundleLogger from '../utils/bundleLogger';
 import handleErrors from '../utils/handleErrors';
@@ -22,7 +22,10 @@ const envDev = config.args.env === 'dev';
 const b = browserify({
   entries: [`${config.src}/scripts/main.${config.extensions.scripts}`],
   extensions: [config.extensions.scripts],
-  debug: envDev
+  debug: envDev,
+  cache: {},
+  packageCache: {},
+  fullPaths: envDev
 });
 
 const bundler = envDev ? watchify(b) : b;
@@ -43,7 +46,7 @@ const bundle = (done) => {
     }))
     .on('end', () => {
       if (envDev) {
-        browserSync.reload();
+        reload(() => {});
       } else {
         done();
       }
