@@ -1,6 +1,5 @@
 import gulp from 'gulp';
 
-import browserSync from 'browser-sync';
 import autoprefixer from 'autoprefixer';
 import mqpacker from 'css-mqpacker';
 import csswring from 'csswring';
@@ -9,7 +8,6 @@ import Fontmin from 'fontmin';
 import gutil from 'gulp-util';
 import postcss from 'gulp-postcss';
 import sourcemaps from 'gulp-sourcemaps';
-import filter from 'gulp-filter';
 import header from 'gulp-header';
 import rename from 'gulp-rename';
 
@@ -107,11 +105,7 @@ export function processStyles() {
     .pipe(envDev ? gutil.noop() : rename({
       suffix: '.min'
     }))
-    .pipe(gulp.dest(`${config.dist}/styles`))
-    .pipe(filter('**/*.css'))
-    .pipe(browserSync.reload({
-      stream: true
-    }));
+    .pipe(gulp.dest(`${config.dist}/styles`));
 }
 
 export function generateFonts(done) {

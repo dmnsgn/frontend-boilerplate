@@ -6,6 +6,7 @@ import del from 'del';
 
 import config from '../config';
 
+import { reload } from './serve';
 import { markup } from './markup';
 import { processStyles, generateFonts } from './styles';
 import { bundleVendor } from './scripts';
@@ -43,11 +44,14 @@ function addEventsHandlers(watcher) {
 export function watch(done) {
   const watchers = [
     // Watch html files
-    gulp.watch(`${config.src}/*.html`, markup),
-    gulp.watch(`${config.src}/inc/**/*`, markup),
+    gulp.watch(`${config.src}/*.html`, gulp.series(markup, reload)),
+    gulp.watch(`${config.src}/inc/**/*`, gulp.series(markup, reload)),
 
     // Watch styles files
-    gulp.watch(`${config.src}/styles/**/*.${config.extensions.styles}`, processStyles),
+    gulp.watch(
+      `${config.src}/styles/**/*.${config.extensions.styles}`,
+      gulp.series(processStyles, reload)
+    ),
     gulp.watch(`${config.src}/styles/fonts/**/*`, generateFonts),
 
     // Watch package.json file

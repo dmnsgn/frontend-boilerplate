@@ -2,10 +2,17 @@ import browserSync from 'browser-sync';
 
 import config from '../config';
 
+const server = browserSync.create();
+
+export function reload(done) {
+  server.reload();
+  done();
+}
+
 export function serve(done) {
   const logLevel = config.verbose ? 'debug' : 'info';
 
-  browserSync.init({
+  server.init({
     server: {
       baseDir: config.dist,
       directory: true
