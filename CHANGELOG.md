@@ -1,5 +1,9 @@
 ### Change log
 
+1.5.1
+
+* Fix browsersync inject css
+
 1.5.0
 
 * Add reload to server task
