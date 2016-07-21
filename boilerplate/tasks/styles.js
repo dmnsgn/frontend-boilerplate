@@ -12,6 +12,7 @@ import header from 'gulp-header';
 import rename from 'gulp-rename';
 
 import config from '../config';
+import { server } from './serve';
 import handleErrors from '../utils/handleErrors';
 
 let preprocessor;
@@ -105,7 +106,8 @@ export function processStyles() {
     .pipe(envDev ? gutil.noop() : rename({
       suffix: '.min'
     }))
-    .pipe(gulp.dest(`${config.dist}/styles`));
+    .pipe(gulp.dest(`${config.dist}/styles`))
+    .pipe(server.stream());
 }
 
 export function generateFonts(done) {

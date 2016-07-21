@@ -50,7 +50,7 @@ export function watch(done) {
     // Watch styles files
     gulp.watch(
       `${config.src}/styles/**/*.${config.extensions.styles}`,
-      gulp.series(processStyles, reload)
+      processStyles
     ),
     gulp.watch(`${config.src}/styles/fonts/**/*`, generateFonts),
 
