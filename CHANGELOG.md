@@ -1,5 +1,9 @@
 ### Change log
 
+1.5.2
+
+* Update init (Babel, React, Redux)
+
 1.5.1
 
 * Fix browsersync inject css
