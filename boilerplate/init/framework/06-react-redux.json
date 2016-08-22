@@ -1,0 +1,8 @@
+{
+  "name": "React + Redux",
+  "value": {
+    "devDependencies": ["babelify", "babel-preset-es2015", "babel-preset-react", "redux-devtools"],
+    "dependencies": ["react", "react-dom", "react-router", "redux", "react-redux", "react-router-redux"],
+    "transform": ["babelify"]
+  }
+}
