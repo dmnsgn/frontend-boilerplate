@@ -35,15 +35,15 @@ git clone --depth 1 https://github.com/dmnsgn/gulp-frontend-boilerplate.git && c
 git clone --depth 1 https://github.com/dmnsgn/gulp-frontend-boilerplate.git && cd gulp-frontend-boilerplate && rd /s /q .git
 ```
 
-### Init (once)
+### Start a new project
 
-This step sets up the boilerplate to fit your needs (App Name, JS compiler/transpiler, JS framework, CSS preprocessor).
+This step sets up the boilerplate to fit your needs (App Name, JS compiler/transpiler, JS framework, CSS preprocessor). It should only be ran once. 
 
 ```bash
 npm run init
 ```
 
-### Install
+### Install an existing project
 
 Then each time you clone the repo, use:
 
