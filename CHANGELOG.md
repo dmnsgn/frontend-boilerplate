@@ -1,8 +1,12 @@
 ### Change log
 
+1.5.3
+
+* Add aliasify and brfs by default
+
 1.5.2
 
-* Update init (Babel, React, Redux)
+* Add
 
 1.5.1
 
