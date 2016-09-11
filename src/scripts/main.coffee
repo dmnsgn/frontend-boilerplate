@@ -1,3 +1,3 @@
-View = require './views/view'
+View = require 'views/view'
 
 console.log 'Hello World'
