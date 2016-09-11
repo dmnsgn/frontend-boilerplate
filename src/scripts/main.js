@@ -1,4 +1,4 @@
-// import View from './views/view';
+// import View from 'views/view';
 
 // const g = 9.81;
 
