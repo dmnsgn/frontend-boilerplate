@@ -85,7 +85,7 @@
     "install": "napa",
     "init": "npm i inquirer@1.0.3 chalk cli-spinner del babel-cli babel-preset-es2015 && babel-node ./boilerplate/init/index.js",
     "dev": "gulp --env dev",
-    "prod": "gulp --env prod"
+    "prod": "NODE_ENV=production gulp --env prod"
   },
   "directories": {
     "src": "./src",
