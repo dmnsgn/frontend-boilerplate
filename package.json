@@ -42,11 +42,11 @@
     "css-mqpacker": "^5.0.x",
     "csswring": "^5.0.x",
     "del": "^2.2.x",
-    "eslint": "^2.8.0",
-    "eslint-config-airbnb": "^9.0.x",
-    "eslint-plugin-import": "^1.4.x",
-    "eslint-plugin-jsx-a11y": "^1.5.x",
-    "eslint-plugin-react": "^5.2.x",
+    "eslint": "^3.6.1",
+    "eslint-config-airbnb": "^12.0.x",
+    "eslint-plugin-import": "^2.0.x",
+    "eslint-plugin-jsx-a11y": "^2.2.x",
+    "eslint-plugin-react": "^6.3.x",
     "favicons": "^4.7.x",
     "fontmin": "^0.9.x",
     "gulp": "github:gulpjs/gulp#4.0",
@@ -55,7 +55,7 @@
     "gulp-filter": "^4.0.x",
     "gulp-header": "^1.7.x",
     "gulp-imagemin": "^3.0.x",
-    "gulp-mocha": "^2.2.x",
+    "gulp-mocha": "^3.0.x",
     "gulp-newer": "^1.1.x",
     "gulp-notify": "^2.2.x",
     "gulp-postcss": "^6.1.x",
@@ -63,7 +63,7 @@
     "gulp-rename": "^1.2.x",
     "gulp-sitemap": "^4.0.x",
     "gulp-sourcemaps": "^1.6.x",
-    "gulp-uglify": "^1.5.x",
+    "gulp-uglify": "^2.0.x",
     "gulp-util": "^3.0.x",
     "gulp-w3cjs": "^1.2.x",
     "gulp-watch": "^4.3.x",
@@ -96,12 +96,6 @@
     "presets": [
       "es2015"
     ]
-  },
-  "stylelint": {
-    "extends": "stylelint-config-suitcss",
-    "rules": {
-      "rule-properties-order": null
-    }
   },
   "eslintConfig": {
     "extends": "airbnb",
