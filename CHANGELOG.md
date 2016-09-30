@@ -1,5 +1,10 @@
 ### Change log
 
+1.6.0
+
+* Set NODE_ENV in npm scripts
+* Roll back to external .stylelintrc + Update
+
 1.5.3
 
 * Add aliasify and brfs by default
