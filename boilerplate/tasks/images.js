@@ -27,7 +27,7 @@ export function optimizeImages() {
 export function generateSpritesheet() {
   const spriteData = gulp.src(`${config.src}/images/sprite/*.png`).pipe(spritesmith({
     retinaSrcFilter: [`${config.src}/images/sprite/*@2x.png`],
-    retinaImgName: 'sprite@2x.png',
+    retinaImgName: '../images/sprite@2x.png',
     imgName: '../images/sprite.png',
     cssName: `_sprite.${config.extensions.styles}`,
     algorithm: 'binary-tree'

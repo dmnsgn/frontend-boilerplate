@@ -21,18 +21,6 @@ Gulp ([Getting started](https://github.com/gulpjs/gulp/blob/master/docs/getting-
 npm install -g gulpjs/gulp-cli#4.0
 ```
 
-[Less](http://lesscss.org/)
-
-```bash
-npm install -g less
-```
-
-or [Stylus](https://learnboost.github.io/stylus/)
-
-```bash
-npm install -g stylus
-```
-
 ### Clone this repository
 
 *OSX & Linux*
@@ -47,15 +35,15 @@ git clone --depth 1 https://github.com/dmnsgn/gulp-frontend-boilerplate.git && c
 git clone --depth 1 https://github.com/dmnsgn/gulp-frontend-boilerplate.git && cd gulp-frontend-boilerplate && rd /s /q .git
 ```
 
-### Init (once)
+### Start a new project
 
-This step sets up the boilerplate to fit your needs (App Name, JS compiler/transpiler, JS framework, CSS preprocessor).
+This step sets up the boilerplate to fit your needs (App Name, JS compiler/transpiler, JS framework, CSS preprocessor). It should only be ran once. 
 
 ```bash
 npm run init
 ```
 
-### Install
+### Install an existing project
 
 Then each time you clone the repo, use:
 
@@ -82,6 +70,12 @@ Open `package.json`:
 |**twitterHandle**: twitter handle for metas|String|''|
 |**analyticsUA**: your google analytics UA|String|''|
 |**developerURL**: your URL.|String|''|
+
+Others keys:
+
+* [Babel](https://babeljs.io/docs/usage/babelrc/)
+* [ESLint](http://eslint.org/docs/user-guide/configuring)
+* [stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/configuration.md)
 
 ### Tasks
 
