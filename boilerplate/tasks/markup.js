@@ -16,7 +16,9 @@ export function markup() {
         description: config.description,
         url: config.prodURL,
         image: config.shareImageURL,
-        twitterHandle: config.twitterHandle
+        twitterHandle: config.twitterHandle,
+        twitterImage: config.twitterImage,
+        themeColor: config.themeColor
       },
       UA: config.analyticsUA
     }
