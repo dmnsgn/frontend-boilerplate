@@ -152,7 +152,8 @@ gulp --tasks
 
 ## External issues
 
-* On some OS, napa needs to be installed globally first `npm install -g napa`
+* On some OS, napa needs to be installed globally first `npm install -g napa`.
+* If running Linux, `phantomjs-prebuilt@2.1.14 install: node install.js` (from favicons └─┬ svg2png) might fail. Running `apt-get install bzip2` seems to solve this issue.
 
 ## Licence
 
