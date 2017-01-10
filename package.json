@@ -28,7 +28,7 @@
   "vendors": [],
   "napa": {},
   "dependencies": {
-    "normalize.css": "git://github.com/necolas/normalize.css.git#3.0.3"
+    "normalize.css": "^5.0.0"
   },
   "devDependencies": {
     "aliasify": "^2.1.0",
