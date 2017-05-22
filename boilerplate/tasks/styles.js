@@ -76,7 +76,9 @@ function getStylesStream(extension) {
       return gulp.src(`${config.src}/styles/main.scss`)
         .pipe(sassGlob())
         .pipe(sourcemaps.init())
-        .pipe(preprocessor());
+        .pipe(preprocessor({
+            includePaths: './node_modules',
+          }));
 
     case 'less':
       return gulp.src(`${config.src}/styles/main.less`)
