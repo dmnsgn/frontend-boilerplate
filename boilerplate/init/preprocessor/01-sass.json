@@ -1,8 +1,0 @@
-{
-  "name": "Sass",
-  "value": {
-    "extension": "scss",
-    "dependencies": ["sass-easing", "sass-font-face"],
-    "devDependencies": ["gulp-sass", "gulp-sass-glob"]
-  }
-}

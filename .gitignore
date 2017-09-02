@@ -1,6 +1,11 @@
 .DS_Store
 node_modules
+.esm-cache
 .sass-cache
 dist/*
-!dist/static/
-!dist/static/.gitkeep
+src/assets/sprite.json
+src/assets/sprite.png
+src/assets/sprite.scss
+src/assets/sprite.less
+src/assets/sprite.styl
+src/assets/sprite@2x.png

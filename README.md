@@ -1,159 +1,117 @@
-gulp-frontend-boilerplate
-=========================
+frontend-boilerplate
+====================
 
-> An ES6 boilerplate with common frontend tasks using Gulp 4 as build system.
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
-This is a work in progress. Feel free to contribute. For an older version without Gulp 4, see [0.6.1](https://github.com/dmnsgn/gulp-frontend-boilerplate/releases/tag/0.6.1).
+> An ES201X starter with common frontend tasks using [Webpack 3](https://webpack.js.org/) as module bundler and npm scripts as task runner.
 
+For an older version with Gulp 4, see [1.6.2](https://github.com/dmnsgn/frontend-boilerplate/releases/tag/1.6.2).
 
-## Install
+## Setup
 ### Requirements
 
-Node (use brew or install it from [here](http://nodejs.org/download/))
+Node `">=5.0.0"` (use brew or install it from [here](http://nodejs.org/download/))
 
 ```bash
 brew install node
 ```
 
-Gulp ([Getting started](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started))
-
-```bash
-npm install -g gulpjs/gulp-cli#4.0
-```
-
-### Clone this repository
+### Clone the repository
 
 *OSX & Linux*
 
 ```bash
-git clone --depth 1 https://github.com/dmnsgn/gulp-frontend-boilerplate.git && cd gulp-frontend-boilerplate && rm -rf .git
+git clone --depth 1 https://github.com/dmnsgn/frontend-boilerplate.git && cd frontend-boilerplate && rm -rf .git && git init
 ```
 
 *Windows*
 
 ```bash
-git clone --depth 1 https://github.com/dmnsgn/gulp-frontend-boilerplate.git && cd gulp-frontend-boilerplate && rd /s /q .git
+git clone --depth 1 https://github.com/dmnsgn/frontend-boilerplate.git && cd frontend-boilerplate && rd /s /q .git && git init
 ```
 
-### Start a new project
-
-This step sets up the boilerplate to fit your needs (App Name, JS compiler/transpiler, JS framework, CSS preprocessor). It should only be ran once. 
-
-```bash
-npm run init
-```
-
-### Install an existing project
-
-Then each time you clone the repo, use:
+### Dependencies
 
 ```bash
 npm install
 ```
 
-## Usage
-
 ### Configuration
+
+Open `config/config.js`:
+
+|Key|Description|Type
+|:-|:-|:-:|
+|**PATHS**|map of paths to the differents folders needed by `webpack` and `npm scripts`|Map
+|**BROWSERS**|the browsers targeted for `babel-preset-env` and `autoprefixer` (see full list [here](https://github.com/ai/browserslist))|Array
+
 
 Open `package.json`:
 
-|Option (`directories` and `config` keys)|Type|Default
-|:---------|:---------:|:----------:|
-|**src**: the source folder path, that's where you write code.|String|src|
-|**dist**: the destination folder path, that's where your code is compiled.|String|dist|
-|**test**: the `test` folder path.|String|test|
-|**verbose**: provide a more verbose output when available (useful for debugging).|Boolean|false|
-|**port**: the server port.|Number|3000|
-|**browsers**: the browser(s) targeted for autoprefixer (see full list of options [here](https://github.com/ai/autoprefixer#browsers))|Array|['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']|
-|**prodURL**: the absolute url to use in the sitemap and for metas|String|''|
-|**shareImageURL**: the absolute url of the share image for metas|String|''|
-|**twitterHandle**: twitter handle for metas|String|''|
-|**analyticsUA**: your google analytics UA|String|''|
-|**developerURL**: your URL.|String|''|
+|Key|Description|Type
+|:-|:-|:-:|
+|**description**|title used for metas, favicons and banner|String
+|**homepage**|absolute url used for metas, robotstxt, sitemap and banner|String
+|**license**|license acronym used for banner|String
+|**author.name**|author name used for favicons|String
+|**author.url**|author url used for favicons|String
+|**config.title**|title used for metas and favicons|String
+|**config.handle**|twitter handle for metas|String
+|**config.analyticsUA**|google analytics UA|String
 
-Others keys:
-
-* [Babel](https://babeljs.io/docs/usage/babelrc/)
-* [ESLint](http://eslint.org/docs/user-guide/configuring)
-* [stylelint](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/configuration.md)
-
-### Tasks
-
-#### Launch it
-
-This is the default task.
+## Develop
 
 ```bash
 npm run dev
 ```
-All the magic begins here:
 
-* process `.html` files
-* process `.scss`, `.less` or `.styl` files
-* process `.js` or `.coffee` files
-* create a server with BrowserSync and serve `dist` folder
-* watch changes in source folder
-* reload on changes in source folder
-
-Same as running `gulp --env dev`.
-
----
-Note: if you just want to build the project and serve it, run `npm run prod` then `gulp serve`.
-
-
-#### Make changes
-
- * Write your markup in `src` folder and in `src/inc`. Include your partials with `<!-- @include inc/_filename.html -->`
- * Add some `scss`, `less` or `styl` styles.
- * Add some `scripts`: `.js` or `.coffee`.
- * Add images in the - wait for it - `images` folder.
- * Generate a spritesheet with corresponding mixins (located in `styles/_sprite{.scss,.less,.styl}`) by adding `.png` files into `images/sprite` folder and retina version with `@2x` suffix.
-
-#### Build
-
-When you are happy with your changes, run:
+## Production
 
 ```bash
 npm run prod
 ```
 
-* Replace build tags with `.min` files, generates these minified files in `dist` folder (with optimization tasks)
-* Add copyright headers and generate a `sitemap.xml`file
+## Features
 
-#### Tests tasks
+### Webpack [loaders](https://webpack.js.org/loaders/):
 
-Quick tests and stats with:
+* [Babel](https://babeljs.io/)
+* [Typescript](https://www.typescriptlang.org/)
+* [PostCSS](https://github.com/postcss/postcss): see [postcss.config.js](./config/postcss.config.js)
+* [Sass](http://sass-lang.com/)
+* [Less](http://lesscss.org/)
+* [Stylus](http://stylus-lang.com/)
+* fonts via [file-loader](https://github.com/webpack-contrib/file-loader)
+* optimised images via [file-loader](https://github.com/webpack-contrib/file-loader)
+* [html-loader](https://github.com/webpack-contrib/html-loader)
+* [glslify](https://github.com/stackgl/glslify)
 
-```bash
-# w3c validation
-gulp testMarkup
+### Webpack [plugins](https://webpack.js.org/plugins/):
 
-# mocha tests (written in test folder)
-gulp testScripts
+* [DefinePlugin](https://webpack.js.org/plugins/define-plugin/): create global constants which can be configured at compile time
+* [HotModuleReplacementPlugin](https://webpack.js.org/plugins/hot-module-replacement-plugin/): enable Hot Module Replacement
+* [NamedModulesPlugin](https://webpack.js.org/guides/caching/#deterministic-hashes)
+* [HtmlWebpackPlugin](https://webpack.js.org/plugins/html-webpack-plugin/) with [.ejs](http://ejs.co/) templates: simplify creation of HTML files
+* [ExtractTextWebpackPlugin](https://webpack.js.org/plugins/extract-text-webpack-plugin/): extract text from a bundle, or bundles, into a separate file.
+* [SpritesmithPlugin](https://github.com/mixtur/webpack-spritesmith): convert a set of images into a spritesheet and SASS/LESS/Stylus mixins
+* [CommonsChunkPlugin](https://webpack.js.org/plugins/commons-chunk-plugin/): opt-in feature that creates a separate file (known as a chunk), consisting of common modules shared between multiple entry points.
+* [UglifyjsWebpackPlugin](https://webpack.js.org/plugins/uglifyjs-webpack-plugin/) from webpack
+* [BannerPlugin](https://webpack.js.org/plugins/banner-plugin/): add a banner to the top of each generated chunk.
+* [NpmInstallWebpackPlugin](https://webpack.js.org/plugins/npm-install-webpack-plugin/): speed up development by automatically installing & saving dependencies with Webpack.
+* [WebpackStatsPlugin](https://github.com/FormidableLabs/webpack-stats-plugin): ingest the webpack stats object, process / transform the object and write out to a file for further consumption.
 
-# PageSpeed Insights reporter for mobile and desktop
-gulp testPsi
-```
+### npm scripts:
 
-#### Clean it
+* `npm run clean`: remove all the files from the `dist` directory
+* `npm run favicons`: generate [favicons](https://github.com/evilebottnawi/favicons) files and `/src/templates/_favicons.ejs`
+* `npm run robotstxt`: generate [robots.txt](https://github.com/itgalaxy/generate-robotstxt) file
+* `npm run sitemap`: generate [sitemap.xml](https://github.com/ekalinin/sitemap.js) file
 
-Clean dist dir (except static folder) and clear all caches (sass cache, gulp cache)
+### Prettier [formatter](https://github.com/prettier/prettier):
 
-```bash
-gulp clean
-```
-#### Help
-
-This command will give you a list of all tasks available and their description.
-
-```bash
-gulp --tasks
-```
-
-## External issues
-
-* On some OS, napa needs to be installed globally first `npm install -g napa`.
-* If running Linux, `phantomjs-prebuilt@2.1.14 install: node install.js` (from favicons └─┬ svg2png) might fail. Running `apt-get install bzip2` seems to solve this issue.
+* [Prettier](https://github.com/prettier/prettier)
+* [ESLint Prettier Plugin](https://github.com/prettier/eslint-plugin-prettier)
+* [ESLint Prettier Config](https://github.com/prettier/eslint-config-prettier)
 
 ## Licence
 

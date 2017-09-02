@@ -8,6 +8,10 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[*.{coffee,js,json,css,scss,styl,less}]
+[*.{js,jsx,ts,tsx,json,css,scss,less,vert,frag,glsl}]
 indent_style = space
+indent_size = 2
+
+[*.{styl}]
+indent_style = tab
 indent_size = 2
