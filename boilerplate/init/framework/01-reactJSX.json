@@ -1,8 +1,0 @@
-{
-  "name": "React + JSX",
-  "value": {
-    "devDependencies": ["babelify", "babel-preset-es2015", "babel-preset-react"],
-    "dependencies": ["react", "react-dom", "react-router"],
-    "transform": ["babelify"]
-  }
-}
