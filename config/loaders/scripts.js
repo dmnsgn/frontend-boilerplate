@@ -23,8 +23,9 @@ const scripts = {
           ]
         ],
         plugins: [
-          "babel-plugin-transform-es2015-modules-commonjs",
-          "babel-plugin-transform-object-rest-spread"
+          "transform-es2015-modules-commonjs",
+          "transform-class-properties",
+          "transform-object-rest-spread"
         ]
       }
     }
