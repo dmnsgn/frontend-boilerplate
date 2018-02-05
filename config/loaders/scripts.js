@@ -25,7 +25,8 @@ const scripts = {
         plugins: [
           "transform-es2015-modules-commonjs",
           "transform-class-properties",
-          "transform-object-rest-spread"
+          "transform-object-rest-spread",
+          "syntax-dynamic-import"
         ]
       }
     }
