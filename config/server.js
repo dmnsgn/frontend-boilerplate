@@ -22,7 +22,7 @@ export default {
   noInfo: false,
   open: true,
   // openPage: '/api',
-  overlay: true,
+  // overlay: true,
   // pfx: "/path/to/file.pfx",
   // pfxPassphrase: "passphrase",
   port: 8080,

@@ -23,11 +23,13 @@ export default {
     hotUpdateMainFilename: "[hash].hot-update.json",
     filename: NODE_ENV === "production" ? "[name].[chunkhash].js" : "[name].js",
     path: path.join(ROOT, PATHS.get("dist")),
-    pathinfo: NODE_ENV === "development",
     publicPath: "/",
     sourceMapFilename: "[file].map",
     sourcePrefix: "\t"
   },
+  mode: ["production", "development"].includes(NODE_ENV)
+    ? NODE_ENV
+    : "production",
   devServer,
   module: {
     noParse: /jquery/,
@@ -50,6 +52,5 @@ export default {
     symlinks: true,
     cachePredicate: () => true
   },
-  plugins,
-  devtool: NODE_ENV !== "production" ? "source-map" : false
+  plugins
 };

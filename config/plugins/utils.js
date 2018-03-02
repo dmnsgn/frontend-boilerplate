@@ -13,8 +13,6 @@ const define = new webpack.DefinePlugin({
 
 const HMR = new webpack.HotModuleReplacementPlugin();
 
-const namedModules = new webpack.NamedModulesPlugin();
-
 const hashedModuleIds = new webpack.HashedModuleIdsPlugin();
 
 const banner = new webpack.BannerPlugin({
@@ -34,12 +32,4 @@ const npmInstall = new NpmInstallPlugin({
   quiet: false
 });
 
-export {
-  define,
-  HMR,
-  namedModules,
-  hashedModuleIds,
-  banner,
-  buildInfo,
-  npmInstall
-};
+export { define, HMR, hashedModuleIds, banner, buildInfo, npmInstall };

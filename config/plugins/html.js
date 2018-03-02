@@ -45,8 +45,9 @@ const minifyOptions = {
 };
 
 const htmlIndex = new HtmlWebpackPlugin({
+  inject: true,
   filename: "index.html",
-  template: "templates/index.ejs",
+  template: "templates/index.html",
   title: PACKAGE.config.title,
   description: PACKAGE.description,
   og: {
@@ -63,7 +64,7 @@ const htmlIndex = new HtmlWebpackPlugin({
   analyticsUA: PACKAGE.config.analyticsUA,
   gitInfo: GIT_INFO,
   NODE_ENV: NODE_ENV,
-  minify: minifyOptions
+  minify: NODE_ENV === "development" ? false : minifyOptions
 });
 
 export { htmlIndex };
