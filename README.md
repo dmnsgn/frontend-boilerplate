@@ -2,7 +2,7 @@
 
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
-> An ES201X starter with common frontend tasks using [Webpack 3](https://webpack.js.org/) as module bundler and npm scripts as task runner.
+> An ES201X starter with common frontend tasks using [Webpack 4](https://webpack.js.org/) as module bundler and npm scripts as task runner.
 
 For an older version with Gulp 4, see [1.6.2](https://github.com/dmnsgn/frontend-boilerplate/releases/tag/1.6.2).
 
@@ -10,7 +10,7 @@ For an older version with Gulp 4, see [1.6.2](https://github.com/dmnsgn/frontend
 
 ### Requirements
 
-Node `">=5.0.0"` (use brew or install it from [here](http://nodejs.org/download/))
+Node `">=6.0.0"` (use brew or install it from [here](http://nodejs.org/download/))
 
 ```bash
 brew install node
@@ -62,34 +62,36 @@ Open `package.json`:
 
 ```bash
 npm run dev
+// or npm start
 ```
 
 ## Production
 
 ```bash
 npm run prod
+// or npm run build
 ```
 
 ## Features
 
 ### Webpack [loaders](https://webpack.js.org/loaders/)
 
-* [Babel](https://babeljs.io/)
-* [Typescript](https://www.typescriptlang.org/)
+* [Babel](https://babeljs.io/) with [preset-env](https://github.com/babel/babel/tree/master/packages/babel-preset-env) and [TypeScript](https://github.com/babel/babel/tree/master/packages/babel-preset-typescript)
 * [PostCSS](https://github.com/postcss/postcss): see [postcss.config.js](./config/postcss.config.js)
 * [Sass](http://sass-lang.com/)
 * [Less](http://lesscss.org/)
 * [Stylus](http://stylus-lang.com/)
 * fonts via [file-loader](https://github.com/webpack-contrib/file-loader)
-* optimised images via [file-loader](https://github.com/webpack-contrib/file-loader)
+* images via [file-loader](https://github.com/webpack-contrib/file-loader) and optimised with [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader)
+* svg via [file-loader](https://github.com/webpack-contrib/file-loader) and optimised with [svgo-loader](https://github.com/rpominov/svgo-loader)
 * [html-loader](https://github.com/webpack-contrib/html-loader)
+* [ejs-loader](https://github.com/okonet/ejs-loader)
 * [glslify](https://github.com/stackgl/glslify)
 
 ### Webpack [plugins](https://webpack.js.org/plugins/)
 
 * [DefinePlugin](https://webpack.js.org/plugins/define-plugin/): create global constants which can be configured at compile time
 * [HotModuleReplacementPlugin](https://webpack.js.org/plugins/hot-module-replacement-plugin/): enable Hot Module Replacement
-* [NamedModulesPlugin](https://webpack.js.org/guides/caching/#deterministic-hashes)
 * [HtmlWebpackPlugin](https://webpack.js.org/plugins/html-webpack-plugin/) with [Lodash](https://lodash.com/docs/4.17.5#template) templates: simplify creation of HTML files
 * [ExtractTextWebpackPlugin](https://webpack.js.org/plugins/extract-text-webpack-plugin/): extract text from a bundle, or bundles, into a separate file.
 * [SpritesmithPlugin](https://github.com/mixtur/webpack-spritesmith): convert a set of images into a spritesheet and SASS/LESS/Stylus mixins

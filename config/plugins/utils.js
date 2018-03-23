@@ -25,7 +25,6 @@ const buildInfo = new StatsWriterPlugin({
   filename: "stats.json"
 });
 
-// https://github.com/webpack-contrib/npm-install-webpack-plugin/issues/105
 const npmInstall = new NpmInstallPlugin({
   dev: false,
   peerDependencies: true,
