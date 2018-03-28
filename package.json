@@ -134,5 +134,8 @@
   },
   "eslintIgnore": [
     "node_modules"
-  ]
+  ],
+  "esm": {
+    "cache": false
+  }
 }
