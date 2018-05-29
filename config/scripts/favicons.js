@@ -11,20 +11,20 @@ const faviconPath = "images/favicon/";
 const destination = path.join(ROOT, PATHS.get("dist"), faviconPath);
 
 const configuration = {
+  path: faviconPath, // Path for overriding default icons path. `string`
   appName: PACKAGE.config.title, // Your application's name. `string`
-  appDescription: PACKAGE.description, // Your application's description. `string`
+  appDescription: PACKAGE.config.description, // Your application's description. `string`
   developerName: PACKAGE.author.name, // Your (or your developer's) name. `string`
   developerURL: PACKAGE.author.url, // Your (or your developer's) URL. `string`
+  dir: "auto", // Primary text direction for name, short_name, and description
+  lang: PACKAGE.config.lang, // Primary language for name and short_name
   background: "#fff", // Background colour for flattened icons. `string`
   theme_color: "#fff", // Theme color for browser chrome. `string`
-  path: faviconPath, // Path for overriding default icons path. `string`
   display: "standalone", // Android display: "browser" or "standalone". `string`
   orientation: "portrait", // Android orientation: "portrait" or "landscape". `string`
   start_url: "/?homescreen=1", // Android start application's URL. `string`
   version: GIT_INFO.get("version"), // Your application's version number. `number`
   logging: NODE_ENV === "development", // Print logs to console? `boolean`
-  online: false, // Use RealFaviconGenerator to create favicons? `boolean`
-  preferOnline: false, // Use offline generation, if online generation has failed. `boolean`
   icons: {
     // Platform Options:
     // - offset - offset in percentage
@@ -37,9 +37,7 @@ const configuration = {
     android: true, // Create Android homescreen icon. `boolean` or `{ offset, background, shadow }`
     appleIcon: true, // Create Apple touch icons. `boolean` or `{ offset, background }`
     appleStartup: true, // Create Apple startup images. `boolean` or `{ offset, background }`
-    coast: {
-      offset: 25
-    }, // Create Opera Coast icon with offset 25%. `boolean` or `{ offset, background }`
+    coast: true, // Create Opera Coast icon with offset 25%. `boolean` or `{ offset, background }`
     favicons: true, // Create regular favicons. `boolean`
     firefox: true, // Create Firefox OS icons. `boolean` or `{ offset, background }`
     windows: true, // Create Windows 8 tile icons. `boolean` or `{ background }`
