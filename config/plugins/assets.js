@@ -11,10 +11,10 @@ const spritesheet = new SpritesmithPlugin({
   target: {
     image: path.join(ROOT, PATHS.get("src"), "assets/sprite.png"),
     css: [
-      path.join(ROOT, PATHS.get("src"), "assets/sprite.scss"),
-      path.join(ROOT, PATHS.get("src"), "assets/sprite.less"),
-      path.join(ROOT, PATHS.get("src"), "assets/sprite.styl"),
-      path.join(ROOT, PATHS.get("src"), "assets/sprite.json")
+      path.join(ROOT, PATHS.get("src"), "assets/sprite.scss")
+      // path.join(ROOT, PATHS.get("src"), "assets/sprite.less"),
+      // path.join(ROOT, PATHS.get("src"), "assets/sprite.styl"),
+      // path.join(ROOT, PATHS.get("src"), "assets/sprite.json")
     ]
   },
   apiOptions: {

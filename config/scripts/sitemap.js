@@ -7,7 +7,7 @@ import { ROOT, PATHS, PACKAGE } from "../config";
 const destination = path.join(ROOT, PATHS.get("dist"), "sitemap.xml");
 
 const sm = sitemap.createSitemap({
-  hostname: PACKAGE.homepage,
+  hostname: PACKAGE.config.url,
   cacheTime: 600000,
   urls: [
     {

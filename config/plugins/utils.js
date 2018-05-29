@@ -1,10 +1,7 @@
-import fs from "fs";
-import path from "path";
 import webpack from "webpack";
-import NpmInstallPlugin from "npm-install-webpack-plugin";
 import { StatsWriterPlugin } from "webpack-stats-plugin";
 
-import { NODE_ENV, ROOT, PATHS, BANNER } from "../config";
+import { NODE_ENV, BANNER } from "../config";
 
 const define = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(NODE_ENV === "development"),
@@ -12,8 +9,6 @@ const define = new webpack.DefinePlugin({
 });
 
 const HMR = new webpack.HotModuleReplacementPlugin();
-
-const namedModules = new webpack.NamedModulesPlugin();
 
 const hashedModuleIds = new webpack.HashedModuleIdsPlugin();
 
@@ -27,19 +22,4 @@ const buildInfo = new StatsWriterPlugin({
   filename: "stats.json"
 });
 
-// https://github.com/webpack-contrib/npm-install-webpack-plugin/issues/105
-const npmInstall = new NpmInstallPlugin({
-  dev: false,
-  peerDependencies: true,
-  quiet: false
-});
-
-export {
-  define,
-  HMR,
-  namedModules,
-  hashedModuleIds,
-  banner,
-  buildInfo,
-  npmInstall
-};
+export { define, HMR, hashedModuleIds, banner, buildInfo };

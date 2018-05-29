@@ -1,41 +1,35 @@
 import path from "path";
 
-import { PATHS, ROOT, NODE_ENV, BROWSERS } from "../config";
+import { ROOT, PATHS, BROWSERS } from "../config";
 
-// babel-preset-env: https://github.com/babel/babel-preset-env
 const scripts = {
-  test: /\.(js|jsx)$/,
+  test: /\.((t|j)sx?)$/,
   include: path.join(ROOT, PATHS.get("src")),
   exclude: /(node_modules|bower_components)/,
   use: [
     {
       loader: "babel-loader",
       options: {
+        babelrc: false,
         presets: [
+          "@babel/preset-typescript",
           [
-            "env",
+            "@babel/preset-env",
             {
               modules: false,
+              useBuiltIns: false,
+              debug: false,
               targets: {
                 browsers: BROWSERS
               }
             }
-          ]
+          ],
+          ["@babel/preset-stage-2", { decoratorsLegacy: true }],
         ],
-        plugins: [
-          "transform-es2015-modules-commonjs",
-          "transform-class-properties",
-          "transform-object-rest-spread",
-          "syntax-dynamic-import"
-        ]
+        plugins: []
       }
     }
   ]
 };
 
-const typescript = {
-  test: /\.tsx?$/,
-  loader: "awesome-typescript-loader"
-};
-
-export { scripts, typescript };
+export { scripts };

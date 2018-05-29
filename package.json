@@ -1,15 +1,22 @@
 {
   "name": "frontend-boilerplate",
-  "version": "2.2.0",
-  "description": "An ES201X boilerplate with common frontend tasks using webpack 3 as build system.",
+  "version": "3.0.0",
+  "description": "An ES201X boilerplate with common frontend tasks using webpack 4 as build system.",
   "keywords": [
     "webpack",
-    "webpack3",
+    "webpack4",
     "boilerplate",
     "frontend",
     "workflow",
     "preprocessor",
-    "framework"
+    "framework",
+    "babel",
+    "typescript",
+    "postcss",
+    "sass",
+    "less",
+    "stylus",
+    "glsl"
   ],
   "homepage": "https://github.com/dmnsgn/frontend-boilerplate",
   "bugs": {
@@ -25,91 +32,96 @@
     "url": "https://github.com/dmnsgn/frontend-boilerplate"
   },
   "scripts": {
-    "favicons": "node -r @std/esm ./config/scripts/favicons.js",
-    "sitemap": "node -r @std/esm ./config/scripts/sitemap.js",
-    "robotstxt": "node -r @std/esm ./config/scripts/robotstxt.js",
-    "clean": "node -r @std/esm ./config/scripts/clean.js",
-    "dev:webpack": "cross-env NODE_ENV=development webpack-dev-server --config=config/index.babel.js",
-    "prod:webpack": "cross-env NODE_ENV=production webpack --config=config/index.babel.js",
-    "start": "npm run dev",
+    "favicons": "node -r esm ./config/scripts/favicons.js",
+    "sitemap": "node -r esm ./config/scripts/sitemap.js",
+    "robotstxt": "node -r esm ./config/scripts/robotstxt.js",
+    "clean": "node -r esm ./config/scripts/clean.js",
+    "dev:webpack": "cross-env NODE_ENV=development webpack-dev-server -r esm --config=config/index.js",
+    "prod:webpack": "cross-env NODE_ENV=production webpack -r esm --config=config/index.js",
     "dev": "run-p favicons dev:*",
-    "prod": "run-s favicons prod:* && run-p sitemap robotstxt"
+    "prod": "run-s favicons clean prod:* && run-p sitemap robotstxt",
+    "start": "npm run dev",
+    "build": "npm run prod"
   },
   "config": {
     "title": "Frontend Boilerplate",
+    "url": "https://dmnsgn.me",
+    "lang": "en",
+    "description": "An ES201X boilerplate with common frontend tasks using webpack 4 as build system.",
+    "copyright": "MIT - Damien Seguin",
     "handle": "@dmnsgn",
     "analyticsUA": "UA-XXXXX-X"
   },
-  "@std/esm": {
-    "esm": "js",
-    "cjs": true
-  },
   "dependencies": {
-    "babel-polyfill": "^6.26.0"
+    "@babel/polyfill": "^7.0.0-beta.49"
   },
   "devDependencies": {
-    "@std/esm": "^0.20.0",
-    "autoprefixer": "^7.2.5",
-    "awesome-typescript-loader": "^3.4.1",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^8.2.1",
-    "babel-loader": "^7.1.2",
-    "babel-minify": "^0.3.0",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-decorators": "^6.24.1",
-    "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-es2015": "^6.24.1",
-    "chalk": "^2.3.0",
-    "cross-env": "^5.1.3",
-    "css-loader": "^0.28.9",
+    "@babel/cli": "^7.0.0-beta.49",
+    "@babel/core": "^7.0.0-beta.49",
+    "@babel/preset-env": "^7.0.0-beta.49",
+    "@babel/preset-stage-2": "^7.0.0-beta.49",
+    "@babel/preset-typescript": "^7.0.0-beta.49",
+    "autoprefixer": "^8.5.1",
+    "babel-eslint": "^8.2.3",
+    "babel-loader": "^8.0.0-beta.3",
+    "chalk": "^2.4.1",
+    "cross-env": "^5.1.6",
+    "css-loader": "^0.28.11",
     "del": "^3.0.0",
-    "ejs-loader": "^0.3.0",
-    "eslint": "^4.16.0",
+    "ejs-loader": "^0.3.1",
+    "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.0",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "favicons": "^4.8.6",
-    "file-loader": "^1.1.6",
-    "generate-robotstxt": "^5.0.3",
-    "git-rev-sync": "^1.9.1",
+    "esm": "^3.0.39",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "favicons": "^5.1.1",
+    "file-loader": "^1.1.11",
+    "generate-robotstxt": "^5.0.7",
+    "git-rev-sync": "^1.12.0",
     "glslify-loader": "^1.0.2",
     "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^2.30.1",
-    "image-webpack-loader": "^4.0.0",
-    "less": "^2.7.3",
-    "less-loader": "^4.0.5",
+    "html-webpack-plugin": "^3.2.0",
+    "image-webpack-loader": "^4.2.0",
+    "less": "^3.0.4",
+    "less-loader": "^4.1.0",
     "mkdirp": "^0.5.1",
-    "node-sass": "^4.7.2",
+    "node-sass": "^4.9.0",
     "npm-install-webpack-plugin": "^4.0.5",
-    "npm-run-all": "^4.1.2",
+    "npm-run-all": "^4.1.3",
     "postcss-cssnext": "^3.1.0",
-    "postcss-import": "^11.0.0",
+    "postcss-import": "^11.1.0",
     "postcss-load-config": "^1.2.0",
-    "postcss-loader": "^2.1.0",
-    "prettier": "^1.10.2",
+    "postcss-loader": "^2.1.5",
+    "prettier": "^1.13.2",
     "raw-loader": "^0.5.1",
-    "sass-loader": "^6.0.6",
+    "sass-loader": "^7.0.1",
     "sitemap": "^1.13.0",
-    "style-loader": "^0.20.1",
+    "style-loader": "^0.21.0",
     "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.1",
-    "typescript": "^2.7.1",
-    "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.11.1",
-    "webpack-spritesmith": "^0.4.0",
-    "webpack-stats-plugin": "^0.1.5"
+    "stylus-loader": "^3.0.2",
+    "svg-sprite-loader": "^3.8.0",
+    "svgo": "^1.0.5",
+    "svgo-loader": "^2.1.0",
+    "typescript": "^2.8.3",
+    "webpack": "^4.10.1",
+    "webpack-cli": "^2.1.4",
+    "webpack-dev-server": "^3.1.4",
+    "webpack-spritesmith": "^0.4.1",
+    "webpack-stats-plugin": "^0.2.1"
   },
   "engines": {
-    "node": ">=5.0.0"
+    "node": ">=6.0.0"
   },
   "babel": {
     "presets": [
-      "es2015"
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
     ]
   },
   "eslintConfig": {
@@ -124,7 +136,7 @@
       "prettier/prettier": "error"
     },
     "parserOptions": {
-      "ecmaVersion": 2017,
+      "ecmaVersion": 2018,
       "sourceType": "module",
       "ecmaFeatures": {
         "experimentalObjectRestSpread": false
@@ -133,5 +145,8 @@
   },
   "eslintIgnore": [
     "node_modules"
-  ]
+  ],
+  "esm": {
+    "cache": false
+  }
 }

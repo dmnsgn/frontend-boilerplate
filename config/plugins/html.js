@@ -44,26 +44,32 @@ const minifyOptions = {
   useShortDoctype: true
 };
 
-const htmlIndex = new HtmlWebpackPlugin({
-  filename: "index.html",
-  template: "templates/index.ejs",
+const templateData = {
   title: PACKAGE.config.title,
-  description: PACKAGE.description,
+  description: PACKAGE.config.description,
+  lang: PACKAGE.config.lang,
   og: {
     title: PACKAGE.config.title,
     type: "website",
-    image: `${PACKAGE.homepage}/share.jpg`,
-    url: PACKAGE.homepage,
+    image: `${PACKAGE.config.url}/share.jpg`,
+    url: PACKAGE.config.url,
     description: PACKAGE.description
   },
   twitter: {
-    imageAlt: PACKAGE.description,
+    imageAlt: PACKAGE.config.description,
     handle: PACKAGE.config.handle
   },
   analyticsUA: PACKAGE.config.analyticsUA,
   gitInfo: GIT_INFO,
-  NODE_ENV: NODE_ENV,
-  minify: minifyOptions
+  NODE_ENV: NODE_ENV
+};
+
+const htmlIndex = new HtmlWebpackPlugin({
+  inject: true,
+  filename: "index.html",
+  template: "templates/index.html",
+  minify: NODE_ENV === "development" ? false : minifyOptions,
+  ...templateData
 });
 
 export { htmlIndex };

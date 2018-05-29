@@ -22,8 +22,8 @@ const options = {
       cleanParam: "ref /articles/"
     }
   ],
-  sitemap: `${PACKAGE.homepage}/sitemap.xml`,
-  host: PACKAGE.homepage
+  sitemap: `${PACKAGE.config.url}/sitemap.xml`,
+  host: PACKAGE.config.url
 };
 
 robotstxt(options).then(content => fs.writeFileSync(destination, content));
