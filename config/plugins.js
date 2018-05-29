@@ -8,8 +8,7 @@ import {
   HMR,
   hashedModuleIds,
   banner,
-  buildInfo,
-  npmInstall
+  buildInfo
 } from "./plugins/utils";
 
 const extractCSS = new ExtractTextPlugin("index.[contentHash].css");
@@ -24,6 +23,5 @@ export default [
   NODE_ENV === "production" ? extractCSS : 0,
   spritesheet,
   NODE_ENV === "production" ? banner : 0,
-  // NODE_ENV === "development" ? npmInstall : 0,
   NODE_ENV === "production" ? buildInfo : 0
 ].filter(Boolean);

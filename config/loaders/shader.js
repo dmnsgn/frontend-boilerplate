@@ -1,6 +1,6 @@
 import path from "path";
 
-import { PATHS, ROOT, NODE_ENV } from "../config";
+import { PATHS, ROOT } from "../config";
 
 const shader = {
   test: /\.(glsl|frag|vert)$/,

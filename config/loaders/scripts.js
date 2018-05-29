@@ -1,8 +1,7 @@
 import path from "path";
 
-import { PATHS, ROOT, NODE_ENV, BROWSERS } from "../config";
+import { ROOT, PATHS, BROWSERS } from "../config";
 
-// babel-preset-env: https://github.com/babel/babel-preset-env
 const scripts = {
   test: /\.((t|j)sx?)$/,
   include: path.join(ROOT, PATHS.get("src")),
@@ -13,6 +12,7 @@ const scripts = {
       options: {
         babelrc: false,
         presets: [
+          "@babel/preset-typescript",
           [
             "@babel/preset-env",
             {
@@ -24,8 +24,7 @@ const scripts = {
               }
             }
           ],
-          "@babel/preset-stage-2",
-          "@babel/preset-typescript"
+          ["@babel/preset-stage-2", { decoratorsLegacy: true }],
         ],
         plugins: []
       }

@@ -49,14 +49,14 @@ Open `package.json`:
 
 | Key                    | Description                                                |  Type  |
 | :--------------------- | :--------------------------------------------------------- | :----: |
-| **description**        | title used for metas, favicons and banner                  | String |
-| **homepage**           | absolute url used for metas, robotstxt, sitemap and banner | String |
-| **license**            | license acronym used for banner                            | String |
-| **author.name**        | author name used for favicons                              | String |
-| **author.url**         | author url used for favicons                               | String |
 | **config.title**       | title used for metas and favicons                          | String |
+| **config.url**         | absolute url used for metas, robotstxt, sitemap and banner | String |
+| **config.description** | title used for metas, favicons and banner                  | String |
+| **config.copyright**   | license acronym used for banner                            | String |
 | **config.handle**      | twitter handle for metas                                   | String |
 | **config.analyticsUA** | google analytics UA                                        | String |
+| **author.name**        | author name used for favicons                              | String |
+| **author.url**         | author url used for favicons                               | String |
 
 ## Develop
 
@@ -96,7 +96,6 @@ npm run prod
 * [ExtractTextWebpackPlugin](https://webpack.js.org/plugins/extract-text-webpack-plugin/): extract text from a bundle, or bundles, into a separate file.
 * [SpritesmithPlugin](https://github.com/mixtur/webpack-spritesmith): convert a set of images into a spritesheet and SASS/LESS/Stylus mixins
 * [BannerPlugin](https://webpack.js.org/plugins/banner-plugin/): add a banner to the top of each generated chunk.
-  <!-- * [NpmInstallWebpackPlugin](https://webpack.js.org/plugins/npm-install-webpack-plugin/): speed up development by automatically installing & saving dependencies with Webpack. -->
 * [WebpackStatsPlugin](https://github.com/FormidableLabs/webpack-stats-plugin): ingest the webpack stats object, process / transform the object and write out to a file for further consumption.
 
 ### npm scripts
