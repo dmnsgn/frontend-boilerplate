@@ -39,7 +39,7 @@
     "dev:webpack": "cross-env NODE_ENV=development webpack-dev-server -r esm --config=config/index.js",
     "prod:webpack": "cross-env NODE_ENV=production webpack -r esm --config=config/index.js",
     "dev": "run-p favicons dev:*",
-    "prod": "run-s favicons clean prod:* && run-p sitemap robotstxt",
+    "prod": "run-s clean favicons prod:* && run-p sitemap robotstxt",
     "start": "npm run dev",
     "build": "npm run prod"
   },
