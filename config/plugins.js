@@ -11,7 +11,8 @@ import {
   buildInfo
 } from "./plugins/utils";
 
-const extractCSS = new ExtractTextPlugin("index.[contentHash].css");
+// https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/763#issuecomment-377990665
+const extractCSS = new ExtractTextPlugin("index.[md5:contenthash:hex:20].css");
 
 export { extractCSS };
 
