@@ -94,7 +94,7 @@ npm run prod
 - [DefinePlugin](https://webpack.js.org/plugins/define-plugin/): create global constants which can be configured at compile time
 - [HotModuleReplacementPlugin](https://webpack.js.org/plugins/hot-module-replacement-plugin/): enable Hot Module Replacement
 - [HtmlWebpackPlugin](https://webpack.js.org/plugins/html-webpack-plugin/) with [Lodash](https://lodash.com/docs/4.17.5#template) templates: simplify creation of HTML files
-- [ExtractTextWebpackPlugin](https://webpack.js.org/plugins/extract-text-webpack-plugin/): extract text from a bundle, or bundles, into a separate file.
+- [MiniCssExtractPlugin](https://webpack.js.org/plugins/mini-css-extract-plugin/): lightweight CSS extraction plugin
 - [SpritesmithPlugin](https://github.com/mixtur/webpack-spritesmith): convert a set of images into a spritesheet and SASS/LESS/Stylus mixins
 - [BannerPlugin](https://webpack.js.org/plugins/banner-plugin/): add a banner to the top of each generated chunk.
 - [WebpackStatsPlugin](https://github.com/FormidableLabs/webpack-stats-plugin): ingest the webpack stats object, process / transform the object and write out to a file for further consumption.

@@ -2,10 +2,10 @@ import path from "path";
 
 import postcssImport from "postcss-import";
 import cssnext from "postcss-cssnext";
+import cssnano from "cssnano";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 import { PATHS, ROOT, NODE_ENV, BROWSERS } from "../config";
-
-import { extractCSS } from "../plugins";
 
 const styleLoader = {
   loader: "style-loader"
@@ -14,91 +14,82 @@ const styleLoader = {
 const cssLoader = {
   loader: "css-loader",
   options: {
-    sourceMap: NODE_ENV !== "production",
-    root: "/",
     url: true,
-    alias: {},
     import: true,
     modules: false,
-    minimize: NODE_ENV === "production",
-    sourceMap: true,
+    sourceMap: NODE_ENV !== "production",
     camelCase: false,
-    importLoaders: 0
+    importLoaders: 0,
+    exportOnlyLocals: false
   }
 };
 
-const sassUse = [
-  cssLoader,
-  {
-    loader: "sass-loader",
-    options: {}
+const postcssLoader = {
+  loader: "postcss-loader",
+  options: {
+    exec: undefined,
+    parser: undefined,
+    syntax: undefined,
+    stringifier: undefined,
+    config: {
+      path: path.join(ROOT, PATHS.get("config"), "postcss.config.js")
+    },
+    plugins: loader =>
+      [
+        postcssImport(),
+        cssnext({ browsers: BROWSERS }),
+        NODE_ENV === "production" ? cssnano() : 0
+      ].filter(Boolean),
+    sourceMap: true
   }
-];
+};
 
 const sass = {
   test: /\.scss$/,
-  use:
-    NODE_ENV === "production"
-      ? extractCSS.extract(sassUse)
-      : [styleLoader, ...sassUse]
+  use: [
+    NODE_ENV === "production" ? MiniCssExtractPlugin.loader : styleLoader,
+    cssLoader,
+    postcssLoader,
+    {
+      loader: "sass-loader",
+      options: {}
+    }
+  ]
 };
-
-const lessUse = [
-  cssLoader,
-  {
-    loader: "less-loader",
-    options: {}
-  }
-];
 
 const less = {
   test: /\.less$/,
-  use:
-    NODE_ENV === "production"
-      ? extractCSS.extract(lessUse)
-      : [styleLoader, ...lessUse]
+  use: [
+    NODE_ENV === "production" ? MiniCssExtractPlugin.loader : styleLoader,
+    cssLoader,
+    postcssLoader,
+    {
+      loader: "less-loader",
+      options: {}
+    }
+  ]
 };
-
-const stylusUse = [
-  cssLoader,
-  {
-    loader: "stylus-loader",
-    options: {}
-  }
-];
 
 const stylus = {
   test: /\.styl$/,
-  use:
-    NODE_ENV === "production"
-      ? extractCSS.extract(stylusUse)
-      : [styleLoader, ...stylusUse]
-};
-
-const cssUse = [
-  cssLoader,
-  {
-    loader: "postcss-loader",
-    options: {
-      exec: undefined,
-      parser: undefined,
-      syntax: undefined,
-      stringifier: undefined,
-      config: {
-        path: path.join(ROOT, PATHS.get("config"), "postcss.config.js")
-      },
-      plugins: loader => [postcssImport(), cssnext({ browsers: BROWSERS })],
-      sourceMap: true
+  use: [
+    NODE_ENV === "production" ? MiniCssExtractPlugin.loader : styleLoader,
+    cssLoader,
+    postcssLoader,
+    {
+      loader: "stylus-loader",
+      options: {}
     }
-  }
-];
+  ]
+};
 
 const css = {
   test: /\.css$/,
-  use:
-    NODE_ENV === "production"
-      ? extractCSS.extract(cssUse)
-      : [styleLoader, ...cssUse]
+  use: [
+    NODE_ENV === "production" ? MiniCssExtractPlugin.loader : styleLoader,
+    cssLoader,
+    postcssLoader
+  ]
 };
 
 const fonts = {
