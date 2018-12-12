@@ -2,6 +2,7 @@ import path from "path";
 
 import postcssImport from "postcss-import";
 import cssnext from "postcss-cssnext";
+import cssnano from "cssnano";
 
 import { PATHS, ROOT, NODE_ENV, BROWSERS } from "../config";
 
@@ -14,16 +15,13 @@ const styleLoader = {
 const cssLoader = {
   loader: "css-loader",
   options: {
-    sourceMap: NODE_ENV !== "production",
-    root: "/",
     url: true,
-    alias: {},
     import: true,
     modules: false,
-    minimize: NODE_ENV === "production",
-    sourceMap: true,
+    sourceMap: NODE_ENV !== "production",
     camelCase: false,
-    importLoaders: 0
+    importLoaders: 0,
+    exportOnlyLocals: false
   }
 };
 
@@ -87,7 +85,12 @@ const cssUse = [
       config: {
         path: path.join(ROOT, PATHS.get("config"), "postcss.config.js")
       },
-      plugins: loader => [postcssImport(), cssnext({ browsers: BROWSERS })],
+      plugins: loader =>
+        [
+          postcssImport(),
+          cssnext({ browsers: BROWSERS }),
+          NODE_ENV === "production" ? cssnano() : false
+        ].filter(Boolean),
       sourceMap: true
     }
   }
