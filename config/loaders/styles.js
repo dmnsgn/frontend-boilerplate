@@ -1,14 +1,19 @@
 import path from "path";
 
 import postcssImport from "postcss-import";
-import cssnext from "postcss-cssnext";
+import postcssPresetEnv from "postcss-preset-env";
 import cssnano from "cssnano";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 import { PATHS, ROOT, NODE_ENV, BROWSERS } from "../config";
 
+const sourceMap = NODE_ENV !== "production";
+
 const styleLoader = {
-  loader: "style-loader"
+  loader: "style-loader",
+  options: {
+    sourceMap
+  }
 };
 
 const cssLoader = {
@@ -17,7 +22,7 @@ const cssLoader = {
     url: true,
     import: true,
     modules: false,
-    sourceMap: NODE_ENV !== "production",
+    sourceMap,
     camelCase: false,
     importLoaders: 0,
     exportOnlyLocals: false
@@ -32,15 +37,20 @@ const postcssLoader = {
     syntax: undefined,
     stringifier: undefined,
     config: {
-      path: path.join(ROOT, PATHS.get("config"), "postcss.config.js")
+      path: path.join(ROOT, PATHS.get("config"), "postcss.config.js"),
+      ctx: {
+        "postcss-preset-env": {},
+        cssnano: {}
+      }
     },
+    ident: "postcss",
     plugins: loader =>
       [
-        postcssImport(),
-        cssnext({ browsers: BROWSERS }),
+        postcssImport({ root: loader.resourcePath }),
+        postcssPresetEnv({ browsers: BROWSERS }),
         NODE_ENV === "production" ? cssnano() : 0
       ].filter(Boolean),
-    sourceMap: true
+    sourceMap
   }
 };
 
@@ -52,7 +62,9 @@ const sass = {
     postcssLoader,
     {
       loader: "sass-loader",
-      options: {}
+      options: {
+        sourceMap
+      }
     }
   ]
 };
@@ -65,7 +77,7 @@ const less = {
     postcssLoader,
     {
       loader: "less-loader",
-      options: {}
+      options: { sourceMap }
     }
   ]
 };
@@ -78,7 +90,7 @@ const stylus = {
     postcssLoader,
     {
       loader: "stylus-loader",
-      options: {}
+      options: { sourceMap }
     }
   ]
 };
