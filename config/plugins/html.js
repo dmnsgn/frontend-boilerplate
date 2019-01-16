@@ -1,6 +1,3 @@
-import path from "path";
-import fs from "fs";
-
 import HtmlWebpackPlugin from "html-webpack-plugin";
 
 import { NODE_ENV, PACKAGE, GIT_INFO } from "../config";
