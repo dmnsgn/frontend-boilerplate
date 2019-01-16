@@ -53,7 +53,7 @@ const templateData = {
     type: "website",
     image: `${PACKAGE.config.url}/share.jpg`,
     url: PACKAGE.config.url,
-    description: PACKAGE.description
+    description: PACKAGE.config.description
   },
   twitter: {
     imageAlt: PACKAGE.config.description,
