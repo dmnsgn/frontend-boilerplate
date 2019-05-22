@@ -7,7 +7,7 @@ import chalk from "chalk";
 import { NODE_ENV, ROOT, PATHS, PACKAGE, GIT_INFO } from "../config";
 
 const source = path.join(ROOT, PATHS.get("src"), "/assets/favicon.png");
-const faviconPath = "images/favicon/";
+const faviconPath = "/images/favicon/";
 const destination = path.join(ROOT, PATHS.get("dist"), faviconPath);
 
 const configuration = {
