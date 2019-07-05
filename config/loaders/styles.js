@@ -96,7 +96,7 @@ const stylus = {
 };
 
 const css = {
-  test: /\.css$/,
+  test: /\.(p|post)?css$/,
   use: [
     NODE_ENV === "production" ? MiniCssExtractPlugin.loader : styleLoader,
     cssLoader,
