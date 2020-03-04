@@ -17,7 +17,8 @@ const scripts = {
             "@babel/preset-env",
             {
               modules: false,
-              useBuiltIns: false,
+              corejs: 3,
+              useBuiltIns: "usage",
               debug: false,
               targets: {
                 browsers: BROWSERS
