@@ -28,6 +28,6 @@ Compiled: ${Date()}
 @copyright ${PACKAGE.config.copyright}`;
 
 // https://github.com/ai/browserslist
-const BROWSERS = ["> 1%", "IE 10"];
+const BROWSERS = ["defaults"];
 
 export { NODE_ENV, ROOT, PATHS, PACKAGE, GIT_INFO, BANNER, BROWSERS };
