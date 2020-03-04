@@ -1,8 +1,9 @@
-import ExtractTextPlugin from "extract-text-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 import { NODE_ENV } from "./config";
+import { reloadHtml } from "./server";
 import { htmlIndex } from "./plugins/html";
-import { spritesheet } from "./plugins/assets";
+import { spritesheet, compression, offline } from "./plugins/assets";
 import {
   define,
   HMR,
@@ -11,18 +12,19 @@ import {
   buildInfo
 } from "./plugins/utils";
 
-// https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/763#issuecomment-377990665
-const extractCSS = new ExtractTextPlugin("index.[md5:contenthash:hex:20].css");
-
-export { extractCSS };
-
 export default [
   define,
   NODE_ENV === "development" ? HMR : 0,
   NODE_ENV === "production" ? hashedModuleIds : 0,
   htmlIndex,
-  NODE_ENV === "production" ? extractCSS : 0,
+  reloadHtml,
+  new MiniCssExtractPlugin({
+    filename: NODE_ENV !== "production" ? "[name].css" : "[name].[hash].css",
+    chunkFilename: NODE_ENV !== "production" ? "[id].css" : "[id].[hash].css"
+  }),
   spritesheet,
   NODE_ENV === "production" ? banner : 0,
-  NODE_ENV === "production" ? buildInfo : 0
+  NODE_ENV === "production" ? buildInfo : 0,
+  // NODE_ENV === "production" ? compression : 0,
+  NODE_ENV === "production" ? offline : 0
 ].filter(Boolean);

@@ -1,7 +1,27 @@
 import { PATHS } from "./config";
 
+let devServer;
+
+export function reloadHtml() {
+  const cache = {};
+  const plugin = { name: "CustomHtmlReloadPlugin" };
+  this.hooks.compilation.tap(plugin, compilation => {
+    compilation.hooks.htmlWebpackPluginAfterEmit.tap(plugin, data => {
+      const orig = cache[data.outputName];
+      const html = data.html.source();
+      if (orig && orig !== html) {
+        devServer.sockWrite(devServer.sockets, "content-changed");
+      }
+      cache[data.outputName] = html;
+    });
+  });
+}
+
 // https://webpack.js.org/configuration/dev-server/
 export default {
+  before(app, server) {
+    devServer = server;
+  },
   // allowedHosts: [],
   // bonjour: true,
   clientLogLevel: "info",

@@ -15,7 +15,8 @@ const hashedModuleIds = new webpack.HashedModuleIdsPlugin();
 const banner = new webpack.BannerPlugin({
   banner: BANNER,
   raw: false,
-  entryOnly: false
+  entryOnly: false,
+  exclude: /\.svg$/
 });
 
 const buildInfo = new StatsWriterPlugin({
