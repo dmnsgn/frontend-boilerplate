@@ -1,45 +1,45 @@
 <div class="build-info">
 	<span>Version: <%= data.gitInfo.get('GIT_VERSION') %> | </span>
-	<span>Tag: <%= data.gitInfo.get('GIT_TAG') %></span><br>
+	<span>Tag: <%= data.gitInfo.get('GIT_TAG') %></span><br />
 	<span>Hash: <%= data.gitInfo.get('GIT_HASH') %> | </span>
 	<span>Date: <%= data.gitInfo.get('GIT_DATE') %></span>
 </div>
 
 <style>
-<% if (data.NODE_ENV === 'production'){ %>
-.build-info {
-	display: none;
-}
-<% } else{ %>
-.build-info {
-  z-index: 9999;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  padding-left: 27px;
-  height: 26px;
-  color: #000;
-  font-size: 10px;
-  font-family: Verdana, sans-serif;
-  background-color: rgba(255, 255, 255, 0.7);
-}
-.build-info::before {
-  content: "#";
-  position: absolute;
-  top: 7px;
-  left: 9px;
-}
-.build-info span {
-  display: none;
-  margin-left: 0;
-  margin-right: 5px;
-}
-.build-info:hover {
-  width: initial;
-}
-.build-info:hover span {
-  display: inline;
-}
-<% } %>
+	<% if (data.NODE_ENV === 'production'){ %>
+	.build-info {
+		display: none;
+	}
+	<% } else{ %>
+	.build-info {
+	  z-index: 9999;
+	  position: fixed;
+	  bottom: 0;
+	  left: 0;
+	  width: 0;
+	  padding-left: 27px;
+	  height: 26px;
+	  color: #000;
+	  font-size: 10px;
+	  font-family: Verdana, sans-serif;
+	  background-color: rgba(255, 255, 255, 0.7);
+	}
+	.build-info::before {
+	  content: "#";
+	  position: absolute;
+	  top: 7px;
+	  left: 9px;
+	}
+	.build-info span {
+	  display: none;
+	  margin-left: 0;
+	  margin-right: 5px;
+	}
+	.build-info:hover {
+	  width: initial;
+	}
+	.build-info:hover span {
+	  display: inline;
+	}
+	<% } %>
 </style>

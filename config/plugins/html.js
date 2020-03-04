@@ -1,6 +1,3 @@
-import path from "path";
-import fs from "fs";
-
 import HtmlWebpackPlugin from "html-webpack-plugin";
 
 import { NODE_ENV, PACKAGE, GIT_INFO } from "../config";
@@ -53,7 +50,7 @@ const templateData = {
     type: "website",
     image: `${PACKAGE.config.url}/share.jpg`,
     url: PACKAGE.config.url,
-    description: PACKAGE.description
+    description: PACKAGE.config.description
   },
   twitter: {
     imageAlt: PACKAGE.config.description,

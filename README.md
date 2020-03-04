@@ -4,7 +4,7 @@
 
 > An ES201X starter with common frontend tasks using [Webpack 4](https://webpack.js.org/) as module bundler and npm scripts as task runner.
 
-For an older version with Gulp 4, see [1.6.2](https://github.com/dmnsgn/frontend-boilerplate/releases/tag/1.6.2).
+If you serve your files over HTTPS with HTTP/2, use compression (gzip, brotli...) for text-based resources, and respect [accessibility rules](https://developers.google.com/web/fundamentals/accessibility/), your [lighthouse](https://developers.google.com/web/tools/lighthouse/) score will be 100%.
 
 ## Setup
 
@@ -96,6 +96,8 @@ npm run prod
 - [HtmlWebpackPlugin](https://webpack.js.org/plugins/html-webpack-plugin/) with [Lodash](https://lodash.com/docs/4.17.5#template) templates: simplify creation of HTML files
 - [MiniCssExtractPlugin](https://webpack.js.org/plugins/mini-css-extract-plugin/): lightweight CSS extraction plugin
 - [SpritesmithPlugin](https://github.com/mixtur/webpack-spritesmith): convert a set of images into a spritesheet and SASS/LESS/Stylus mixins
+- [CompressionPlugin](https://github.com/webpack-contrib/compression-webpack-plugin): Prepare compressed versions of assets to serve them with Content-Encoding (default to gzip). Requires server configuration so it is commented [here](./config/plugins.js#L26)
+- [OfflinePlugin](https://github.com/NekR/offline-plugin): provide an offline experience using ServiceWorker, and AppCache as a fallback.
 - [BannerPlugin](https://webpack.js.org/plugins/banner-plugin/): add a banner to the top of each generated chunk.
 - [WebpackStatsPlugin](https://github.com/FormidableLabs/webpack-stats-plugin): ingest the webpack stats object, process / transform the object and write out to a file for further consumption.
 
