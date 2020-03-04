@@ -43,7 +43,7 @@ Open `config/config.js`:
 | Key          | Description                                                                                                                | Type  |
 | :----------- | :------------------------------------------------------------------------------------------------------------------------- | :---: |
 | **PATHS**    | map of paths to the differents folders needed by `webpack` and `npm scripts`                                               |  Map  |
-| **BROWSERS** | the browsers targeted for `babel-preset-env` and `autoprefixer` (see full list [here](https://github.com/ai/browserslist)) | Array |
+| **BROWSERS** | the browsers targeted for `babel-preset-env` and `browserslist` (see full list [here](https://github.com/ai/browserslist)) | Array |
 
 Open `package.json`:
 
