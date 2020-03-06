@@ -1,6 +1,12 @@
 # frontend-boilerplate
 
+[![travis](https://img.shields.io/travis/dmnsgn/frontend-boilerplate)](https://travis-ci.org/dmnsgn/frontend-boilerplate)
+[![dependencies](https://img.shields.io/david/dmnsgn/frontend-boilerplate)](https://github.com/dmnsgn/frontend-boilerplate/blob/master/package.json)
+[![repo size](https://img.shields.io/github/repo-size/dmnsgn/frontend-boilerplate)](https://github.com/dmnsgn/frontend-boilerplate)
+[![version](https://img.shields.io/github/package-json/v/dmnsgn/frontend-boilerplate/master)](https://github.com/dmnsgn/frontend-boilerplate/blob/master/package.json)
+[![twitter](https://img.shields.io/twitter/follow/dmnsgn?style=social)](https://twitter.com/dmnsgn)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![license](https://img.shields.io/github/license/dmnsgn/frontend-boilerplate)](https://github.com/frontend-boilerplate/frontend-boilerplate/blob/master/LICENSE)
 
 > An ES201X starter with common frontend tasks using [Webpack 4](https://webpack.js.org/) as module bundler and npm scripts as task runner.
 
