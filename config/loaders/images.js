@@ -11,18 +11,22 @@ const images = {
     {
       loader: "image-webpack-loader",
       query: {
-        gifsicle: {
-          interlaced: true
+        mozjpeg: {
+          progressive: true,
+          quality: 65
         },
         optipng: {
-          optimizationLevel: 7
+          enabled: false
         },
         pngquant: {
-          quality: "65-90",
+          quality: [0.65, 0.9],
           speed: 4
         },
-        mozjpeg: {
-          progressive: true
+        gifsicle: {
+          interlaced: false
+        },
+        webp: {
+          quality: 75
         }
       }
     }
