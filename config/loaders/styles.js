@@ -12,7 +12,11 @@ const sourceMap = NODE_ENV !== "production";
 const styleLoader = {
   loader: "style-loader",
   options: {
-    sourceMap
+    injectType: "styleTag",
+    attributes: {},
+    insert: "head",
+    // base: 1000,
+    esModule: false
   }
 };
 
@@ -23,9 +27,10 @@ const cssLoader = {
     import: true,
     modules: false,
     sourceMap,
-    camelCase: false,
     importLoaders: 0,
-    exportOnlyLocals: false
+    localsConvention: "asIs",
+    onlyLocals: false,
+    esModule: false
   }
 };
 
