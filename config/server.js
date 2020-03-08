@@ -45,7 +45,7 @@ export default {
   // overlay: true,
   // pfx: "/path/to/file.pfx",
   // pfxPassphrase: "passphrase",
-  port: 8080,
+  // port: 8080,
   // proxy: {
   //   "/api": "http://localhost:3000"
   // },
