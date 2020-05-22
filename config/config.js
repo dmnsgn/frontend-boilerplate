@@ -1,5 +1,4 @@
 import fs from "fs";
-import path from "path";
 import GitRevSync from "git-rev-sync";
 
 const NODE_ENV = process.env.NODE_ENV;
