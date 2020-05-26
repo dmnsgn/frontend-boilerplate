@@ -38,7 +38,7 @@ const minifyOptions = {
   sortAttributes: true,
   sortClassName: true,
   trimCustomFragments: true,
-  useShortDoctype: true
+  useShortDoctype: false
 };
 
 const templateData = {
