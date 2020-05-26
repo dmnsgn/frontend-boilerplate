@@ -25,9 +25,11 @@ const images = {
         gifsicle: {
           interlaced: false
         },
-        webp: {
-          quality: 75
-        }
+        // The following encode images to webp while keeping original file extension.
+        // Use only if you don't care about Safari support: https://caniuse.com/#feat=webp
+        // webp: {
+        //  quality: 75
+        // }
       }
     }
   ]
