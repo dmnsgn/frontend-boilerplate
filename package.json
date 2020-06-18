@@ -1,7 +1,7 @@
 {
   "name": "frontend-boilerplate",
   "version": "3.8.1",
-  "description": "An ES201X boilerplate with common frontend tasks using webpack 4 as build system.",
+  "description": "An ES20XX boilerplate with common frontend tasks using webpack 4 as build system.",
   "keywords": [
     "webpack",
     "webpack4",
@@ -50,7 +50,7 @@
     "title": "Frontend Boilerplate",
     "url": "https://dmnsgn.me",
     "lang": "en",
-    "description": "An ES201X boilerplate with common frontend tasks using webpack 4 as build system.",
+    "description": "An ES20XX boilerplate with common frontend tasks using webpack 4 as build system.",
     "copyright": "MIT - Damien Seguin",
     "handle": "@dmnsgn",
     "analyticsUA": "UA-XXXXX-X"

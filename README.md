@@ -8,7 +8,7 @@
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![license](https://img.shields.io/github/license/dmnsgn/frontend-boilerplate)](https://github.com/frontend-boilerplate/frontend-boilerplate/blob/master/LICENSE)
 
-> An ES201X starter with common frontend tasks using [Webpack 4](https://webpack.js.org/) as module bundler and npm scripts as task runner.
+> An ES20XX starter with common frontend tasks using [Webpack 4](https://webpack.js.org/) as module bundler and npm scripts as task runner.
 
 If you serve your files over HTTPS with HTTP/2, use compression (gzip, brotli...) for text-based resources, and respect [accessibility rules](https://developers.google.com/web/fundamentals/accessibility/), your [lighthouse](https://developers.google.com/web/tools/lighthouse/) score will be 100%.
 
