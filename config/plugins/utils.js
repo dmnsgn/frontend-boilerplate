@@ -1,26 +1,31 @@
 import webpack from "webpack";
-import { StatsWriterPlugin } from "webpack-stats-plugin";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
+import ObsoleteWebpackPlugin from "obsolete-webpack-plugin";
 
-import { NODE_ENV, BANNER } from "../config";
+import { NODE_ENV, BANNER, BROWSERS } from "../config.js";
 
 const define = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(NODE_ENV === "development"),
-  __PRODUCTION__: JSON.stringify(NODE_ENV === "production")
+  __PRODUCTION__: JSON.stringify(NODE_ENV === "production"),
 });
-
-const HMR = new webpack.HotModuleReplacementPlugin();
-
-const hashedModuleIds = new webpack.HashedModuleIdsPlugin();
 
 const banner = new webpack.BannerPlugin({
   banner: BANNER,
   raw: false,
   entryOnly: false,
-  exclude: /\.svg$/
+  exclude: /\.svg$/,
 });
 
-const buildInfo = new StatsWriterPlugin({
-  filename: "stats.json"
+const progress = new webpack.ProgressPlugin();
+
+const analyze = new BundleAnalyzerPlugin({
+  analyzerMode: NODE_ENV === "production" ? "static" : "disabled",
+  generateStatsFile: true,
+  openAnalyzer: false,
 });
 
-export { define, HMR, hashedModuleIds, banner, buildInfo };
+const obsolete = new ObsoleteWebpackPlugin({
+  browsers: BROWSERS,
+});
+
+export { define, banner, progress, analyze, obsolete };

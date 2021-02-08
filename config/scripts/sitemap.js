@@ -1,22 +1,37 @@
-import fs from "fs";
-import path from "path";
-import { createSitemap } from "sitemap";
+import { writeFileSync } from "fs";
+import { join } from "path";
+import { Readable } from "stream";
+import { SitemapStream, streamToPromise } from "sitemap";
 
-import { ROOT, PATHS, PACKAGE } from "../config";
+import { ROOT, PATHS, PACKAGE } from "../config.js";
 
-const destination = path.join(ROOT, PATHS.get("dist"), "sitemap.xml");
+const destination = join(ROOT, PATHS.get("dist"), "sitemap.xml");
 
-const sm = createSitemap({
-  hostname: PACKAGE.config.url,
-  cacheTime: 600000,
-  urls: [
-    {
-      url: "/",
+const links = [];
+const getPageInstance = (page) => {
+  if (!page.pages) return;
+
+  page.pages.forEach((page) => {
+    getPageInstance(page);
+    links.push({
+      url: page.id === "index" ? "/" : `/${page.id}/`,
       changefreq: "weekly",
-      priority: 1.0,
-      lastmodrealtime: true
-    }
-  ]
-});
+      priority: page.id === "index" ? 1.0 : 0.8,
+      lastmodrealtime: true,
+    });
+  });
+};
+getPageInstance(PACKAGE.config);
 
-fs.writeFileSync(destination, sm.toString());
+(async () => {
+  // Create a stream to write to
+  const stream = new SitemapStream({
+    hostname: PACKAGE.config.url,
+    cacheTime: 600000,
+  });
+
+  writeFileSync(
+    destination,
+    (await streamToPromise(Readable.from(links).pipe(stream))).toString()
+  );
+})();

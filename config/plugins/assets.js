@@ -1,45 +1,80 @@
-import path from "path";
-import SpritesmithPlugin from "webpack-spritesmith";
-import CompressionPlugin from "compression-webpack-plugin";
-import OfflinePlugin from "offline-plugin";
+import { join } from "path";
 
-import { ROOT, PATHS } from "../config";
+import imagemin from "imagemin";
+import webp from "imagemin-webp";
+import sharp from "sharp";
+import SpritesmithPlugin from "webpack-spritesmith";
+import SpriteLoaderPlugin from "svg-sprite-loader/plugin.js";
+import ConvertAssetsPlugin from "convert-assets-webpack-plugin";
+import CompressionPlugin from "compression-webpack-plugin";
+import WorkboxWebpackPlugin from "workbox-webpack-plugin";
+
+import { ROOT, PATHS, NODE_ENV } from "../config.js";
 
 const spritesheet = new SpritesmithPlugin({
   src: {
-    cwd: path.join(ROOT, PATHS.get("src"), "assets/sprites/"),
-    glob: "*.png"
+    cwd: join(ROOT, PATHS.get("src"), "assets/sprites/"),
+    glob: "*.png",
   },
   target: {
-    image: path.join(ROOT, PATHS.get("src"), "assets/sprite.png"),
+    image: join(ROOT, PATHS.get("src"), "assets/sprite.png"),
     css: [
-      path.join(ROOT, PATHS.get("src"), "assets/sprite.scss")
-      // path.join(ROOT, PATHS.get("src"), "assets/sprite.less"),
-      // path.join(ROOT, PATHS.get("src"), "assets/sprite.styl"),
-      // path.join(ROOT, PATHS.get("src"), "assets/sprite.json")
-    ]
+      // join(ROOT, PATHS.get("src"), "assets/sprite.scss"),
+      // join(ROOT, PATHS.get("src"), "assets/sprite.less"),
+      // join(ROOT, PATHS.get("src"), "assets/sprite.styl"),
+      join(ROOT, PATHS.get("src"), "assets/sprite.json"),
+    ],
   },
   apiOptions: {
-    cssImageRef: "~sprite.png"
+    cssImageRef: "~sprite.png",
   },
   spritesmithOptions: {
     padding: 2,
-    algorithm: "binary-tree"
+    algorithm: "binary-tree",
   },
-  retina: "@2x"
+  retina: "@2x",
 });
+
+const svgSprite = new SpriteLoaderPlugin({ plainSprite: true });
+
+const convertImages = new ConvertAssetsPlugin([
+  {
+    test: /\.(jpe?g|png)/,
+    verbose: NODE_ENV === "production",
+    filename: (name) => `${name}.avif`,
+    async convertBuffer(buffer) {
+      return await sharp(buffer).avif().toBuffer();
+    },
+  },
+  {
+    test: /\.(jpe?g|png)/,
+    verbose: NODE_ENV === "production",
+    filename: (name) => `${name}.webp`,
+    async convertBuffer(buffer) {
+      return await imagemin.buffer(buffer, {
+        plugins: [
+          webp({
+            quality: 75,
+            method: 6,
+          }),
+        ],
+      });
+    },
+  },
+]);
 
 const compression = new CompressionPlugin({
   test: /\.(html|css|js|svg)(\?.*)?$/i,
   // Default to gzip
-  cache: false,
-  filename: "[path].gz[query]",
+  filename: "[path][base].gz[query]",
   algorithm: "gzip",
   // See https://nodejs.org/api/zlib.html#zlib_class_options
   compressionOptions: { level: 9 },
   threshold: 0,
   minRatio: 0.8,
-  deleteOriginalAssets: false
+  deleteOriginalAssets: true,
+  exclude: /.map$/,
+  deleteOriginalAssets: "keep-source-map",
 
   // For Zopfli (npm install @gfx/zopfli --save-dev)
   // compressionOptions: {
@@ -58,6 +93,32 @@ const compression = new CompressionPlugin({
   // deleteOriginalAssets: false
 });
 
-const offline = new OfflinePlugin();
+const pwa = new WorkboxWebpackPlugin.GenerateSW({
+  clientsClaim: true,
+  skipWaiting: true,
+  sourcemap: false,
+  // Exclude mp4 (optionally containing hash)
+  exclude: [/\.map$/, /^manifest.*\.js$/, /\.mp4(?::(\d+))?/],
+  // exclude: [/\.map$/, /^manifest.*\.js(?:on)?$/, '**/*.mp4'],
+  // runtimeCaching: [
+  //   {
+  //     urlPattern: new RegExp("\\.mp4$"),
+  //     handler: "CacheFirst",
+  //     options: {
+  //       cacheName: "precache",
+  //       plugins: [
+  //         {
+  //           cacheKeyWillBeUsed: ({ request }) =>
+  //             new Request(getCacheKeyForURL(request.url), {
+  //               headers: request.headers,
+  //             }),
+  //         },
+  //         new CacheableResponsePlugin({ statuses: [200] }),
+  //         new RangeRequestsPlugin(),
+  //       ],
+  //     },
+  //   },
+  // ],
+});
 
-export { spritesheet, compression, offline };
+export { spritesheet, svgSprite, convertImages, compression, pwa };

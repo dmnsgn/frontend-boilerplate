@@ -1,5 +1,8 @@
-import fs from "fs";
-import GitRevSync from "git-rev-sync";
+import { readFileSync } from "fs";
+import { createRequire } from "module";
+
+const require = createRequire(import.meta.url);
+const GitRevSync = require("git-rev-sync");
 
 const NODE_ENV = process.env.NODE_ENV;
 const ROOT = process.env.PWD;
@@ -10,7 +13,7 @@ const PATHS = new Map()
   .set("test", "test");
 
 const PACKAGE = JSON.parse(
-  fs.readFileSync("./package.json", { encoding: "utf-8" })
+  readFileSync("./package.json", { encoding: "utf-8" })
 );
 
 const GIT_INFO = new Map()
@@ -27,6 +30,6 @@ Compiled: ${Date()}
 @copyright ${PACKAGE.config.copyright}`;
 
 // https://github.com/ai/browserslist
-const BROWSERS = ["defaults"];
+const BROWSERS = PACKAGE.browserslist;
 
 export { NODE_ENV, ROOT, PATHS, PACKAGE, GIT_INFO, BANNER, BROWSERS };

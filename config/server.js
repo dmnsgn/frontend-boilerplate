@@ -1,70 +1,63 @@
-import { PATHS } from "./config";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+
+import { PATHS } from "./config.js";
 
 let devServer;
+const cache = {};
 
-export function reloadHtml() {
-  const cache = {};
-  const plugin = { name: "CustomHtmlReloadPlugin" };
-  this.hooks.compilation.tap(plugin, compilation => {
-    compilation.hooks.htmlWebpackPluginAfterEmit.tap(plugin, data => {
-      const orig = cache[data.outputName];
-      const html = data.html.source();
-      if (orig && orig !== html) {
-        devServer.sockWrite(devServer.sockets, "content-changed");
-      }
-      cache[data.outputName] = html;
+export class CustomHtmlReloadPlugin {
+  apply(compiler) {
+    compiler.hooks.compilation.tap("CustomHtmlReloadPlugin", (compilation) => {
+      HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tapAsync(
+        "CustomHtmlReloadPlugin",
+        (data, cb) => {
+          const orig = cache[data.outputName];
+          const html = data.html;
+          if (orig && orig !== html) {
+            devServer.sockWrite(devServer.sockets, "content-changed");
+          }
+          cache[data.outputName] = html;
+          cb();
+        }
+      );
     });
-  });
+  }
 }
 
-// https://webpack.js.org/configuration/dev-server/
 export default {
-  before(app, server) {
-    devServer = server;
-  },
-  // allowedHosts: [],
-  // bonjour: true,
-  clientLogLevel: "info",
+  // bonjour: false,
+  // client: {},
   compress: true,
-  contentBase: PATHS.get("dist"),
-  disableHostCheck: true,
-  // filename: "bundle.js",
+  dev: {
+    publicPath: "/",
+  },
+  // firewall: ['192.168.0.1', 'domain.com']
+  firewall: false,
   // headers: {
   //   "X-Custom-Foo": "bar"
   // },
+  port: 8080,
   historyApiFallback: true,
-  host: "0.0.0.0",
   hot: true,
-  // hotOnly: true,
+  http2: true,
   https: true,
-  inline: true,
-  // lazy: true,
-  noInfo: false,
+  // injectClient: false,
+  // injectHot: false,
+  liveReload: true,
+  // onAfterSetupMiddleware: () => {},
+  onBeforeSetupMiddleware(server) {
+    devServer = server;
+  },
+  // onListening: () => {},
   open: true,
-  // openPage: '/api',
-  // overlay: true,
-  // pfx: "/path/to/file.pfx",
-  // pfxPassphrase: "passphrase",
-  // port: 8080,
+  // openPage: ['/different/page1', '/different/page2'],
   // proxy: {
   //   "/api": "http://localhost:3000"
   // },
   // public: "myapp.test:80",
-  // publicPath: "/assets/",
-  quiet: false,
-  // setup(app) {
-  //   app.get("/some/path", function(req, res) {
-  //     res.json({ custom: "response" });
-  //   });
-  // }
-  // socket: "socket",
-  // staticOptions: {
-  //   redirect: false
-  // },
-  stats: "normal", // "errors-only" | "minimal" | "none" | "normal" | "detailed" | "verbose"
-  // useLocalIp: true,
-  watchContentBase: false
-  // watchOptions: {
-  //   poll: true
-  // }
+  setupExitSignals: true,
+  // static: path.join(ROOT, PATHS.get("dist")),
+  static: PATHS.get("dist"),
+  transportMode: "ws", // "sockjs"
+  useLocalIp: true,
 };
