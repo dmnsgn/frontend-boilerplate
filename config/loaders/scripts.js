@@ -11,6 +11,9 @@ const scripts = {
       loader: "babel-loader",
       options: {
         babelrc: false,
+        targets: {
+          browsers: BROWSERS,
+        },
         presets: [
           "@babel/preset-typescript",
           [
@@ -20,9 +23,6 @@ const scripts = {
               corejs: 3,
               useBuiltIns: "usage",
               debug: NODE_ENV === "production",
-              targets: {
-                browsers: BROWSERS,
-              },
             },
           ],
         ],
