@@ -1,28 +1,6 @@
-import HtmlWebpackPlugin from "html-webpack-plugin";
+import { join } from "path";
 
-import { PATHS } from "./config.js";
-
-let devServer;
-const cache = {};
-
-export class CustomHtmlReloadPlugin {
-  apply(compiler) {
-    compiler.hooks.compilation.tap("CustomHtmlReloadPlugin", (compilation) => {
-      HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tapAsync(
-        "CustomHtmlReloadPlugin",
-        (data, cb) => {
-          const orig = cache[data.outputName];
-          const html = data.html;
-          if (orig && orig !== html) {
-            devServer.sockWrite(devServer.sockets, "content-changed");
-          }
-          cache[data.outputName] = html;
-          cb();
-        }
-      );
-    });
-  }
-}
+import { PATHS, ROOT } from "./config.js";
 
 export default {
   // bonjour: false,
@@ -45,9 +23,7 @@ export default {
   // injectHot: false,
   liveReload: true,
   // onAfterSetupMiddleware: () => {},
-  onBeforeSetupMiddleware(server) {
-    devServer = server;
-  },
+  // onBeforeSetupMiddleware(server) {},
   // onListening: () => {},
   open: true,
   // openPage: ['/different/page1', '/different/page2'],
@@ -58,6 +34,6 @@ export default {
   setupExitSignals: true,
   // static: path.join(ROOT, PATHS.get("dist")),
   static: PATHS.get("dist"),
-  transportMode: "ws", // "sockjs"
-  useLocalIp: true,
+  transportMode: "ws", // "sockjs",
+  watchFiles: [join(ROOT, PATHS.get("src"), "**/*.{ejs,html}")],
 };

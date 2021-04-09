@@ -1,5 +1,5 @@
 import { NODE_ENV } from "./config.js";
-import { htmlPages, htmlProcessing, htmlReload } from "./plugins/html.js";
+import { htmlPages, htmlProcessing } from "./plugins/html.js";
 import { cssExtract, cssUnused, cssCritical } from "./plugins/css.js";
 import {
   spritesheet,
@@ -21,7 +21,6 @@ export default [
   obsolete,
   define,
   ...htmlPages,
-  NODE_ENV === "development" ? htmlReload : 0,
   htmlProcessing,
   cssExtract,
   NODE_ENV === "production" ? cssUnused : 0,

@@ -6,7 +6,6 @@ import validator from "html-validator";
 import posthtml from "posthtml";
 import posthtmlImageSources from "./posthtml-image-sources.js";
 
-import { CustomHtmlReloadPlugin } from "../server.js";
 import { NODE_ENV, PACKAGE, GIT_INFO } from "../config.js";
 
 const minifyOptions = {
@@ -139,6 +138,4 @@ getPageInstanceRecursively(PACKAGE.config);
 
 const htmlProcessing = new HtmlWebpackProcessingPlugin();
 
-const htmlReload = new CustomHtmlReloadPlugin();
-
-export { htmlPages, htmlProcessing, htmlReload };
+export { htmlPages, htmlProcessing };
