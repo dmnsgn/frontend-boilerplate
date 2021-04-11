@@ -123,7 +123,6 @@ export default {
     minimizer: [
       "...",
       new CssMinimizerPlugin({
-        sourceMap: true,
         minimizerOptions: {
           preset: [
             "default",
