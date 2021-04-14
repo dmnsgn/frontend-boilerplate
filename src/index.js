@@ -1,5 +1,11 @@
-import * as OfflinePluginRuntime from "offline-plugin/runtime";
-OfflinePluginRuntime.install();
+import "./test/test.js";
 
-import App from "./App";
-const app = new App();
+window.addEventListener("load", async () => {
+  if ("serviceWorker" in navigator) {
+    try {
+      await navigator.serviceWorker.register("/service-worker.js");
+    } catch (error) {
+      console.log("SW registration failed: ", error);
+    }
+  }
+});

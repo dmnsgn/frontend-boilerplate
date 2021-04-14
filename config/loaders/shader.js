@@ -1,20 +1,17 @@
-import path from "path";
+import { join } from "path";
 
-import { PATHS, ROOT } from "../config";
+import { PATHS, ROOT } from "../config.js";
 
 const shader = {
   test: /\.(glsl|frag|vert)$/,
-  include: path.join(ROOT, PATHS.get("src")),
+  include: join(ROOT, PATHS.get("src")),
+  type: "asset/source",
   use: [
     {
-      loader: "raw-loader",
-      options: {}
-    },
-    {
       loader: "glslify-loader",
-      options: {}
-    }
-  ]
+      options: {},
+    },
+  ],
 };
 
 export { shader };

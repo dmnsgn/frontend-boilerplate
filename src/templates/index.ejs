@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="<%= htmlWebpackPlugin.options.lang %>">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title><%= htmlWebpackPlugin.options.title %></title>
+
+		<%= require('./_meta.ejs')({ data: htmlWebpackPlugin.options }) %>
+		<%= require('./_favicons.ejs')() %>
+	</head>
+	<body>
+		<noscript>Please enable javascript</noscript>
+		<img
+			src="<%= webpackConfig.output.publicPath %>sprite.svg"
+			class="u-no-picture-wrap"
+			style="display: none"
+			alt=""
+		/>
+
+		<main>
+			<h1>Frontend Boilerplate</h1>
+		</main>
+
+		<%= require('./_version.ejs')({ data: htmlWebpackPlugin.options }) %>
+		<%= require('./_analytics.ejs')({ data: htmlWebpackPlugin.options }) %>
+	</body>
+</html>

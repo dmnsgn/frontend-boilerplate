@@ -1,120 +1,102 @@
-import path from "path";
-
 import postcssImport from "postcss-import";
 import postcssPresetEnv from "postcss-preset-env";
-import cssnano from "cssnano";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
-import { PATHS, ROOT, NODE_ENV, BROWSERS } from "../config";
+import { NODE_ENV, BROWSERS } from "../config.js";
 
 const sourceMap = NODE_ENV !== "production";
 
 const styleLoader = {
   loader: "style-loader",
   options: {
-    sourceMap
-  }
+    // injectType: "styleTag",
+    // attributes: {},
+    // insert: "head",
+    // base: true,
+    esModule: true,
+  },
 };
 
 const cssLoader = {
   loader: "css-loader",
   options: {
-    url: true,
-    import: true,
+    // url: true,
+    // import: true,
     modules: false,
     sourceMap,
-    camelCase: false,
-    importLoaders: 0,
-    exportOnlyLocals: false
-  }
+    importLoaders: 1,
+    esModule: true,
+  },
 };
+
+const extractLoader = MiniCssExtractPlugin.loader;
 
 const postcssLoader = {
   loader: "postcss-loader",
   options: {
-    exec: undefined,
-    parser: undefined,
-    syntax: undefined,
-    stringifier: undefined,
-    config: {
-      path: path.join(ROOT, PATHS.get("config"), "postcss.config.js"),
-      ctx: {
-        "postcss-preset-env": {},
-        cssnano: {}
-      }
+    // execute: undefined,
+    postcssOptions: {
+      config: false,
+      plugins: [
+        postcssImport(),
+        postcssPresetEnv({ browsers: BROWSERS, stage: 0 }),
+      ],
     },
-    ident: "postcss",
-    plugins: loader =>
-      [
-        postcssImport({ root: loader.resourcePath }),
-        postcssPresetEnv({ browsers: BROWSERS }),
-        NODE_ENV === "production" ? cssnano() : 0
-      ].filter(Boolean),
-    sourceMap
-  }
+    sourceMap,
+  },
 };
 
 const sass = {
-  test: /\.scss$/,
+  test: /\.(sa|sc)ss$/,
   use: [
-    NODE_ENV === "production" ? MiniCssExtractPlugin.loader : styleLoader,
+    NODE_ENV === "production" ? extractLoader : styleLoader,
     cssLoader,
     postcssLoader,
     {
       loader: "sass-loader",
-      options: {
-        sourceMap
-      }
-    }
-  ]
+      options: { sourceMap },
+    },
+  ],
 };
 
 const less = {
   test: /\.less$/,
   use: [
-    NODE_ENV === "production" ? MiniCssExtractPlugin.loader : styleLoader,
+    NODE_ENV === "production" ? extractLoader : styleLoader,
     cssLoader,
     postcssLoader,
     {
       loader: "less-loader",
-      options: { sourceMap }
-    }
-  ]
+      options: { sourceMap },
+    },
+  ],
 };
 
 const stylus = {
   test: /\.styl$/,
   use: [
-    NODE_ENV === "production" ? MiniCssExtractPlugin.loader : styleLoader,
+    NODE_ENV === "production" ? extractLoader : styleLoader,
     cssLoader,
     postcssLoader,
     {
       loader: "stylus-loader",
-      options: { sourceMap }
-    }
-  ]
+      options: { sourceMap },
+    },
+  ],
 };
 
 const css = {
   test: /\.(p|post)?css$/,
   use: [
-    NODE_ENV === "production" ? MiniCssExtractPlugin.loader : styleLoader,
+    NODE_ENV === "production" ? extractLoader : styleLoader,
     cssLoader,
-    postcssLoader
-  ]
+    postcssLoader,
+  ],
 };
 
 const fonts = {
-  test: /\.(woff|woff2|eot|ttf|otf)$/,
-  use: [
-    {
-      loader: "file-loader",
-      query: {
-        name: "[name].[ext]",
-        outputPath: "fonts/"
-      }
-    }
-  ]
+  test: /\.(woff(2)?|eot|ttf|otf)$/,
+  type: "asset/resource",
 };
 
 export { css, sass, less, stylus, fonts };

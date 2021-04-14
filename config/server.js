@@ -1,70 +1,39 @@
-import { PATHS } from "./config";
+import { join } from "path";
 
-let devServer;
+import { PATHS, ROOT } from "./config.js";
 
-export function reloadHtml() {
-  const cache = {};
-  const plugin = { name: "CustomHtmlReloadPlugin" };
-  this.hooks.compilation.tap(plugin, compilation => {
-    compilation.hooks.htmlWebpackPluginAfterEmit.tap(plugin, data => {
-      const orig = cache[data.outputName];
-      const html = data.html.source();
-      if (orig && orig !== html) {
-        devServer.sockWrite(devServer.sockets, "content-changed");
-      }
-      cache[data.outputName] = html;
-    });
-  });
-}
-
-// https://webpack.js.org/configuration/dev-server/
 export default {
-  before(app, server) {
-    devServer = server;
-  },
-  // allowedHosts: [],
-  // bonjour: true,
-  clientLogLevel: "info",
+  // bonjour: false,
+  // client: {},
   compress: true,
-  contentBase: PATHS.get("dist"),
-  disableHostCheck: true,
-  // filename: "bundle.js",
+  dev: {
+    publicPath: "/",
+  },
+  // firewall: ['192.168.0.1', 'domain.com']
+  firewall: false,
   // headers: {
   //   "X-Custom-Foo": "bar"
   // },
-  historyApiFallback: true,
-  host: "0.0.0.0",
-  hot: true,
-  // hotOnly: true,
-  https: true,
-  inline: true,
-  // lazy: true,
-  noInfo: false,
-  open: true,
-  // openPage: '/api',
-  // overlay: true,
-  // pfx: "/path/to/file.pfx",
-  // pfxPassphrase: "passphrase",
   port: 8080,
+  historyApiFallback: true,
+  hot: true,
+  http2: true,
+  https: true,
+  // injectClient: false,
+  // injectHot: false,
+  liveReload: true,
+  // onAfterSetupMiddleware: () => {},
+  // onBeforeSetupMiddleware(server) {},
+  // onListening: () => {},
+  open: true,
+  // openPage: ['/different/page1', '/different/page2'],
   // proxy: {
   //   "/api": "http://localhost:3000"
   // },
   // public: "myapp.test:80",
-  // publicPath: "/assets/",
-  quiet: false,
-  // setup(app) {
-  //   app.get("/some/path", function(req, res) {
-  //     res.json({ custom: "response" });
-  //   });
-  // }
-  // socket: "socket",
-  // staticOptions: {
-  //   redirect: false
-  // },
-  stats: "normal", // "errors-only" | "minimal" | "none" | "normal" | "detailed" | "verbose"
-  // useLocalIp: true,
-  watchContentBase: false
-  // watchOptions: {
-  //   poll: true
-  // }
+  setupExitSignals: true,
+  // static: path.join(ROOT, PATHS.get("dist")),
+  static: PATHS.get("dist"),
+  transportMode: "ws", // "sockjs",
+  watchFiles: [join(ROOT, PATHS.get("src"), "**/*.{ejs,html}")],
 };

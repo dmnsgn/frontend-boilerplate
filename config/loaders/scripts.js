@@ -1,16 +1,19 @@
-import path from "path";
+import { join } from "path";
 
-import { ROOT, PATHS, BROWSERS } from "../config";
+import { ROOT, PATHS, BROWSERS, NODE_ENV } from "../config.js";
 
 const scripts = {
-  test: /\.((t|j)sx?)$/,
-  include: path.join(ROOT, PATHS.get("src")),
+  test: /\.((t|j|cj|mj)sx?)$/,
+  include: join(ROOT, PATHS.get("src")),
   exclude: /(node_modules|bower_components)/,
   use: [
     {
       loader: "babel-loader",
       options: {
         babelrc: false,
+        targets: {
+          browsers: BROWSERS,
+        },
         presets: [
           "@babel/preset-typescript",
           [
@@ -19,30 +22,30 @@ const scripts = {
               modules: false,
               corejs: 3,
               useBuiltIns: "usage",
-              debug: false,
-              targets: {
-                browsers: BROWSERS
-              }
-            }
-          ]
+              debug: NODE_ENV === "production",
+            },
+          ],
         ],
         plugins: [
-          // Stage 2
-          ["@babel/plugin-proposal-decorators", { legacy: true }],
-          "@babel/plugin-proposal-function-sent",
-          "@babel/plugin-proposal-export-namespace-from",
-          "@babel/plugin-proposal-numeric-separator",
-          "@babel/plugin-proposal-throw-expressions",
+          // Stage 4
+          "@babel/plugin-syntax-dynamic-import",
+          "@babel/plugin-proposal-unicode-property-regex",
+          "babel-plugin-transform-regexp-constructors",
+          "babel-plugin-transform-modern-regexp",
 
           // Stage 3
-          "@babel/plugin-syntax-dynamic-import",
+          "@babel/plugin-proposal-class-properties",
           "@babel/plugin-syntax-import-meta",
-          ["@babel/plugin-proposal-class-properties", { loose: false }],
-          "@babel/plugin-proposal-json-strings"
-        ]
-      }
-    }
-  ]
+          "@babel/plugin-proposal-json-strings",
+
+          // Stage 2
+          "@babel/plugin-proposal-function-sent",
+          ["@babel/plugin-proposal-decorators", { legacy: true }],
+          "@babel/plugin-proposal-throw-expressions",
+        ],
+      },
+    },
+  ],
 };
 
 export { scripts };

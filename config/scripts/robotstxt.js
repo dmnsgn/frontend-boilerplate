@@ -1,10 +1,10 @@
-import fs from "fs";
-import path from "path";
+import { writeFileSync } from "fs";
+import { join } from "path";
 import robotstxt from "generate-robotstxt";
 
-import { ROOT, PATHS, PACKAGE } from "../config";
+import { ROOT, PATHS, PACKAGE } from "../config.js";
 
-const destination = path.join(ROOT, PATHS.get("dist"), "robots.txt");
+const destination = join(ROOT, PATHS.get("dist"), "robots.txt");
 
 const options = {
   policy: [
@@ -12,18 +12,18 @@ const options = {
       userAgent: "Googlebot",
       allow: "/",
       disallow: "/search",
-      crawlDelay: 2
+      crawlDelay: 2,
     },
     {
       userAgent: "*",
       allow: "/",
       disallow: "/search",
       crawlDelay: 10,
-      cleanParam: "ref /articles/"
-    }
+      cleanParam: "ref /articles/",
+    },
   ],
   sitemap: `${PACKAGE.config.url}/sitemap.xml`,
-  host: PACKAGE.config.url
+  host: PACKAGE.config.url,
 };
 
-robotstxt(options).then(content => fs.writeFileSync(destination, content));
+robotstxt(options).then((content) => writeFileSync(destination, content));
