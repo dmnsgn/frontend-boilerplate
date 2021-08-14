@@ -9,6 +9,10 @@ export default [
     test: /\.(pdf|txt)$/,
     type: "asset/resource",
   },
+  {
+    test: /\.(xml)$/,
+    type: "asset/source",
+  },
   markup,
   ejs,
   markdown,
