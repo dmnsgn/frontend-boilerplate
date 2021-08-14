@@ -1,6 +1,7 @@
 import { join } from "path";
 
 import imagemin from "imagemin";
+import zlib from "zlib";
 import webp from "imagemin-webp";
 import sharp from "sharp";
 import SpritesmithPlugin from "webpack-spritesmith";
@@ -69,10 +70,9 @@ const compression = new CompressionPlugin({
   filename: "[path][base].gz[query]",
   algorithm: "gzip",
   // See https://nodejs.org/api/zlib.html#zlib_class_options
-  compressionOptions: { level: 9 },
+  compressionOptions: { level: zlib.constants.Z_BEST_COMPRESSION },
   threshold: 0,
   minRatio: 0.8,
-  deleteOriginalAssets: true,
   exclude: /.map$/,
   deleteOriginalAssets: "keep-source-map",
 
@@ -85,12 +85,14 @@ const compression = new CompressionPlugin({
   // }
 
   // For Brotli
-  // filename: "[path].br[query]",
+  // filename: "[path][base].br[query]",
   // algorithm: "brotliCompress",
-  // compressionOptions: { level: 11 },
+  // compressionOptions: {
+  //   params: { [zlib.constants.BROTLI_PARAM_QUALITY]: 11 },
+  // },
   // threshold: 10240,
   // minRatio: 0.8,
-  // deleteOriginalAssets: false
+  // deleteOriginalAssets: "keep-source-map",
 });
 
 const pwa = new WorkboxWebpackPlugin.GenerateSW({
