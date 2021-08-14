@@ -11,6 +11,11 @@ const markup = {
       loader: "html-loader",
       options: {
         minimize: NODE_ENV === "production",
+        sources: {
+          urlFilter: (attribute, value) => {
+            return !(attribute === "xlink:href" && /sprite\.svg/.test(value));
+          },
+        },
       },
     },
   ],
