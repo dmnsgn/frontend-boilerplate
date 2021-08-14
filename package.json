@@ -1,6 +1,6 @@
 {
   "name": "frontend-boilerplate",
-  "version": "3.8.1",
+  "version": "4.0.0",
   "type": "module",
   "description": "An ES20XX boilerplate with common frontend tasks using webpack 5 as build system.",
   "keywords": [
@@ -200,7 +200,7 @@
     "parserOptions": {
       "ecmaVersion": 2021,
       "sourceType": "module",
-      "requireConfigFile" : false,
+      "requireConfigFile": false,
       "ecmaFeatures": {
         "experimentalObjectRestSpread": false
       }
