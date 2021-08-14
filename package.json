@@ -200,12 +200,15 @@
     "parserOptions": {
       "ecmaVersion": 2021,
       "sourceType": "module",
+      "requireConfigFile" : false,
       "ecmaFeatures": {
         "experimentalObjectRestSpread": false
       }
     },
     "env": {
-      "browser": true
+      "browser": true,
+      "es2021": true,
+      "node": true
     }
   },
   "eslintIgnore": [
