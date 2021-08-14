@@ -1,0 +1,18 @@
+:root {
+  --copy: "Space Mono Bold";
+}
+
+@font-face {
+  font-family: var(--copy);
+  font-display: swap;
+  src: url("./test.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+}
+
+body {
+  background-color: #f00;
+  background-image: url(./test.png);
+  background-size: cover;
+  font-family: var(--copy);
+}
