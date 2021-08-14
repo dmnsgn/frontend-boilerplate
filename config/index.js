@@ -178,7 +178,7 @@ export default {
     topLevelAwait: true,
   },
   // bail: false,
-  // cache: {}
+  // cache: { type: "filesystem", profile: true },
   // ignoreWarnings: null,
   // loader: {},
   // parallelism: 100,
