@@ -1,6 +1,12 @@
+import shortid from "shortid";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import HtmlWebpackProcessingPlugin from "html-webpack-processing-plugin";
+import validator from "html-validator";
 
-import { NODE_ENV, PACKAGE, GIT_INFO } from "../config";
+import posthtml from "posthtml";
+import posthtmlImageSources from "./posthtml-image-sources.js";
+
+import { NODE_ENV, PACKAGE, GIT_INFO } from "../config.js";
 
 const minifyOptions = {
   caseSensitive: false,
@@ -38,35 +44,98 @@ const minifyOptions = {
   sortAttributes: true,
   sortClassName: true,
   trimCustomFragments: true,
-  useShortDoctype: false
+  useShortDoctype: false,
 };
 
 const templateData = {
-  title: PACKAGE.config.title,
-  description: PACKAGE.config.description,
   lang: PACKAGE.config.lang,
   og: {
     title: PACKAGE.config.title,
-    type: "website",
-    image: `${PACKAGE.config.url}/share.jpg`,
+    description: PACKAGE.config.description,
+    type: PACKAGE.config.type,
     url: PACKAGE.config.url,
-    description: PACKAGE.config.description
+    image: `${PACKAGE.config.url}/share.jpg`,
+    imageWidth: PACKAGE.config.imageWidth,
+    imageHeight: PACKAGE.config.imageHeight,
   },
   twitter: {
+    card: PACKAGE.config.card,
+    handle: PACKAGE.config.handle,
     imageAlt: PACKAGE.config.description,
-    handle: PACKAGE.config.handle
   },
   analyticsUA: PACKAGE.config.analyticsUA,
   gitInfo: GIT_INFO,
-  NODE_ENV: NODE_ENV
+  NODE_ENV: NODE_ENV,
 };
 
-const htmlIndex = new HtmlWebpackPlugin({
-  inject: true,
-  filename: "index.html",
-  template: "templates/index.html",
-  minify: NODE_ENV === "development" ? false : minifyOptions,
-  ...templateData
-});
+const htmlPages = [];
 
-export { htmlIndex };
+const getPageInstanceRecursively = (page) => {
+  if (!page.pages) return;
+
+  page.pages.forEach((page) => {
+    getPageInstanceRecursively(page);
+    htmlPages.push(
+      new HtmlWebpackPlugin({
+        filename: page.id === "index" ? "index.html" : `${page.id}/index.html`,
+        title: page.name
+          ? `${page.name} · ${PACKAGE.config.title}`
+          : PACKAGE.config.title,
+        description: page.description || PACKAGE.config.description,
+        inject: true,
+        template: page.template || "templates/index.ejs",
+        minify: NODE_ENV === "development" ? false : minifyOptions,
+        page,
+        pages: PACKAGE.config.pages,
+        postProcessing: (content) => {
+          let result;
+
+          // Add hash to svg
+          content = content.replace(
+            /sprite.svg/g,
+            `sprite.svg?${shortid.generate()}`
+          );
+
+          // Wrap images in a picture element with a webp source and original image as fallback
+          try {
+            result = posthtml()
+              .use(
+                posthtmlImageSources({
+                  replaceExtension: true,
+                  classIgnore: ["u-no-picture-wrap"],
+                  extensionIgnore: ["svg", "gif"],
+                })
+              )
+              .process(content, { sync: true });
+          } catch (error) {
+            console.log(error);
+
+            return content;
+          }
+
+          // Validate html
+          (async () => {
+            try {
+              console.log(
+                `Validating page: ${page.id}\n${await validator({
+                  data: result.html,
+                  format: "text",
+                })}`
+              );
+            } catch (error) {
+              console.error(error);
+            }
+          })();
+
+          return result.html;
+        },
+        ...templateData,
+      })
+    );
+  });
+};
+getPageInstanceRecursively(PACKAGE.config);
+
+const htmlProcessing = new HtmlWebpackProcessingPlugin();
+
+export { htmlPages, htmlProcessing };

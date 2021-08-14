@@ -1,14 +1,14 @@
-import path from "path";
-import fs from "fs";
+import { writeFileSync } from "fs";
+import { join } from "path";
 import mkdirp from "mkdirp";
 import favicons from "favicons";
 import chalk from "chalk";
 
-import { NODE_ENV, ROOT, PATHS, PACKAGE, GIT_INFO } from "../config";
+import { NODE_ENV, ROOT, PATHS, PACKAGE, GIT_INFO } from "../config.js";
 
-const source = path.join(ROOT, PATHS.get("src"), "/assets/favicon.png");
-const faviconPath = "/images/favicon/";
-const destination = path.join(ROOT, PATHS.get("dist"), faviconPath);
+const source = join(ROOT, PATHS.get("src"), "/assets/favicon.png");
+const faviconPath = "/assets/favicon/";
+const destination = join(ROOT, PATHS.get("dist"), faviconPath);
 
 const configuration = {
   path: faviconPath, // Path for overriding default icons path. `string`
@@ -35,14 +35,14 @@ const configuration = {
     //   * color - set background for the specified icons
     //
     android: true, // Create Android homescreen icon. `boolean` or `{ offset, background, shadow }`
-    appleIcon: true, // Create Apple touch icons. `boolean` or `{ offset, background }`
-    appleStartup: true, // Create Apple startup images. `boolean` or `{ offset, background }`
+    appleIcon: ["apple-touch-icon-180x180.png"], // Create Apple touch icons. `boolean` or `{ offset, background }`
+    appleStartup: false, // Create Apple startup images. `boolean` or `{ offset, background }`
     coast: true, // Create Opera Coast icon with offset 25%. `boolean` or `{ offset, background }`
     favicons: true, // Create regular favicons. `boolean`
     firefox: true, // Create Firefox OS icons. `boolean` or `{ offset, background }`
     windows: true, // Create Windows 8 tile icons. `boolean` or `{ background }`
-    yandex: true // Create Yandex browser icon. `boolean` or `{ background }`
-  }
+    yandex: true, // Create Yandex browser icon. `boolean` or `{ background }`
+  },
 };
 
 const callback = (error, response) => {
@@ -55,8 +55,8 @@ const callback = (error, response) => {
 
   if (response.images) {
     mkdirp.sync(destination);
-    response.images.forEach(image =>
-      fs.writeFileSync(`${destination}${image.name}`, image.contents)
+    response.images.forEach((image) =>
+      writeFileSync(`${destination}${image.name}`, image.contents)
     );
     console.log(chalk.green("Favicons images generated."));
   } else {
@@ -65,8 +65,8 @@ const callback = (error, response) => {
 
   if (response.files) {
     mkdirp.sync(destination);
-    response.files.forEach(file =>
-      fs.writeFileSync(`${destination}${file.name}`, file.contents)
+    response.files.forEach((file) =>
+      writeFileSync(`${destination}${file.name}`, file.contents)
     );
     console.log(chalk.green("Favicons files generated."));
   } else {
@@ -74,7 +74,7 @@ const callback = (error, response) => {
   }
 
   if (response.html) {
-    fs.writeFileSync(
+    writeFileSync(
       `${PATHS.get("src")}/templates/_favicons.ejs`,
       response.html.join("\n")
     );
