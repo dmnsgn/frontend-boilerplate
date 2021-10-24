@@ -1,6 +1,6 @@
 {
   "name": "frontend-boilerplate",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "type": "module",
   "description": "An ES20XX boilerplate with common frontend tasks using webpack 5 as build system.",
   "keywords": [
