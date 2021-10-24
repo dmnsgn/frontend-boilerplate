@@ -39,7 +39,7 @@ export default {
     // uniqueName: "my-package-xyz",
     hashDigest: "hex",
     hashDigestLength: 20,
-    hashFunction: "md4",
+    hashFunction: "xxhash64",
     // hashSalt: "",
     // hotUpdateChunkFilename: "[id].[fullhash].hot-update.js",
     // hotUpdateGlobal: "webpackChunkwebpack",
