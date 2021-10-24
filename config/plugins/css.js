@@ -17,39 +17,11 @@ const cssExtract = new MiniCssExtractPlugin({
 const cssUnused = new PurgecssPlugin({
   paths: glob.sync(`${PATHS.get("src")}/**/*`, { nodir: true }),
   variables: true,
-  safelist: [/^hljs-/, /^::-webkit/],
+  safelist: [/^hljs-/, /^::-webkit-scrollbar/],
 });
 
-// TODO: https://github.com/GoogleChromeLabs/critters/pull/62
-const require = createRequire(import.meta.url);
-
-var PLUGIN_NAME = "critters-webpack-plugin";
-function tap(inst, hook, pluginName, async, callback) {
-  if (inst.hooks) {
-    var camel = hook.replace(/-([a-z])/g, function (s, i) {
-      return i.toUpperCase();
-    });
-    inst.hooks[camel][async ? "tapAsync" : "tap"](pluginName, callback);
-  } else {
-    inst.plugin(hook, callback);
-  }
-}
-Critters.prototype.apply = function apply(compiler) {
-  var this$1 = this;
-
-  tap(compiler, "compilation", PLUGIN_NAME, false, function (compilation) {
-    require("html-webpack-plugin")
-      .getHooks(compilation)
-      .beforeEmit.tapAsync(PLUGIN_NAME, (htmlPluginData, callback) => {
-        this$1
-          .process(compiler, compilation, htmlPluginData.html)
-          .then((html) => {
-            callback(null, { html });
-          })
-          .catch(callback);
-      });
-  });
-};
+// TODO: https://github.com/GoogleChromeLabs/critters/pull/85
+global.require = createRequire(import.meta.url);
 
 const cssCritical = new Critters({
   // external: true,

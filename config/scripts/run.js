@@ -8,8 +8,8 @@ const compiler = webpack(webpackConfig);
 
 try {
   if (NODE_ENV === "development") {
-    const server = new WebpackDevServer(compiler, webpackConfig.devServer);
-    server.listen();
+    const server = new WebpackDevServer(webpackConfig.devServer, compiler);
+    server.start();
   } else {
     compiler.run((err, stats) => {
       if (err) {
