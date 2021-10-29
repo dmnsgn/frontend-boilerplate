@@ -103,7 +103,7 @@ const getPageInstanceRecursively = (page) => {
                 posthtmlImageSources({
                   replaceExtension: true,
                   classIgnore: ["u-no-picture-wrap"],
-                  extensionIgnore: ["svg"],
+                  extensionIgnore: ["svg", "gif"],
                 })
               )
               .process(content, { sync: true });

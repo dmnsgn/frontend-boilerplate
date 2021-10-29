@@ -9,7 +9,9 @@
 </div>
 
 <% if (data.NODE_ENV === 'development'){ %>
-<style>
+<script>
+	const styleElement = document.createElement("style");
+	styleElement.innerText = /* css */ `
 	.build-info {
 		z-index: 9999;
 		position: fixed;
@@ -37,6 +39,7 @@
 	.build-info:hover {
 		width: initial;
 		overflow: auto;
-	}
-</style>
+	}`;
+	document.head.appendChild(styleElement);
+</script>
 <% } %>

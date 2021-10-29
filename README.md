@@ -1,14 +1,18 @@
 # frontend-boilerplate
 
-[![travis](https://img.shields.io/travis/dmnsgn/frontend-boilerplate)](https://travis-ci.org/dmnsgn/frontend-boilerplate)
-[![dependencies](https://img.shields.io/david/dmnsgn/frontend-boilerplate)](https://github.com/dmnsgn/frontend-boilerplate/blob/master/package.json)
+[![dependencies](https://img.shields.io/david/dmnsgn/frontend-boilerplate)](https://github.com/dmnsgn/frontend-boilerplate/blob/main/package.json)
 [![repo size](https://img.shields.io/github/repo-size/dmnsgn/frontend-boilerplate)](https://github.com/dmnsgn/frontend-boilerplate)
 [![version](https://img.shields.io/github/package-json/v/dmnsgn/frontend-boilerplate/master)](https://github.com/dmnsgn/frontend-boilerplate/blob/master/package.json)
-[![twitter](https://img.shields.io/twitter/follow/dmnsgn?style=social)](https://twitter.com/dmnsgn)
-[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![license](https://img.shields.io/github/license/dmnsgn/frontend-boilerplate)](https://github.com/frontend-boilerplate/frontend-boilerplate/blob/master/LICENSE)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-fa6673.svg)](https://conventionalcommits.org)
+[![styled with prettier](https://img.shields.io/badge/styled_with-Prettier-f8bc45.svg?logo=prettier)](https://github.com/prettier/prettier)
+[![linted with eslint](https://img.shields.io/badge/linted_with-ES_Lint-4B32C3.svg?logo=eslint)](https://github.com/eslint/eslint)
+[![license](https://img.shields.io/github/license/dmnsgn/frontend-boilerplate)](https://github.com/dmnsgn/frontend-boilerplate/blob/main/LICENSE.md)
 
 > An ES20XX starter with common frontend tasks using [Webpack 5](https://webpack.js.org/) as module bundler and npm scripts as task runner.
+
+[![paypal](https://img.shields.io/badge/donate-paypal-informational?logo=paypal)](https://paypal.me/dmnsgn)
+[![coinbase](https://img.shields.io/badge/donate-coinbase-informational?logo=coinbase)](https://commerce.coinbase.com/checkout/56cbdf28-e323-48d8-9c98-7019e72c97f3)
+[![twitter](https://img.shields.io/twitter/follow/dmnsgn?style=social)](https://twitter.com/dmnsgn)
 
 If you serve your files over HTTPS with HTTP/2, use compression (gzip, brotli...) for text-based resources, and respect [accessibility rules](https://developers.google.com/web/fundamentals/accessibility/), your [lighthouse](https://developers.google.com/web/tools/lighthouse/) score will be 100%.
 
@@ -96,24 +100,28 @@ npm run prod
 - fonts as [Resources assets](https://webpack.js.org/guides/asset-modules/#resource-assets)
 - images as [Resources assets](https://webpack.js.org/guides/asset-modules/#resource-assets), with automatic avif and webp fallbacks with [convert-assets-webpack-plugin](https://github.com/dmnsgn/convert-assets-webpack-plugin/) and `<picture>` wrapping using [posthtml](https://posthtml.org/), optimised with [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader)
 - videos as [Resources assets](https://webpack.js.org/guides/asset-modules/#resource-assets)
-- svg as [Resources assets](https://webpack.js.org/guides/asset-modules/#resource-assets) and optimised with [svgo-loader](https://github.com/rpominov/svgo-loader)
+- svg as [Resources assets](https://webpack.js.org/guides/asset-modules/#resource-assets) and optimised with [svgo-loader](https://github.com/rpominov/svgo-loader) or as sprite with [svg-sprite-loader](https://github.com/JetBrains/svg-sprite-loader)
 - [html-loader](https://github.com/webpack-contrib/html-loader)
 - [ejs-loader](https://github.com/okonet/ejs-loader)
 - [glslify](https://github.com/stackgl/glslify)
+- [markdown-it-loader](https://github.com/unindented/markdown-it-loader) with [markdown-it-attrs](https://github.com/arve0/markdown-it-attrs) and [markdown-it-toc-done-right](https://github.com/nagaozen/markdown-it-toc-done-right)
 
 ### Webpack [plugins](https://webpack.js.org/plugins/)
 
 - [DefinePlugin](https://webpack.js.org/plugins/define-plugin/): create global constants which can be configured at compile time
 - [HotModuleReplacementPlugin](https://webpack.js.org/plugins/hot-module-replacement-plugin/): enable Hot Module Replacement
 - [HtmlWebpackPlugin](https://webpack.js.org/plugins/html-webpack-plugin/) with [Lodash](https://lodash.com/docs/4.17.5#template) templates: simplify creation of HTML files
+- [HtmlWebpackProcessingPlugin](https://github.com/haoliangyu/html-webpack-processing-plugin#readme): HTML pre-processing and post-processing for html-webpack-plugin.
 - [MiniCssExtractPlugin](https://webpack.js.org/plugins/mini-css-extract-plugin/): lightweight CSS extraction plugin
+- [CssMinimizerWebpackPlugin](https://webpack.js.org/plugins/css-minimizer-webpack-plugin/): uses cssnano to optimize and minify your CSS.
 - [PurgecssWebpackPlugin](https://github.com/FullHuman/purgecss/tree/master/packages/purgecss-webpack-plugin): remove unused css.
 - [CrittersWebpackPlugin](https://github.com/GoogleChromeLabs/critters): inlines critical CSS and lazy-loads the rest.
 - [SpritesmithPlugin](https://github.com/mixtur/webpack-spritesmith): convert a set of images into a spritesheet and SASS/LESS/Stylus mixins
 - [CompressionPlugin](https://github.com/webpack-contrib/compression-webpack-plugin): Prepare compressed versions of assets to serve them with Content-Encoding (default to gzip). Requires server configuration so it is commented [here](./config/plugins.js)
 - [GenerateSW](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin): The GenerateSW plugin will create a service worker file for you and add it to the webpack asset pipeline.
 - [BannerPlugin](https://webpack.js.org/plugins/banner-plugin/): add a banner to the top of each generated chunk.
-- [Webpack Bundle Analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer): Visualize size of webpack output files with an interactive zoomable treemap.
+- [ObsoleteWebpackPlugin](https://github.com/ElemeFE/obsolete-webpack-plugin): A Webpack plugin generates a browser-side standalone script that detects browser compatibility based on Browserslist and prompts website users to upgrade it.
+- [WebpackBundleAnalyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer): Visualize size of webpack output files with an interactive zoomable treemap.
 
 ### npm scripts
 
