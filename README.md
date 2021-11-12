@@ -1,6 +1,6 @@
 # frontend-boilerplate
 
-[![dependencies](https://img.shields.io/david/dmnsgn/frontend-boilerplate)](https://github.com/dmnsgn/frontend-boilerplate/blob/main/package.json)
+[![dependencies](https://img.shields.io/librariesio/release/npm/frontend-boilerplate)](https://github.com/dmnsgn/frontend-boilerplate/blob/main/package.json)
 [![repo size](https://img.shields.io/github/repo-size/dmnsgn/frontend-boilerplate)](https://github.com/dmnsgn/frontend-boilerplate)
 [![version](https://img.shields.io/github/package-json/v/dmnsgn/frontend-boilerplate/master)](https://github.com/dmnsgn/frontend-boilerplate/blob/master/package.json)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-fa6673.svg)](https://conventionalcommits.org)
