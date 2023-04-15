@@ -101,7 +101,7 @@
     "eslint": "^8.1.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "favicons": "^6.2.2",
+    "favicons": "^7.1.2",
     "generate-robotstxt": "^8.0.3",
     "git-rev-sync": "^3.0.1",
     "glob": "^7.2.0",
